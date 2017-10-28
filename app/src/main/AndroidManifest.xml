@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".KakaoSignupActivity"/>
-        <activity android:name=".kakaologin.LoginActivity"/>
+        <activity android:name=".LoginActivity"/>
 
 
         <activity
