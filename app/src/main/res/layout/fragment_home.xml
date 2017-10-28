@@ -1,26 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ViewFlipper
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-        
-    </ViewFlipper>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"></ListView>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_store"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
         app:srcCompat="@drawable/fab_store" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ViewFlipper
+            android:id="@+id/home_viewFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@drawable/not_found_long">
+
+            <ImageView
+                android:id="@+id/flipper_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </ViewFlipper>
+
+        <ListView
+            android:id="@+id/home_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#d2bdef74">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/go_board"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="75dp"
+            android:gravity="center"
+            android:text="더보기" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
