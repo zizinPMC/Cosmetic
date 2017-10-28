@@ -1,4 +1,4 @@
-package com.example.gimjihyeon.cosmeticapp;
+package com.cosmetic;
 
 import android.support.v7.app.AppCompatActivity;
 

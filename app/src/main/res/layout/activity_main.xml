@@ -6,11 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.gimjihyeon.cosmeticapp.MainActivity">
+    tools:context="com.cosmetic.gimjihyeon.cosmeticapp.com.example.MainActivity">
 
-
-
-    <android.support.v4.view.ViewPager
+    <com.cosmetic.view.NonSwipeViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

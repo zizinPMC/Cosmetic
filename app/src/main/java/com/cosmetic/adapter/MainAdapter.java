@@ -1,12 +1,12 @@
-package com.example.gimjihyeon.cosmeticapp.adapter;
+package com.cosmetic.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.gimjihyeon.cosmeticapp.HomeFragment;
-import com.example.gimjihyeon.cosmeticapp.MyPageFragment;
-import com.example.gimjihyeon.cosmeticapp.RegisterFragment;
+import com.cosmetic.HomeFragment;
+import com.cosmetic.MyPageFragment;
+import com.cosmetic.RegisterFragment;
 
 /**
  * Created by yujeen on 2017. 10. 28..
@@ -14,9 +14,9 @@ import com.example.gimjihyeon.cosmeticapp.RegisterFragment;
 
 public class MainAdapter extends FragmentStatePagerAdapter {
     private static final int PAGE_COUNT = 3;
-    private static final int HOME = 0;
-    private static final int REGISTER = 1;
-    private static final int MY_PAGE = 2;
+    public static final int HOME = 0;
+    public static final int REGISTER = 1;
+    public static final int MY_PAGE = 2;
 
     public MainAdapter(FragmentManager fm) {
         super(fm);
