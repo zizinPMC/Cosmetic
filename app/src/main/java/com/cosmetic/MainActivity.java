@@ -1,4 +1,4 @@
-package com.example.gimjihyeon.cosmeticapp;
+package com.cosmetic;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.example.gimjihyeon.cosmeticapp.adapter.MainAdapter;
+import com.cosmetic.adapter.MainAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

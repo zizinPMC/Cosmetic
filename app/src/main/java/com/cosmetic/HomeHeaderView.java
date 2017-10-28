@@ -1,4 +1,4 @@
-package com.example.gimjihyeon.cosmeticapp;
+package com.cosmetic;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

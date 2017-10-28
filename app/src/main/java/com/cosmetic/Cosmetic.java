@@ -1,4 +1,4 @@
-package com.example.gimjihyeon.cosmeticapp;
+package com.cosmetic;
 
 import com.dhha22.bindadapter.Item;
 

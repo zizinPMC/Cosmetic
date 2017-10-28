@@ -1,4 +1,4 @@
-package com.example.gimjihyeon.cosmeticapp;
+package com.cosmetic;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

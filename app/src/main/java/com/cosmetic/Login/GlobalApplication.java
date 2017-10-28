@@ -1,9 +1,7 @@
-package com.example.gimjihyeon.cosmeticapp.Login;
+package com.cosmetic.Login;
 
 import android.app.Activity;
 import android.app.Application;
-
-import com.kakao.auth.KakaoSDK;
 
 /**
  * Created by gimjihyeon on 2017. 10. 12..
@@ -18,7 +16,7 @@ public class GlobalApplication extends Application {
     public void onCreate() {
         super.onCreate();
         obj = this;
-        KakaoSDK.init(new KakaoSDKAdapter());
+       // KakaoSDK.init(new KakaoSDKAdapter());
     }
 
     public static GlobalApplication getGlobalApplicationContext() {

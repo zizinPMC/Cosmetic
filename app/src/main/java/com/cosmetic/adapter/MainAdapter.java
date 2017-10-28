@@ -1,12 +1,12 @@
-package com.example.gimjihyeon.cosmeticapp.adapter;
+package com.cosmetic.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.gimjihyeon.cosmeticapp.HomeFragment;
-import com.example.gimjihyeon.cosmeticapp.MyPageFragment;
-import com.example.gimjihyeon.cosmeticapp.RegisterFragment;
+import com.cosmetic.HomeFragment;
+import com.cosmetic.MyPageFragment;
+import com.cosmetic.RegisterFragment;
 
 /**
  * Created by yujeen on 2017. 10. 28..
