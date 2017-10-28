@@ -91,7 +91,7 @@ public class LoginActivity extends Activity {
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                    startActivity(intent);
+                    startActivity(intent); 
 
                     finish();
 
