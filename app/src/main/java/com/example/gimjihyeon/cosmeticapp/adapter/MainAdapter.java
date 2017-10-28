@@ -14,9 +14,9 @@ import com.example.gimjihyeon.cosmeticapp.RegisterFragment;
 
 public class MainAdapter extends FragmentStatePagerAdapter {
     private static final int PAGE_COUNT = 3;
-    private static final int HOME = 0;
-    private static final int REGISTER = 1;
-    private static final int MY_PAGE = 2;
+    public static final int HOME = 0;
+    public static final int REGISTER = 1;
+    public static final int MY_PAGE = 2;
 
     public MainAdapter(FragmentManager fm) {
         super(fm);
