@@ -5,8 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.cosmetic.gimjihyeon.cosmeticapp.com.example.MainActivity">
+    android:orientation="vertical">
 
     <com.cosmetic.view.NonSwipeViewPager
         android:id="@+id/viewPager"
