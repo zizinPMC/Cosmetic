@@ -1,11 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3eff4"
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="register"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/img_cosmetic"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/img_cosmeticdefault"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+
+                <TextView
+                    android:id="@+id/txt_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="34dp"
+                    android:layout_marginStart="34dp"
+                    android:text="분류"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/img_cosmetic"
+                    android:layout_toEndOf="@+id/img_cosmetic" />
+
+
+                <Button
+                    android:id="@+id/btn_cos_Brand"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_alignLeft="@+id/btn_cos_MainCate"
+                    android:layout_alignStart="@+id/btn_cos_MainCate"
+                    android:layout_alignTop="@+id/img_cosmetic"
+                    android:layout_marginTop="5dp"
+
+                    android:text="화장품 브랜드"
+                    android:textStyle="bold" />
+
+                <Button
+
+                    android:id="@+id/btn_cos_MainCate"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="17dp"
+
+                    android:text="화장품 대분류"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp" />
+
+                <Button
+                    android:id="@+id/btn_cos_MidCate"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_alignLeft="@+id/btn_cos_MainCate"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/btn_cos_MainCate"
+                    android:layout_marginTop="5dp"
+
+                    android:text="화장품 중분류"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txt_date"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="30dp"
+                    android:cursorVisible="false"
+                    android:text="이름"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_cosName"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/name"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/name"
+                    android:cursorVisible="false"></EditText>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txt_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/txt_exp_date"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignStart="@+id/txt_exp_date"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="54dp"
+                        android:text="개봉일"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_cosIsOpen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/txt_date"
+                        android:layout_alignBottom="@+id/txt_date"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="16dp"
+                        android:onClick="checkboxCosIsOpenClick"
+                        android:text="개봉여부"
+                        android:textSize="18sp" />
+
+                    <Button
+
+                        android:id="@+id/btn_opendate"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/txt_date"
+                        android:layout_alignBottom="@+id/txt_date"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginStart="13dp"
+                        android:layout_toEndOf="@+id/txt_date"
+                        android:layout_toRightOf="@+id/txt_date"
+                        android:onClick="btn_openDateClick"
+                        android:text="개봉일자"
+                        android:visibility="invisible"></Button>
+
+
+                    <TextView
+                        android:id="@+id/txt_selectedDatePicker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignBaseline="@+id/btn_opendate"
+                        android:layout_alignBottom="@+id/btn_opendate"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginStart="26dp"
+                        android:layout_toEndOf="@+id/btn_opendate"
+                        android:layout_toRightOf="@+id/btn_opendate"
+                        android:textColor="#b64bc4"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                    <CheckBox
+                        android:id="@+id/checkbox_exp_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/txt_date"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="25dp"
+                        android:onClick="checkboxExpDateClick"
+                        android:text="사용기한 입력"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txt_exp_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/checkbox_exp_date"
+                        android:layout_alignBottom="@+id/checkbox_exp_date"
+                        android:layout_alignLeft="@+id/edt_exp_month"
+                        android:layout_alignStart="@+id/edt_exp_month" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_exp_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/checkbox_exp_date"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="19dp"
+                        android:onClick="checkboxMonthDateClick"
+                        android:text="개월수로 입력"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edt_exp_month"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/checkbox_exp_month"
+                        android:layout_alignBottom="@+id/checkbox_exp_month"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_toEndOf="@+id/checkbox_exp_month"
+                        android:layout_toRightOf="@+id/checkbox_exp_month"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/txt_exp_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/checkbox_exp_month"
+                        android:layout_marginLeft="17dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_toEndOf="@+id/txt_date"
+                        android:layout_toRightOf="@+id/txt_date"
+                        android:text="개월"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
