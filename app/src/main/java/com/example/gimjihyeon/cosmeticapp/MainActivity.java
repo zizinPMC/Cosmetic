@@ -11,6 +11,10 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private Button btn;
+    private Button btn1;
+    private Button btn2;
+    private Button btn3;
+
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
