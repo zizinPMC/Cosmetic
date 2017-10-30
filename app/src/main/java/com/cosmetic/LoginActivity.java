@@ -95,6 +95,7 @@ public class LoginActivity extends Activity {
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
                     Log.e("UserProfile=====>", userProfile.toString());
 
+                    // 관심있는 화장품 브랜드 선택(다중선택 가능)
                     final List<String> list =new ArrayList<String>();
 
                     final String[] brand_items =new String[]{"이니스프리", "미샤", "어퓨", "아리따움","올리브영", "홀리카홀리카", "에뛰드하우스", "스킨푸드"};
@@ -124,7 +125,7 @@ public class LoginActivity extends Activity {
                                     for(String item:list){
                                         selectedItem += item + ", ";
                                     }
-
+                                    //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
                                     Toast.makeText(getApplicationContext(),selectedItem,Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 

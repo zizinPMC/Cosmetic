@@ -152,10 +152,10 @@ public class RegisterFragment extends Fragment {
             }
 
         });
-        if (btn_CosMainCategory.getText().toString().equals("스킨 케어")) { //스킨케어
-            btn_CosMidCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btn_CosMidCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (btn_CosMainCategory.getText().toString().equals("스킨케어")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
                             .setItems(cos_midcate_skincare, new DialogInterface.OnClickListener() {
@@ -167,17 +167,10 @@ public class RegisterFragment extends Fragment {
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
-
                     //for input DB
                     cos_MidCate = btn_CosMidCategory.getText().toString();
                     //   toast();
-                }
-            });
-        } else if (btn_CosMainCategory.getText().toString().equals("페이스 메이크업"))    //페이스메이크업
-        {
-            btn_CosMidCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                } else if (btn_CosMainCategory.getText().toString().equals("페이스 메이크업")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
                             .setItems(cos_midcate_facemakeup, new DialogInterface.OnClickListener() {
@@ -191,14 +184,8 @@ public class RegisterFragment extends Fragment {
                     dialog.show();
                     //for input DB
                     cos_MidCate = btn_CosMidCategory.getText().toString();
-                    //      toast();
-                }
-            });
-        } else if (btn_CosMainCategory.getText().toString().equals("아이 메이크업"))    //아이메이크업
-        {
-            btn_CosMidCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                    //   toast();
+                }else if (btn_CosMainCategory.getText().toString().equals("아이 메이크업")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
                             .setItems(cos_midcate_eyemakeup, new DialogInterface.OnClickListener() {
@@ -213,13 +200,7 @@ public class RegisterFragment extends Fragment {
                     //for input DB
                     cos_MidCate = btn_CosMidCategory.getText().toString();
                     //   toast();
-                }
-            });
-        } else if (btn_CosMidCategory.getText().toString().equals("립 메이크업"))     //립메이크업
-        {
-            btn_CosMidCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                }else if (btn_CosMainCategory.getText().toString().equals("립 메이크업")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
                             .setItems(cos_midcate_lipmakeup, new DialogInterface.OnClickListener() {
@@ -228,18 +209,13 @@ public class RegisterFragment extends Fragment {
                                     btn_CosMidCategory.setText(cos_midcate_lipmakeup[index]);
                                 }
                             });
+
                     AlertDialog dialog = builder.create();
                     dialog.show();
                     //for input DB
                     cos_MidCate = btn_CosMidCategory.getText().toString();
-                    // toast();
-                }
-            });
-        } else if (btn_CosMidCategory.getText().toString().equals("클렌징"))     //클렌징
-        {
-            btn_CosMidCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                    //   toast();
+                }else if (btn_CosMainCategory.getText().toString().equals("클렌징")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
                             .setItems(cos_midcate_cleansing, new DialogInterface.OnClickListener() {
@@ -253,11 +229,10 @@ public class RegisterFragment extends Fragment {
                     dialog.show();
                     //for input DB
                     cos_MidCate = btn_CosMidCategory.getText().toString();
-                    // toast();
+                    //   toast();
                 }
-            });
-        }
-
+            }
+        });
 
         //화장품 이름
         cos_Name = edt_cosName.getText().toString();
