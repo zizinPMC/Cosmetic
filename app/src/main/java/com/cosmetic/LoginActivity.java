@@ -1,9 +1,12 @@
 package com.cosmetic;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
@@ -15,6 +18,9 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gimjihyeon on 2017. 10. 28..
@@ -89,11 +95,54 @@ public class LoginActivity extends Activity {
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
                     Log.e("UserProfile=====>", userProfile.toString());
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    final List<String> list =new ArrayList<String>();
 
-                    startActivity(intent);
+                    final String[] brand_items =new String[]{"이니스프리", "미샤", "어퓨", "아리따움","올리브영", "홀리카홀리카", "에뛰드하우스", "스킨푸드"};
 
-                    finish();
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+                    dialog.setTitle("관심브랜드를 고르세요.")
+                            .setMultiChoiceItems(
+                                    brand_items,
+                                    new boolean[]{false, false, false, false, false, false,false, false}
+                                    , new DialogInterface.OnMultiChoiceClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+                                            if(isChecked){
+                                                Toast.makeText(getApplicationContext(),brand_items[which],Toast.LENGTH_SHORT).show();
+                                                list.add(brand_items[which]);
+                                            }else{
+                                                list.remove(brand_items[which]);
+                                            }
+                                        }
+                                    }
+                            )
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    String selectedItem ="";
+                                    for(String item:list){
+                                        selectedItem += item + ", ";
+                                    }
+
+                                    Toast.makeText(getApplicationContext(),selectedItem,Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                                    startActivity(intent);
+
+                                    finish();
+
+                                }
+                            })
+                            .setNeutralButton("취소", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(getApplicationContext(),"취소버튼 누름누름",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    dialog.create();
+                    dialog.show();
+
 
                 }
             });
