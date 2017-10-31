@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="#f3eff4"
     android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -127,27 +128,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/txt_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="20dp"
-                        android:text="개봉일"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:visibility="invisible" />
-                    <!-- android:layout_toEndOf="@+id/checkbox_exp_date" -->
 
                     <CheckBox
                         android:id="@+id/checkbox_cosIsOpen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/txt_date"
-                        android:layout_alignBottom="@+id/txt_date"
-                        android:layout_alignStart="@+id/txt_date"
                         android:layout_marginLeft="16dp"
                         android:text="개봉여부"
                         android:textSize="18sp"
@@ -189,19 +174,19 @@
 
                         android:text="사용기한 (날짜)"
                         android:textStyle="bold" />
+
                     <RadioButton
                         android:id="@+id/radio_exp_none"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:textStyle="bold"
-                        android:text="모 름 "/>
+                        android:text="모 름 "
+                        android:textStyle="bold" />
                 </RadioGroup>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
 
                     <EditText
                         android:id="@+id/edt_exp_month"
@@ -210,7 +195,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
+
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:visibility="invisible" />
@@ -222,7 +207,7 @@
                         android:layout_alignBottom="@+id/checkbox_exp_month"
                         android:layout_marginLeft="17dp"
                         android:layout_marginStart="17dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_toEndOf="@+id/txt_date"
                         android:layout_toRightOf="@+id/txt_date"
                         android:text="개월"
@@ -241,6 +226,30 @@
                     android:textStyle="bold"
                     android:visibility="invisible" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" 취 소 "
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" 등 록 "
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -1,5 +1,6 @@
 package com.cosmetic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,13 +17,18 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation) BottomNavigationView navigation;
     @BindView(R.id.viewPager) ViewPager viewPager;
     private MainAdapter adapter;
-
+    Intent intent = getIntent();
+/*
+    String userprofileUrl = intent.getExtras().getString("ProfileUrl");
+    String usernickname = intent.getExtras().getString("userName");
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
                     viewPager.setCurrentItem(MainAdapter.MY_PAGE, false);
+
                     return true;
             }
             return false;

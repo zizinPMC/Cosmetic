@@ -70,8 +70,6 @@ public class RegisterFragment extends Fragment {
 
     @BindView(R.id.btn_opendate)
     Button btn_opendate;    //화장품 개봉일자
-    @BindView(R.id.txt_date)
-    TextView txt_date;    //화장품 개봉일자
 
     @BindView(R.id.radioGroup_exp)
     RadioGroup radioGroup_exp;
@@ -93,6 +91,12 @@ public class RegisterFragment extends Fragment {
     @BindView(R.id.radio_exp_none)
     RadioButton radiobtn_exp_none;
 
+    @BindView(R.id.btn_cancel)
+    Button btn_cancel;
+
+    @BindView(R.id.btn_register)
+    Button btn_register;
+
 
     int cos_No = 0;
     String userID, cos_Name;
@@ -113,18 +117,35 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, view);
+        setHasOptionsMenu(true);
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         context = getContext();
         imgbtn_Cos.setOnClickListener(listener);
         checkbox_cosIsOpen.setOnClickListener(listener_chechbox_OpenDate);
         btn_opendate.setOnClickListener(listener_btn_openDateClick);
-        //radiobtn_exp_month.setOnClickListener(listener_radiobtn_ExpMonthDateClick);
-        //radiobtn_exp_date.setOnClickListener(listener_radiobtn_ExpDateClick);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent i = new Intent(getContext(), MainActivity.class);
+                startActivity(i);
+
+            }
+        });
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), MainActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final String[] cos_brand = {"네이처리퍼블릭", "더샘", "더페이스샵", "마몽드", "맥", "미샤", "베네피트", "비욘드", "시드물", "아리따움", "어퓨", "에뛰드하우스", "이니스프리", "키스미", "토니모리", "페리페라", "홀리카홀리카", "기타"};
@@ -450,10 +471,8 @@ public class RegisterFragment extends Fragment {
         public void onClick(View view) {
             if (checkbox_cosIsOpen.isChecked()) {
                 btn_opendate.setVisibility(View.VISIBLE);
-                txt_date.setVisibility(View.VISIBLE);
             } else {
                 btn_opendate.setVisibility(View.INVISIBLE);
-                txt_date.setVisibility(View.INVISIBLE);
             }
         }
     };
@@ -532,4 +551,5 @@ public class RegisterFragment extends Fragment {
             }
         }
     };
+
 }
