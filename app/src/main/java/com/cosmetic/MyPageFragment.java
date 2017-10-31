@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -22,6 +23,12 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class MyPageFragment extends Fragment{
     @BindView(R.id.userProfileImage)
     ImageView userProfileImg;
+    @BindView(R.id.linear_alarm)
+    LinearLayout linear_alarm;
+    @BindView(R.id.linear_notice)
+    LinearLayout linear_notice;
+    @BindView(R.id.linear_mycosmetic)
+    LinearLayout linear_mycosmetic;
 
     public static MyPageFragment newInstance(){
         MyPageFragment fragment = new MyPageFragment();
@@ -50,5 +57,27 @@ public class MyPageFragment extends Fragment{
                 .override(150,150)
                 .bitmapTransform(new CropCircleTransformation(getActivity()))
                 .into(userProfileImg);
+        //마이페이지 -알람
+        linear_alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //마이페이지 -공지사항
+        linear_notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //마이페이지 -내 등록화장품 목록
+        linear_mycosmetic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }

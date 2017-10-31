@@ -2,23 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linear_profile">
     <ImageView
+        android:layout_marginLeft="30dp"
         android:id="@+id/userProfileImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:src="@drawable/fab_store" />
 
-    <LinearLayout
-        android:id="@+id/linear_alarm"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/userProfileImage"
+        android:text="닉네임"
+        android:id="@+id/userName"
+        android:layout_centerInParent="true"
+        android:textSize="25sp"
+        android:layout_marginBottom="10dp"
+        />
+
+</RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/userProfileImage"
+android:layout_below="@id/linear_profile"
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
@@ -41,7 +58,7 @@
 
     <LinearLayout
         android:id="@+id/linear_notice"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@id/linear_alarm"
@@ -87,7 +104,7 @@
 
     <LinearLayout
         android:id="@+id/linear_mycosmetic"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@id/linear_notice"
