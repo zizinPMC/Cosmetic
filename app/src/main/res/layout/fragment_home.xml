@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout_fragment_home">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_store"
@@ -21,20 +22,52 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ViewFlipper
-            android:id="@+id/home_viewFlipper"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/home_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/not_found_long">
 
-            <ImageView
-                android:id="@+id/flipper_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
-        </ViewFlipper>
+        </android.support.v4.view.ViewPager>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:background="#f7eeac"
+                android:text="글 제목"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="#bef7ac"
+                android:text="작성자"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="#acbaf7"
+                android:text="작성날짜"
+                android:textAlignment="center" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#f7ace8"
+                android:text="조회수"
+                android:textAlignment="center" />
+        </LinearLayout>
         <ListView
             android:id="@+id/home_listview"
             android:layout_width="match_parent"

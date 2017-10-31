@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="25dp"
+    android:orientation="horizontal"
+    android:padding="3dp"
+    android:weightSum="10">
+    <TextView
+        android:id="@+id/cb_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:background="#f7eeac"
+        android:text="글 제목"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:maxLines="1"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/cb_tv_writer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="#bef7ac"
+        android:text="작성자"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:maxLines="1"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/cb_tv_date"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="#acbaf7"
+        android:text="작성날짜"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/cb_tv_hits"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#f7ace8"
+        android:text="조회수"
+        android:textSize="13dp"
+        android:textColor="#000000"
+        android:textAlignment="center" />
+</LinearLayout>
