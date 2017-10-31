@@ -4,17 +4,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
+
+import com.cosmetic.db.BoardTipDB;
+import com.cosmetic.adapter.AutoScrollAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 /**
  * Created by yujeen on 2017. 10. 28..
@@ -23,10 +30,11 @@ import butterknife.ButterKnife;
 public class HomeFragment extends Fragment {
 
     @BindView(R.id.fab_store) FloatingActionButton fab;
-    @BindView(R.id.home_viewFlipper) ViewFlipper viewFlipper;
-    @BindView(R.id.flipper_image) ImageView flipImage;
+    @BindView(R.id.home_autoViewPager) AutoScrollViewPager autoViewPager;
     @BindView(R.id.home_listview) ListView listView;
     @BindView(R.id.go_board) Button btnGoBoard;
+
+    ArrayList<HashMap<String,String>> tipList;//하단 리스트뷰 팁리스
 
     public static HomeFragment newInstance(){
         HomeFragment fragment = new HomeFragment();
@@ -45,17 +53,38 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
+        for(int i=1;i<=5;i++){
+            data.add("http://zizin1318.cafe24.com/homeFlipImage/etude"+i+".jpg");
+        }
+        AutoScrollAdapter scrollAdapter = new AutoScrollAdapter(this.getContext(), data);
+        autoViewPager.setAdapter(scrollAdapter); //Auto Viewpager에 Adapter 장착
+        autoViewPager.setInterval(5000); // 페이지 넘어갈 시간 간격 설정
+        autoViewPager.startAutoScroll(); //Auto Scroll 시작
+
+        //하단 게시판 글 뷰
+        tipList = new ArrayList<HashMap<String, String>>();
+        BoardTipDB.getData("http://zizin1318.cafe24.com/board/board_tip_read.php",tipList,this.getContext(),listView);
+
+        //하단 게시판 더보기버튼 누를경우 게시판뷰로 이동
         btnGoBoard.setOnClickListener(listener);
 
     }
-
-
     View.OnClickListener listener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.go_board :
                     Toast.makeText(getContext(), "button go board click", Toast.LENGTH_SHORT).show();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    Fragment fragment = BoardFragment.newInstance();
+                    ft.add(R.id.layout_fragment_home,fragment);
+                    ft.commit();
+
+                    break;
+                case R.id.fab_store:
+
                     break;
                 default:
                     break;
