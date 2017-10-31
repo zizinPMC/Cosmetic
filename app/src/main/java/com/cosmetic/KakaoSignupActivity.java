@@ -30,7 +30,8 @@ public class KakaoSignupActivity extends AppCompatActivity {
     /**
      * 사용자의 상태를 알아 보기 위해 me API 호출을 한다.
      */
-    protected void requestMe() { //유저의 정보를 받아오는 함수
+    protected void requestMe() {
+        //유저의 정보를 받아오는 함수
         UserManagement.requestMe(new MeResponseCallback() {
             @Override
             public void onFailure(ErrorResult errorResult) {
@@ -51,11 +52,12 @@ public class KakaoSignupActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNotSignedUp() {} // 카카오톡 회원이 아닐 시 showSignup(); 호출해야함
+            public void onNotSignedUp() {
+            } // 카카오톡 회원이 아닐 시 showSignup(); 호출해야함
 
             @Override
             public void onSuccess(UserProfile userProfile) {  //성공 시 userProfile 형태로 반환
-                Logger.d("UserProfile : " + userProfile);
+                System.out.println("UserProfile : " + userProfile);
                 redirectMainActivity(); // 로그인 성공시 MainActivity로
             }
         });

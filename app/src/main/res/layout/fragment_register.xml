@@ -129,16 +129,15 @@
                         android:id="@+id/txt_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/txt_exp_date"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignStart="@+id/txt_exp_date"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="54dp"
+                        android:layout_marginTop="52dp"
                         android:text="개봉일"
                         android:textColor="#000000"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/checkbox_exp_date" />
 
                     <CheckBox
                         android:id="@+id/checkbox_cosIsOpen"
@@ -146,17 +145,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/txt_date"
                         android:layout_alignBottom="@+id/txt_date"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
                         android:layout_marginLeft="16dp"
-                        android:onClick="checkboxCosIsOpenClick"
                         android:text="개봉여부"
                         android:textSize="18sp" />
 
                     <Button
 
                         android:id="@+id/btn_opendate"
-                        android:layout_width="100dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/txt_date"
                         android:layout_alignBottom="@+id/txt_date"
@@ -164,26 +160,8 @@
                         android:layout_marginStart="13dp"
                         android:layout_toEndOf="@+id/txt_date"
                         android:layout_toRightOf="@+id/txt_date"
-                        android:onClick="btn_openDateClick"
                         android:text="개봉일자"
                         android:visibility="invisible"></Button>
-
-
-                    <TextView
-                        android:id="@+id/txt_selectedDatePicker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:layout_alignBaseline="@+id/btn_opendate"
-                        android:layout_alignBottom="@+id/btn_opendate"
-                        android:layout_marginLeft="18dp"
-                        android:layout_marginStart="26dp"
-                        android:layout_toEndOf="@+id/btn_opendate"
-                        android:layout_toRightOf="@+id/btn_opendate"
-                        android:textColor="#b64bc4"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
 
                     <CheckBox
                         android:id="@+id/checkbox_exp_date"
@@ -194,7 +172,6 @@
                         android:layout_below="@+id/txt_date"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="25dp"
-                        android:onClick="checkboxExpDateClick"
                         android:text="사용기한 입력"
                         android:textSize="18sp" />
 
@@ -214,7 +191,6 @@
                         android:layout_below="@+id/checkbox_exp_date"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="19dp"
-                        android:onClick="checkboxMonthDateClick"
                         android:text="개월수로 입력"
                         android:textSize="18sp" />
 
@@ -222,13 +198,10 @@
                         android:id="@+id/edt_exp_month"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/checkbox_exp_month"
-                        android:layout_alignBottom="@+id/checkbox_exp_month"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginStart="18dp"
-                        android:layout_toEndOf="@+id/checkbox_exp_month"
-                        android:layout_toRightOf="@+id/checkbox_exp_month"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true" />
 
                     <TextView
                         android:id="@+id/txt_exp_month"
