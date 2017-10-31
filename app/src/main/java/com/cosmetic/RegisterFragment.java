@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +21,8 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,36 +49,50 @@ public class RegisterFragment extends Fragment {
 
     private Uri mImageCaptureUri;
 
+    private long inputTotalDate;
     @BindView(R.id.img_cosmetic)
     ImageButton imgbtn_Cos; //화장품 이미지
+
     @BindView(R.id.btn_cos_Brand)
     Button btn_CosBrand; //화장품 브랜드
+
     @BindView(R.id.btn_cos_MainCate)
     Button btn_CosMainCategory;    //화장품 대분류 선택
+
     @BindView(R.id.btn_cos_MidCate)
     Button btn_CosMidCategory;  //화장품 중분류 선택
+
     @BindView(R.id.edt_cosName)
     EditText edt_cosName;   //화장품 이름입력
+
     @BindView(R.id.checkbox_cosIsOpen)
-    CheckBox checkBox_cosIsOpen;    //화장품 개봉여부
+    CheckBox checkbox_cosIsOpen;    //화장품 개봉여부
+
     @BindView(R.id.btn_opendate)
     Button btn_opendate;    //화장품 개봉일자
     @BindView(R.id.txt_date)
     TextView txt_date;    //화장품 개봉일자
 
+    @BindView(R.id.radioGroup_exp)
+    RadioGroup radioGroup_exp;
 
-
-    @BindView(R.id.checkbox_exp_date)
-    CheckBox checkbox_exp_date; //화장품 유통기한(날짜)
+    @BindView(R.id.radio_exp_date)
+    RadioButton radiobtn_exp_date; //화장품 유통기한(날짜)
 
     @BindView(R.id.txt_exp_date)
     TextView txt_exp_date;  //화장품 유통기한(날짜)
-    @BindView(R.id.checkbox_exp_month)
-    CheckBox checkbox_exp_month;  //화장품 유통기한(월)
+
+    @BindView(R.id.radio_exp_month)
+    RadioButton radiobtn_exp_month;  //화장품 유통기한(월)
+
     @BindView(R.id.edt_exp_month)
     EditText edt_exp_month;//화장품 유통기한 (월)
     @BindView(R.id.txt_exp_month)
     TextView txt_exp_month;//화장품 유통기한 (월)
+
+    @BindView(R.id.radio_exp_none)
+    RadioButton radiobtn_exp_none;
+
 
     int cos_No = 0;
     String userID, cos_Name;
@@ -104,10 +121,10 @@ public class RegisterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         context = getContext();
         imgbtn_Cos.setOnClickListener(listener);
-        checkBox_cosIsOpen.setOnClickListener(listener_chechbox_OpenDate);
+        checkbox_cosIsOpen.setOnClickListener(listener_chechbox_OpenDate);
         btn_opendate.setOnClickListener(listener_btn_openDateClick);
-        checkbox_exp_month.setOnClickListener(listener_checkbox_MonthDateClick);
-        checkbox_exp_date.setOnClickListener(listener_checkbox_ExpDateClick);
+        //radiobtn_exp_month.setOnClickListener(listener_radiobtn_ExpMonthDateClick);
+        //radiobtn_exp_date.setOnClickListener(listener_radiobtn_ExpDateClick);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final String[] cos_brand = {"네이처리퍼블릭", "더샘", "더페이스샵", "마몽드", "맥", "미샤", "베네피트", "비욘드", "시드물", "아리따움", "어퓨", "에뛰드하우스", "이니스프리", "키스미", "토니모리", "페리페라", "홀리카홀리카", "기타"};
@@ -247,6 +264,61 @@ public class RegisterFragment extends Fragment {
 
         //유통기한 날짜 입력(~까지 쓸수있는 날짜)
 
+        radioGroup_exp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedID) {
+                switch (checkedID) {
+                    case R.id.radio_exp_date: {
+                        edt_exp_month.setVisibility(View.INVISIBLE);
+                        txt_exp_month.setVisibility(View.INVISIBLE);
+
+                        txt_exp_date.setVisibility(View.VISIBLE);
+                        final Calendar c = Calendar.getInstance();
+                        mYear = c.get(Calendar.YEAR);
+                        mMonth = c.get(Calendar.MONTH);
+                        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                        DatePickerDialog datePickerDialog
+                                = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                                txt_exp_date.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+                                Toast.makeText(getContext(), dateFormat.toString(), Toast.LENGTH_SHORT).show();
+
+                                try {
+                                    cos_exp_date = dateFormat.parse(txt_exp_date.getText().toString());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, mYear, mMonth, mDay);
+                        datePickerDialog.show();
+
+                        break;
+                    }
+                    case R.id.radio_exp_month: {
+                        txt_exp_date.setVisibility(View.INVISIBLE);
+                        edt_exp_month.setVisibility(View.VISIBLE);
+                        txt_exp_month.setVisibility(View.VISIBLE);
+                        if (!edt_exp_month.getText().toString().equals("")) {
+                            cos_exp_month = Integer.parseInt(edt_exp_month.getText().toString());
+                        }
+
+                        break;
+                    }
+                    case R.id.radio_exp_none:
+                        txt_exp_date.setVisibility(View.INVISIBLE);
+                        edt_exp_month.setVisibility(View.INVISIBLE);
+                        txt_exp_month.setVisibility(View.INVISIBLE);
+
+                    default:
+                        break;
+
+                }
+            }
+        });
+
     }
 
     //이미지 관련
@@ -373,18 +445,10 @@ public class RegisterFragment extends Fragment {
         }
     }
 
- /*   public void checkboxCosIsOpenClick(View v) {
-        if (checkBox_cosIsOpen.isChecked() == true) {
-            btn_opendate.setVisibility(View.VISIBLE);
-            txt_opendate.setVisibility(View.VISIBLE);
-            txt_date.setVisibility(View.VISIBLE);
-        }
-    }*/
-
     View.OnClickListener listener_chechbox_OpenDate = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (checkBox_cosIsOpen.isChecked()) {
+            if (checkbox_cosIsOpen.isChecked()) {
                 btn_opendate.setVisibility(View.VISIBLE);
                 txt_date.setVisibility(View.VISIBLE);
             } else {
@@ -393,6 +457,7 @@ public class RegisterFragment extends Fragment {
             }
         }
     };
+    //개봉일 - 날짜
     View.OnClickListener listener_btn_openDateClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -419,23 +484,27 @@ public class RegisterFragment extends Fragment {
             }
         }
     };
-    View.OnClickListener listener_checkbox_MonthDateClick = new View.OnClickListener() {
+
+    //유효기간 - "개월" 입력
+    View.OnClickListener listener_radiobtn_ExpMonthDateClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (checkbox_exp_month.isChecked() == true) {
+            if (radiobtn_exp_month.isChecked() == true) {
                 edt_exp_month.setVisibility(View.VISIBLE);
                 txt_exp_month.setVisibility(View.VISIBLE);
                 if (!edt_exp_month.getText().toString().equals("")) {
                     cos_exp_month = Integer.parseInt(edt_exp_month.getText().toString());
+
                 }
 
             }
         }
     };
-    View.OnClickListener listener_checkbox_ExpDateClick = new View.OnClickListener() {
+    //유효기간 - "날짜" 입력
+    View.OnClickListener listener_radiobtn_ExpDateClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (checkbox_exp_date.isChecked()) {
+            if (radiobtn_exp_month.isChecked()) {
                 final Calendar c = Calendar.getInstance();
                 mYear = c.get(Calendar.YEAR);
                 mMonth = c.get(Calendar.MONTH);
@@ -446,7 +515,9 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                         txt_exp_date.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.getDefault());
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+                        Toast.makeText(getContext(), dateFormat.toString(), Toast.LENGTH_SHORT).show();
+
                         try {
                             cos_exp_date = dateFormat.parse(txt_exp_date.getText().toString());
                         } catch (ParseException e) {
@@ -456,7 +527,7 @@ public class RegisterFragment extends Fragment {
                 }, mYear, mMonth, mDay);
                 datePickerDialog.show();
 
-            } else if (!checkbox_exp_date.isChecked()) {
+            } else if (!radiobtn_exp_date.isChecked()) {
                 txt_exp_date.setVisibility(View.INVISIBLE);
             }
         }
