@@ -6,16 +6,7 @@
     android:orientation="vertical"
     android:id="@+id/layout_fragment_home">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_store"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/fab_store" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,6 +78,15 @@
             android:text="더보기" />
 
     </LinearLayout>
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_store"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/fab_store" />
 
 </RelativeLayout>

@@ -1,10 +1,16 @@
 package com.cosmetic;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.cosmetic.adapter.AutoScrollAdapter;
 import com.cosmetic.db.BoardTipDB;
@@ -71,6 +76,7 @@ public class HomeFragment extends Fragment {
 
         //하단 게시판 더보기버튼 누를경우 게시판뷰로 이동
         btnGoBoard.setOnClickListener(listener);
+        fab.setOnClickListener(listener);
 
     }
 
@@ -78,8 +84,7 @@ public class HomeFragment extends Fragment {
     View.OnClickListener listener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            Double latitude = 127.027624;
-            Double longitude = 37.497941;
+
             switch (v.getId()){
                 case R.id.go_board :
                     Fragment fragment = BoardFragment.newInstance();
@@ -87,8 +92,10 @@ public class HomeFragment extends Fragment {
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.replace(R.id.layout_fragment_home, fragment).addToBackStack(null).commit();
                     break;
-                case R.id.fab_store:
-                    /*LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                case R.id.fab_store: {
+                    Double latitude = 127.027624;
+                    Double longitude = 37.497941;
+                    LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
                     //네트워크를 통해 위치정보를 받아오기위해 기기에서 퍼미션체크를 하도록 아래 코드를 추가해줌
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -96,19 +103,20 @@ public class HomeFragment extends Fragment {
                         return;
                     }
                     Location lastLocation = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    if(lastLocation != null) {
+                    if (lastLocation != null) {
                         latitude = lastLocation.getLatitude();
                         longitude = lastLocation.getLongitude();
-                    }*/
-                    Toast.makeText(getContext(), "fab_store button click!", Toast.LENGTH_SHORT).show();
+                    }
+                    System.out.println("gps----lat = " + latitude +", lon = "+ longitude);
+                    //왜 lat이랑 lon이랑 바뀌어서 저장이 되는거징...
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse("https://m.store.naver.com/places/listMap?sortingOrder=distance" +
-                                    "&viewType=place&back=false&level=top&nlu=%5Bobject%20Object%5D&query=%EC%97%90%EB%9B%B0%EB%93%9C" +
+                                    "&viewType=place&back=false&level=bottom&nlu=%5Bobject%20Object%5D&query=%EC%97%90%EB%9B%B0%EB%93%9C" +
                                     "&sid=36298052%2C21547444%2C36836471" +
-                                    "&x="+latitude +
-                                    "&y="+longitude));
+                                    "&x=" + longitude +
+                                    "&y=" + latitude));
                     startActivity(intent);
-                    break;
+                }break;
                 default:
                     break;
             }
