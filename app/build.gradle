@@ -53,7 +53,7 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-//glide for Image
+    //glide for Image
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {

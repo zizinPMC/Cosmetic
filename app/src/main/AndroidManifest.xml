@@ -26,6 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".board.BoardWriteActivity"
+            android:label="글 작성"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
