@@ -26,6 +26,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cosmetic.board.UserInfo;
+import com.cosmetic.db.CosmeticWriteDB;
+
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
+import static com.cosmetic.board.UserInfo.profileUrl;
 
 /**
  * Created by yujeen on 2017. 10. 28..
@@ -46,6 +50,7 @@ public class RegisterFragment extends Fragment {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_CAMERA = 2;
+    private CosmeticWriteDB dbManager;
 
     private Uri mImageCaptureUri;
 
@@ -99,9 +104,9 @@ public class RegisterFragment extends Fragment {
     long open = -1, exp, count;
     int cos_No = 0;
     String userID, cos_Name;
-    String cos_Brand = "", cos_MainCate = "", cos_MidCate = "";
+    String cos_Brand = "", cos_MainCate = "", cos_MidCate = "", cos_PicUrl = "";
     Date cos_open_date, cos_exp_date;
-    int cos_exp_month, cos_IsOpen;
+    int cos_exp_month, cos_IsOpen = 0, cos_ExpDday = 0;
     private Context context;
     private int mYear, mMonth, mDay;
 
@@ -110,20 +115,20 @@ public class RegisterFragment extends Fragment {
         return fragment;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
-
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        dbManager = new CosmeticWriteDB();
 
         context = getContext();
         imgbtn_Cos.setOnClickListener(listener);
@@ -132,17 +137,28 @@ public class RegisterFragment extends Fragment {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), MainActivity.class);
-                startActivity(i);
-
             }
         });
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), MainActivity.class);
-                startActivity(i);
+                String userprofileurl = profileUrl;
+                String usernickname = UserInfo.userName;
 
+                userID = usernickname;
+                if (edt_cosName.getText().toString() != null) {
+                    //화장품 이름
+                    cos_Name = edt_cosName.getText().toString();
+
+                    dbManager.cosmeticDBManager(cos_No, userID, cos_Name, cos_Brand, cos_MainCate,
+                            cos_MidCate, cos_IsOpen, cos_open_date, cos_ExpDday, cos_PicUrl);
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    intent.putExtra("ProfileUrl", userprofileurl);
+                    intent.putExtra("userName", usernickname);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "화장품 이름을 입력해주세요.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -188,7 +204,6 @@ public class RegisterFragment extends Fragment {
                                 Toast.makeText(getContext(), btn_CosMainCategory.getText().toString(), Toast.LENGTH_LONG).show();
                                 //for input DB
                                 cos_MainCate = btn_CosMainCategory.getText().toString();
-                                //  toast();
                             }
                         });
 
@@ -207,14 +222,13 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_skincare[index]);
+                                    cos_MidCate = cos_midcate_facemakeup[index];
                                 }
                             });
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    //for input DB
-                    cos_MidCate = btn_CosMidCategory.getText().toString();
-                    //   toast();
+
                 } else if (btn_CosMainCategory.getText().toString().equals("페이스 메이크업")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
@@ -222,14 +236,13 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_facemakeup[index]);
+                                    cos_MidCate = cos_midcate_facemakeup[index];
                                 }
                             });
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    //for input DB
-                    cos_MidCate = btn_CosMidCategory.getText().toString();
-                    //   toast();
+
                 } else if (btn_CosMainCategory.getText().toString().equals("아이 메이크업")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
@@ -237,14 +250,12 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_eyemakeup[index]);
+                                    cos_MidCate = cos_midcate_facemakeup[index];
                                 }
                             });
-
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    //for input DB
-                    cos_MidCate = btn_CosMidCategory.getText().toString();
-                    //   toast();
+
                 } else if (btn_CosMainCategory.getText().toString().equals("립 메이크업")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
@@ -252,14 +263,12 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_lipmakeup[index]);
+                                    cos_MidCate = cos_midcate_facemakeup[index];
                                 }
                             });
-
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    //for input DB
-                    cos_MidCate = btn_CosMidCategory.getText().toString();
-                    //   toast();
+
                 } else if (btn_CosMainCategory.getText().toString().equals("클렌징")) {
                     //알림창의 속성 설정
                     builder.setTitle("화장품 중분류 선택하기")
@@ -267,23 +276,16 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_cleansing[index]);
+                                    //for input DB
+                                    cos_MidCate = cos_midcate_facemakeup[index];
                                 }
                             });
-
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    //for input DB
-                    cos_MidCate = btn_CosMidCategory.getText().toString();
 
                 }
             }
         });
-
-        //화장품 이름
-        cos_Name = edt_cosName.getText().toString();
-
-        //유통기한 날짜 입력(~까지 쓸수있는 날짜)
-
         radioGroup_exp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedID) {
@@ -308,7 +310,7 @@ public class RegisterFragment extends Fragment {
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
 //                                Toast.makeText(getContext(), (txt_exp_date.getText().toString()), Toast.LENGTH_SHORT).show();
                                 if (open != -1) {
-                                    Toast.makeText(getContext(), Long.toString(open)+","+Long.toString(exp)+","+String.valueOf(countdday()), Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(getContext(), Long.toString(open) + "," + Long.toString(exp) + "," + String.valueOf(countdday()), Toast.LENGTH_SHORT).show();
                                 }
                                 try {
                                     cos_exp_date = dateFormat.parse(txt_exp_date.getText().toString());
@@ -339,10 +341,7 @@ public class RegisterFragment extends Fragment {
 
                     default:
                         break;
-
-
                 }
-
             }
         });
 
@@ -352,6 +351,7 @@ public class RegisterFragment extends Fragment {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             count = exp - open;
+            cos_ExpDday = (int) count;
             return (int) count;
         } catch (Exception e) {
             e.printStackTrace();
@@ -415,7 +415,7 @@ public class RegisterFragment extends Fragment {
 
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
         // 특정기기에서 사진을 저장못하는 문제가 있어 다음을 주석처리 합니다.
-        //intent.putExtra("return-data", true);
+        intent.putExtra("return-data", true);
         startActivityForResult(intent, PICK_FROM_CAMERA);
     }
 
@@ -461,6 +461,7 @@ public class RegisterFragment extends Fragment {
                 // 실제 코드에서는 좀더 합리적인 방법을 선택하시기 바랍니다.
 
                 mImageCaptureUri = data.getData();
+                cos_PicUrl = mImageCaptureUri.toString();
             }
 
             case PICK_FROM_CAMERA: {
@@ -491,6 +492,10 @@ public class RegisterFragment extends Fragment {
                 btn_opendate.setVisibility(View.VISIBLE);
             } else {
                 btn_opendate.setVisibility(View.INVISIBLE);
+                cos_PicUrl = "";
+                cos_ExpDday = 0;
+                cos_IsOpen = 1;
+                cos_open_date = null;
             }
         }
     };
@@ -517,6 +522,7 @@ public class RegisterFragment extends Fragment {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
             try {
                 cos_open_date = dateFormat.parse(btn_opendate.getText().toString());
+                Toast.makeText(getContext(), dateFormat.parse(btn_opendate.getText().toString()).toString(), Toast.LENGTH_LONG).show();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
