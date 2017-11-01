@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class BoardFragment extends Fragment {
 
-    @BindView(R.id.btn_write) Button btn_write;
+    @BindView(R.id.btn_boardWrite) Button btn_write;
     @BindView(R.id.cbt_listview) ListView listView;
     ArrayList<HashMap<String,String>> tipList;
     public static BoardFragment newInstance() {
@@ -61,7 +61,7 @@ public class BoardFragment extends Fragment {
     View.OnClickListener listener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.btn_write){
+            if(v.getId() == R.id.btn_boardWrite){
                 Intent intent = new Intent(
                         getContext(), // 현재 화면의 제어권자
                         BoardWriteActivity.class); // 다음 넘어갈 클래스 지정

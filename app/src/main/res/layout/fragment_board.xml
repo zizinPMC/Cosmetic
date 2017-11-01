@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <Button
-        android:id="@+id/btn_write"
+        android:id="@+id/btn_boardWrite"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="end"
