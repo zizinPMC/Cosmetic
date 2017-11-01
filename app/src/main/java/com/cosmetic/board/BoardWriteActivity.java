@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.cosmetic.MainActivity;
 import com.cosmetic.R;
+import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardWriteDB;
 
 import java.text.SimpleDateFormat;
@@ -73,14 +75,17 @@ public class BoardWriteActivity extends AppCompatActivity {
                 //String sCategory = editCategory.getText().toString();
                 String sCategory = spinCategory.getSelectedItem().toString();
                 //String sWriter = editWriter.getText().toString();
-                //String sWriter = UserInfo.userName;
-                String sWriter = "한뉴";
+                String sWriter = UserInfo.userName;
                 String sTitle = editTitle.getText().toString();
                 String sContents = editContents.getText().toString();
                 SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date(System.currentTimeMillis());
                 String sDate =sdfNow.format(date).toString();
                 dbManager.comBoardDBManager(sCategory,sWriter, sTitle,sContents,sDate,"",NULL,0);
+                /*BoardFragment.newInstance();
+                finish();*/
+                MainActivity.viewPager.setCurrentItem(MainAdapter.HOME,false);
+                MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                 finish();
             }
         }
