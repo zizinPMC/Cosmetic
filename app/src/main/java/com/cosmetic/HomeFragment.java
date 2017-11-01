@@ -91,8 +91,8 @@ public class HomeFragment extends Fragment {
                     /*Fragment boardFragment = BoardFragment.newInstance();
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.add(R.id.layout_fragment_home, boardFragment).addToBackStack(null).commit();
-*/                  MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
+                    ft.add(R.id.layout_fragment_home, boardFragment).addToBackStack(null).commit();*/
+                    MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                     break;
                 case R.id.fab_store: {
                     Double latitude = 127.027624;

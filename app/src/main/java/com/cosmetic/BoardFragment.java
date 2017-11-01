@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.BoardWriteActivity;
 import com.cosmetic.db.BoardTipDB;
 
@@ -52,7 +52,8 @@ public class BoardFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), tipList.get(position).toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), tipList.get(position).toString(), Toast.LENGTH_LONG).show();
+                MainActivity.viewPager.setCurrentItem(MainAdapter.READ,false);
             }
         });
 
