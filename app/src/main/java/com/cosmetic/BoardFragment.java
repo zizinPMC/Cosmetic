@@ -1,12 +1,24 @@
 package com.cosmetic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.cosmetic.board.BoardWriteActivity;
+import com.cosmetic.db.BoardTipDB;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -15,8 +27,10 @@ import butterknife.ButterKnife;
 
 public class BoardFragment extends Fragment {
 
-
-    public static BoardFragment newInstance(){
+    @BindView(R.id.btn_write) Button btn_write;
+    @BindView(R.id.cbt_listview) ListView listView;
+    ArrayList<HashMap<String,String>> tipList;
+    public static BoardFragment newInstance() {
         BoardFragment fragment = new BoardFragment();
         return fragment;
     }
@@ -25,7 +39,7 @@ public class BoardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_board, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -33,5 +47,28 @@ public class BoardFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tipList = new ArrayList<HashMap<String, String>>();
+        BoardTipDB.getData("http://zizin1318.cafe24.com/board/board_tip_read.php", tipList, getContext(), listView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), tipList.get(position).toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btn_write.setOnClickListener(listener);
     }
+    View.OnClickListener listener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == R.id.btn_write){
+                Intent intent = new Intent(
+                        getContext(), // 현재 화면의 제어권자
+                        BoardWriteActivity.class); // 다음 넘어갈 클래스 지정
+                startActivity(intent);
+
+            }
+        }
+    };
+
 }
