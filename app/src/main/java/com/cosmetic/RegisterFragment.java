@@ -49,7 +49,6 @@ public class RegisterFragment extends Fragment {
 
     private Uri mImageCaptureUri;
 
-    private long inputTotalDate;
     @BindView(R.id.img_cosmetic)
     ImageButton imgbtn_Cos; //화장품 이미지
 
@@ -70,8 +69,6 @@ public class RegisterFragment extends Fragment {
 
     @BindView(R.id.btn_opendate)
     Button btn_opendate;    //화장품 개봉일자
-    @BindView(R.id.txt_date)
-    TextView txt_date;    //화장품 개봉일자
 
     @BindView(R.id.radioGroup_exp)
     RadioGroup radioGroup_exp;
@@ -93,7 +90,13 @@ public class RegisterFragment extends Fragment {
     @BindView(R.id.radio_exp_none)
     RadioButton radiobtn_exp_none;
 
+    @BindView(R.id.btn_cancel)
+    Button btn_cancel;
 
+    @BindView(R.id.btn_register)
+    Button btn_register;
+
+    long open = -1, exp, count;
     int cos_No = 0;
     String userID, cos_Name;
     String cos_Brand = "", cos_MainCate = "", cos_MidCate = "";
@@ -113,18 +116,35 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, view);
+        setHasOptionsMenu(true);
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         context = getContext();
         imgbtn_Cos.setOnClickListener(listener);
         checkbox_cosIsOpen.setOnClickListener(listener_chechbox_OpenDate);
         btn_opendate.setOnClickListener(listener_btn_openDateClick);
-        //radiobtn_exp_month.setOnClickListener(listener_radiobtn_ExpMonthDateClick);
-        //radiobtn_exp_date.setOnClickListener(listener_radiobtn_ExpDateClick);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), MainActivity.class);
+                startActivity(i);
+
+            }
+        });
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), MainActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final String[] cos_brand = {"네이처리퍼블릭", "더샘", "더페이스샵", "마몽드", "맥", "미샤", "베네피트", "비욘드", "시드물", "아리따움", "어퓨", "에뛰드하우스", "이니스프리", "키스미", "토니모리", "페리페라", "홀리카홀리카", "기타"};
@@ -254,7 +274,7 @@ public class RegisterFragment extends Fragment {
                     dialog.show();
                     //for input DB
                     cos_MidCate = btn_CosMidCategory.getText().toString();
-                    //   toast();
+
                 }
             }
         });
@@ -273,21 +293,26 @@ public class RegisterFragment extends Fragment {
                         txt_exp_month.setVisibility(View.INVISIBLE);
 
                         txt_exp_date.setVisibility(View.VISIBLE);
-                        final Calendar c = Calendar.getInstance();
-                        mYear = c.get(Calendar.YEAR);
-                        mMonth = c.get(Calendar.MONTH);
-                        mDay = c.get(Calendar.DAY_OF_MONTH);
-
+                        final Calendar c_txt_exp_date = Calendar.getInstance();
+                        mYear = c_txt_exp_date.get(Calendar.YEAR);
+                        mMonth = c_txt_exp_date.get(Calendar.MONTH);
+                        mDay = c_txt_exp_date.get(Calendar.DAY_OF_MONTH);
+                        if (open != -1) {
+                            exp = c_txt_exp_date.getTimeInMillis() / 86400000;
+                        }
                         DatePickerDialog datePickerDialog
                                 = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                                 txt_exp_date.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
-                                Toast.makeText(getContext(), dateFormat.toString(), Toast.LENGTH_SHORT).show();
-
+//                                Toast.makeText(getContext(), (txt_exp_date.getText().toString()), Toast.LENGTH_SHORT).show();
+                                if (open != -1) {
+                                    Toast.makeText(getContext(), Long.toString(open)+","+Long.toString(exp)+","+String.valueOf(countdday()), Toast.LENGTH_SHORT).show();
+                                }
                                 try {
                                     cos_exp_date = dateFormat.parse(txt_exp_date.getText().toString());
+
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -315,9 +340,23 @@ public class RegisterFragment extends Fragment {
                     default:
                         break;
 
+
                 }
+
             }
         });
+
+    }
+
+    public int countdday() {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            count = exp - open;
+            return (int) count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
 
     }
 
@@ -450,10 +489,8 @@ public class RegisterFragment extends Fragment {
         public void onClick(View view) {
             if (checkbox_cosIsOpen.isChecked()) {
                 btn_opendate.setVisibility(View.VISIBLE);
-                txt_date.setVisibility(View.VISIBLE);
             } else {
                 btn_opendate.setVisibility(View.INVISIBLE);
-                txt_date.setVisibility(View.INVISIBLE);
             }
         }
     };
@@ -466,6 +503,7 @@ public class RegisterFragment extends Fragment {
             mMonth = c.get(Calendar.MONTH);
             mDay = c.get(Calendar.DAY_OF_MONTH);
 
+            open = c.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
             DatePickerDialog datePickerDialog
                     = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -481,54 +519,6 @@ public class RegisterFragment extends Fragment {
                 cos_open_date = dateFormat.parse(btn_opendate.getText().toString());
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
-        }
-    };
-
-    //유효기간 - "개월" 입력
-    View.OnClickListener listener_radiobtn_ExpMonthDateClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (radiobtn_exp_month.isChecked() == true) {
-                edt_exp_month.setVisibility(View.VISIBLE);
-                txt_exp_month.setVisibility(View.VISIBLE);
-                if (!edt_exp_month.getText().toString().equals("")) {
-                    cos_exp_month = Integer.parseInt(edt_exp_month.getText().toString());
-
-                }
-
-            }
-        }
-    };
-    //유효기간 - "날짜" 입력
-    View.OnClickListener listener_radiobtn_ExpDateClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (radiobtn_exp_month.isChecked()) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog
-                        = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        txt_exp_date.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
-                        Toast.makeText(getContext(), dateFormat.toString(), Toast.LENGTH_SHORT).show();
-
-                        try {
-                            cos_exp_date = dateFormat.parse(txt_exp_date.getText().toString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-
-            } else if (!radiobtn_exp_date.isChecked()) {
-                txt_exp_date.setVisibility(View.INVISIBLE);
             }
         }
     };

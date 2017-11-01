@@ -27,7 +27,9 @@ import java.util.List;
 
 public class LoginActivity extends Activity {
     SessionCallback callback;
-
+    private String userID;
+    private String userName;
+    private String profileUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +106,7 @@ public class LoginActivity extends Activity {
                     String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
                     String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
                     System.out.println("카카오아이디  :  "+kakaoID);
-                    System.out.println("카카오닉네임  :  "+kakaoNickname);
-
+                    System.out.println("카카오닉네  :  "+kakaoNickname);
                     // 관심있는 화장품 브랜드 선택(다중선택 가능)
                     final List<String> list = new ArrayList<String>();
 
@@ -140,9 +141,15 @@ public class LoginActivity extends Activity {
 
 
                                     Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
+                                    profileUrl = userProfile.getProfileImagePath();
+                                    userID = String.valueOf(userProfile.getId());
+                                    userName = userProfile.getNickname();
+
+
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    //intent.putExtra("interest_Brand", selectedItem);
-                                    //setResult(RESULT_OK, intent);
+
+                                    intent.putExtra("ProfileUrl",profileUrl);
+                                    intent.putExtra("userName",userName);
                                     startActivity(intent);
 
                                     finish();
