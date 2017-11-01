@@ -62,7 +62,6 @@ public class HomeFragment extends Fragment {
         autoViewPager.setAdapter(scrollAdapter); //Auto Viewpager에 Adapter 장착
         autoViewPager.setInterval(5000); // 페이지 넘어갈 시간 간격 설정
         autoViewPager.startAutoScroll(); //Auto Scroll 시작
-
         //하단 게시판 글 뷰
         tipList = new ArrayList<HashMap<String, String>>();
         BoardTipDB.getData("http://zizin1318.cafe24.com/board/board_tip_read.php",tipList,this.getContext(),listView);
