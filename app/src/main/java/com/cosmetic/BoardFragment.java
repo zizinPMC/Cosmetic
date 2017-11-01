@@ -46,7 +46,7 @@ public class BoardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        HomeFragment.fab.setVisibility(View.INVISIBLE);
         tipList = new ArrayList<HashMap<String, String>>();
         BoardTipDB.getData("http://zizin1318.cafe24.com/board/board_tip_read.php", tipList, getContext(), listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,5 +70,6 @@ public class BoardFragment extends Fragment {
             }
         }
     };
+
 
 }

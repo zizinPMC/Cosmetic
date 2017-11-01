@@ -16,7 +16,8 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation) BottomNavigationView navigation;
-    @BindView(R.id.viewPager) ViewPager viewPager;
+    //@BindView(R.id.viewPager) ViewPager viewPager;
+    public static ViewPager viewPager;
     private MainAdapter adapter;
 
     @Override
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
