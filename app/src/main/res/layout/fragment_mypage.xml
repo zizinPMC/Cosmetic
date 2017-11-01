@@ -2,46 +2,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/linear_profile">
-    <ImageView
-        android:layout_marginLeft="30dp"
-        android:id="@+id/userProfileImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:src="@drawable/fab_store" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userProfileImage"
-        android:text="닉네임"
-        android:id="@+id/userName"
-        android:layout_centerInParent="true"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
-        />
+    <RelativeLayout
+        android:id="@+id/linear_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/fab_store" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userProfileImage"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:text="횬"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_toRightOf="@id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userProfileImage"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:text="   님"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linear_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-android:layout_below="@id/linear_profile"
+        android:layout_below="@id/linear_profile"
         android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="20dp"
             android:src="@drawable/ic_notification_bell" />
 
@@ -52,7 +64,7 @@ android:layout_below="@id/linear_profile"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:text=" 알 림 "
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -66,8 +78,8 @@ android:layout_below="@id/linear_profile"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="20dp"
             android:src="@drawable/ic_megaphone" />
 
@@ -78,7 +90,7 @@ android:layout_below="@id/linear_profile"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:text=" 공 지 사 항 "
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -112,8 +124,8 @@ android:layout_below="@id/linear_profile"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginLeft="20dp"
             android:src="@drawable/ic_user_image" />
 
@@ -124,10 +136,11 @@ android:layout_below="@id/linear_profile"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:text=" 내 등록 화장품 "
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1.5dp"
