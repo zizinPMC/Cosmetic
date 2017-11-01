@@ -149,7 +149,6 @@ public class LoginActivity extends Activity {
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
                                     intent.putExtra("ProfileUrl",profileUrl);
-                                    intent.putExtra("userID",userID);
                                     intent.putExtra("userName",userName);
                                     startActivity(intent);
 

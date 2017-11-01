@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.cosmetic.adapter.MainAdapter;
+import com.cosmetic.board.UserInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,11 +18,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation) BottomNavigationView navigation;
     @BindView(R.id.viewPager) ViewPager viewPager;
     private MainAdapter adapter;
-    Intent intent = getIntent();
-/*
-    String userprofileUrl = intent.getExtras().getString("ProfileUrl");
-    String usernickname = intent.getExtras().getString("userName");
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+       
+        Intent intent = getIntent();
+        String userNickname = intent.getExtras().getString("userName");
+        String userprofileURL = intent.getExtras().getString("ProfileUrl");
+      new UserInfo(userNickname, userprofileURL);
     }
 
 

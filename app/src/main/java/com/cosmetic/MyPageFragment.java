@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.cosmetic.board.UserInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +22,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  */
 
 
-public class MyPageFragment extends Fragment{
+public class MyPageFragment extends Fragment {
     @BindView(R.id.userProfileImage)
     ImageView userProfileImg;
     @BindView(R.id.linear_alarm)
@@ -29,8 +31,9 @@ public class MyPageFragment extends Fragment{
     LinearLayout linear_notice;
     @BindView(R.id.linear_mycosmetic)
     LinearLayout linear_mycosmetic;
-
-    public static MyPageFragment newInstance(){
+    @BindView(R.id.userName)
+    TextView userName;
+    public static MyPageFragment newInstance() {
         MyPageFragment fragment = new MyPageFragment();
         return fragment;
     }
@@ -38,25 +41,28 @@ public class MyPageFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_mypage,container,false);
+        final View view = inflater.inflate(R.layout.fragment_mypage, container, false);
         ButterKnife.bind(this, view);
-
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*Intent intent = getActivity().getIntent();
-         String profileUrl = intent.getExtras().getString("ProfileUrl");
-        */Glide.with(getActivity())
-                .load("http://k.kakaocdn.net/dn/cuFXl0/btqicSjTW1H/klbg3yc8KoL9eK8MbIY7AK/img_110x110.jpg")
+
+        String  userprofileurl = UserInfo.profileUrl;
+        String usernickname = UserInfo.userName;
+
+        Glide.with(getActivity())
+                .load(userprofileurl)
                 .error(R.drawable.ic_person)
                 .centerCrop()
                 .crossFade()
-                .override(150,150)
+                .override(150, 150)
                 .bitmapTransform(new CropCircleTransformation(getActivity()))
                 .into(userProfileImg);
+
+        userName.setText(usernickname);
         //마이페이지 -알람
         linear_alarm.setOnClickListener(new View.OnClickListener() {
             @Override
