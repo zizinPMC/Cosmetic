@@ -12,8 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.cosmetic.adapter.AutoScrollAdapter;
+import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardTipDB;
 
 import java.util.ArrayList;
@@ -36,7 +35,8 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 public class HomeFragment extends Fragment {
 
-    @BindView(R.id.fab_store) FloatingActionButton fab;
+    //@BindView(R.id.fab_store) public static FloatingActionButton fab;
+    public static FloatingActionButton fab;
     @BindView(R.id.home_autoViewPager) AutoScrollViewPager autoViewPager;
     @BindView(R.id.home_listview) ListView listView;
     @BindView(R.id.go_board) Button btnGoBoard;
@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fab = (FloatingActionButton)getActivity().findViewById(R.id.fab_store);
         ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
         for(int i=1;i<=5;i++){
             data.add("http://zizin1318.cafe24.com/homeFlipImage/etude"+i+".jpg");
@@ -87,10 +88,11 @@ public class HomeFragment extends Fragment {
 
             switch (v.getId()){
                 case R.id.go_board :
-                    Fragment fragment = BoardFragment.newInstance();
+                    /*Fragment boardFragment = BoardFragment.newInstance();
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.layout_fragment_home, fragment).addToBackStack(null).commit();
+                    ft.add(R.id.layout_fragment_home, boardFragment).addToBackStack(null).commit();
+*/                  MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                     break;
                 case R.id.fab_store: {
                     Double latitude = 127.027624;
@@ -122,4 +124,5 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+
 }
