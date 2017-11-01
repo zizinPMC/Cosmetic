@@ -13,10 +13,6 @@ public class UserInfo{
     public UserInfo(String userName) {
         this.userName = userName;
     }
-    public UserInfo() {
-
-    }
-
 
     public static String getUserName() {
         return userName;

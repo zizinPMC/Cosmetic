@@ -1,5 +1,8 @@
 package com.cosmetic;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,6 +36,9 @@ public class MyPageFragment extends Fragment {
     LinearLayout linear_mycosmetic;
     @BindView(R.id.userName)
     TextView userName;
+
+    private Activity activity;
+
     public static MyPageFragment newInstance() {
         MyPageFragment fragment = new MyPageFragment();
         return fragment;
@@ -50,7 +56,7 @@ public class MyPageFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String  userprofileurl = UserInfo.profileUrl;
+        String userprofileurl = UserInfo.profileUrl;
         String usernickname = UserInfo.userName;
 
         Glide.with(getActivity())
@@ -67,7 +73,9 @@ public class MyPageFragment extends Fragment {
         linear_alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(activity, AlarmActivity.class);
+                activity.startActivity(intent);
+                activity.finish();
             }
         });
         //마이페이지 -공지사항
@@ -81,9 +89,22 @@ public class MyPageFragment extends Fragment {
         linear_mycosmetic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(activity, MyCosmeticActivity.class);
+                activity.startActivity(intent);
+                activity.finish();
 
             }
         });
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity) {
+            activity = (Activity) context;
+        }
 
     }
 }

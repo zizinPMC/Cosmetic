@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.cosmetic.db.UserDB;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -26,10 +27,14 @@ import java.util.List;
  */
 
 public class LoginActivity extends Activity {
+    private UserDB dbManager;
+
     SessionCallback callback;
     private String userID;
     private String userName;
     private String profileUrl;
+    private  int userBoardCnt=0, userCosCnt =0, autoLogin =0;
+    private String interestBrand="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +105,7 @@ public class LoginActivity extends Activity {
 
                     //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
+
                     System.out.println("UserProfile=====>"+userProfile.toString());
 
                     System.out.println("프로필이미지 섬네일===>"+userProfile.getProfileImagePath());
@@ -114,7 +120,7 @@ public class LoginActivity extends Activity {
 
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
-                    dialog.setTitle("관심브랜드를 고르세요.")
+                    dialog.setTitle("관심브랜드를 선택해주세요.")
                             .setMultiChoiceItems(
                                     brand_items,
                                     new boolean[]{false, false, false, false, false, false, false, false}
@@ -138,13 +144,16 @@ public class LoginActivity extends Activity {
                                         selectedItem += item + ", ";
                                     }
                                     //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
+                                    dbManager = new UserDB();
 
 
-                                    Toast.makeText(getApplicationContext(), selectedItem, Toast.LENGTH_SHORT).show();
-                                    profileUrl = userProfile.getProfileImagePath();
-                                    userID = String.valueOf(userProfile.getId());
+                                    userID =String.valueOf(userProfile.getId());
                                     userName = userProfile.getNickname();
-
+                                    profileUrl =userProfile.getProfileImagePath();
+                                    interestBrand =selectedItem;
+                                    Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
+                                    dbManager.userDBManager(userID, userName, userBoardCnt, userCosCnt, profileUrl,
+                                            autoLogin, interestBrand);
 
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 

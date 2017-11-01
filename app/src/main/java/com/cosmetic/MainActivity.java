@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-       
+
         Intent intent = getIntent();
         String userNickname = intent.getExtras().getString("userName");
         String userprofileURL = intent.getExtras().getString("ProfileUrl");
