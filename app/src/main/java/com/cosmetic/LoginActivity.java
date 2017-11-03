@@ -114,7 +114,7 @@ public class LoginActivity extends Activity {
                     System.out.println("카카오아이디  :  "+kakaoID);
                     System.out.println("카카오닉네  :  "+kakaoNickname);
                     // 관심있는 화장품 브랜드 선택(다중선택 가능)
-                    final List<String> list = new ArrayList<String>();
+                    final List<String> list = new ArrayList<>();
 
                     final String[] brand_items = new String[]{"이니스프리", "미샤", "어퓨", "아리따움", "올리브영", "홀리카홀리카", "에뛰드하우스", "스킨푸드"};
 
@@ -136,41 +136,33 @@ public class LoginActivity extends Activity {
                                         }
                                     }
                             )
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    String selectedItem = "";
-                                    for (String item : list) {
-                                        selectedItem += item + ", ";
-                                    }
-                                    //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
-                                    dbManager = new UserDB();
-
-
-                                    userID =String.valueOf(userProfile.getId());
-                                    userName = userProfile.getNickname();
-                                    profileUrl =userProfile.getProfileImagePath();
-                                    interestBrand =selectedItem;
-                                    Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
-                                    dbManager.userDBManager(userID, userName, userBoardCnt, userCosCnt, profileUrl,
-                                            autoLogin, interestBrand);
-
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                                    intent.putExtra("ProfileUrl",profileUrl);
-                                    intent.putExtra("userName",userName);
-                                    startActivity(intent);
-
-                                    finish();
-
+                            .setPositiveButton("확인", (dialogInterface, i) -> {
+                                String selectedItem = "";
+                                for (String item : list) {
+                                    selectedItem += item + ", ";
                                 }
+                                //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
+                                dbManager = new UserDB();
+
+
+                                userID =String.valueOf(userProfile.getId());
+                                userName = userProfile.getNickname();
+                                profileUrl =userProfile.getProfileImagePath();
+                                interestBrand =selectedItem;
+                               // Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
+                                dbManager.userDBManager(userID, userName, userBoardCnt, userCosCnt, profileUrl,
+                                        autoLogin, interestBrand);
+
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                                intent.putExtra("ProfileUrl",profileUrl);
+                                intent.putExtra("userName",userName);
+                                startActivity(intent);
+
+                                finish();
+
                             })
-                            .setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            .setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
                     dialog.create();
                     dialog.show();
 
