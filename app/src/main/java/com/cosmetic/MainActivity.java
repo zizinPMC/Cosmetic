@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         dbManager = new UserDB();
         Intent intent = getIntent();
 
-        String userID = intent.getExtras().getString("userID");
+        long userID = intent.getExtras().getLong("userID");
         String userNickname = intent.getExtras().getString("userName");
         int userBoardCnt = intent.getExtras().getInt("userBoardCnt");
         int userCosCnt = intent.getExtras().getInt("userCosCnt");

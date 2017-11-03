@@ -27,7 +27,7 @@ import java.util.List;
 public class LoginActivity extends Activity {
 
     SessionCallback callback;
-    private String userID ;
+    private long userID ;
     private String userName = "";
     private String profileUrl = "";
     private int userBoardCnt = 0, userCosCnt = 0, autoLogin = 0;
@@ -138,7 +138,8 @@ public class LoginActivity extends Activity {
                                 }
                                 //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
 
-                                userID = String.valueOf(userProfile.getId());
+                                //userID = String.valueOf(userProfile.getId());
+                                userID = userProfile.getId();
                                 userName = userProfile.getNickname();
                                 profileUrl = userProfile.getProfileImagePath();
                                 interestBrand = selectedItem;
