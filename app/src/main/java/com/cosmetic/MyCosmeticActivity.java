@@ -15,4 +15,9 @@ public class MyCosmeticActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mycosmetic);
 
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+
+    }
 }

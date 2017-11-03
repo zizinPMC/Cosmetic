@@ -15,4 +15,10 @@ public class AlarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+
+    }
 }

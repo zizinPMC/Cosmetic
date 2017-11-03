@@ -37,16 +37,9 @@ public class BoardReadDB //extends AppCompatActivity{
     private static final String TAG_CONTENTS = "boardContent";
 
     public static JSONArray jsonArray = null;
-    //ArrayList<HashMap<String,String>> tipList;
-    public static ListView listView;
-    /*@Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.listview_comboard_item);
 
-        tipList1 = new ArrayList<HashMap<String, String>>();
-        getData("http://zizin1318.cafe24.com/board/board_read.php",tipList1,getApplicationContext());
-    }*/
+    public static ListView listView;
+
     protected static void showList(ArrayList<HashMap<String,String>> tipList, Context context){
         try {
             System.out.println("-------->showlist start" + myJSON);
