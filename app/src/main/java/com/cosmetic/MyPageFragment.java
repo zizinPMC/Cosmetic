@@ -75,7 +75,7 @@ public class MyPageFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(activity, AlarmActivity.class);
                 activity.startActivity(intent);
-                activity.finish();
+                //activity.finish();
             }
         });
         //마이페이지 -공지사항
@@ -91,7 +91,7 @@ public class MyPageFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(activity, MyCosmeticActivity.class);
                 activity.startActivity(intent);
-                activity.finish();
+                //activity.finish();
 
             }
         });

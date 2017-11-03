@@ -35,15 +35,13 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 public class HomeFragment extends Fragment {
 
-    //@BindView(R.id.fab_store) public static FloatingActionButton fab;
+
     public static FloatingActionButton fab;
     @BindView(R.id.home_autoViewPager) AutoScrollViewPager autoViewPager;
     @BindView(R.id.home_listview) ListView listView;
     @BindView(R.id.go_board) Button btnGoBoard;
 
-    ArrayList<HashMap<String,String>> tipList;//하단 리스트뷰 팁리스
-
-    static View v;
+    ArrayList<HashMap<String,String>> tipList;//하단 리스트뷰 팁리스트
 
     public static HomeFragment newInstance(){
         HomeFragment fragment = new HomeFragment();
@@ -88,13 +86,10 @@ public class HomeFragment extends Fragment {
 
             switch (v.getId()){
                 case R.id.go_board :
-                    /*Fragment boardFragment = BoardFragment.newInstance();
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.add(R.id.layout_fragment_home, boardFragment).addToBackStack(null).commit();*/
                     MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                     break;
                 case R.id.fab_store: {
+                    //제대로 들어가는지 테스트하기위해 초기 gps값을 강남역으로 설정
                     Double latitude = 127.027624;
                     Double longitude = 37.497941;
                     LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);

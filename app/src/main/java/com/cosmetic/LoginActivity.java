@@ -151,7 +151,7 @@ public class LoginActivity extends Activity {
                                     userName = userProfile.getNickname();
                                     profileUrl =userProfile.getProfileImagePath();
                                     interestBrand =selectedItem;
-                                    Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
                                     dbManager.userDBManager(userID, userName, userBoardCnt, userCosCnt, profileUrl,
                                             autoLogin, interestBrand);
 
