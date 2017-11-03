@@ -1,13 +1,11 @@
 package com.cosmetic;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.cosmetic.db.UserDB;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -27,14 +25,14 @@ import java.util.List;
  */
 
 public class LoginActivity extends Activity {
-    private UserDB dbManager;
 
     SessionCallback callback;
-    private String userID;
-    private String userName;
-    private String profileUrl;
-    private  int userBoardCnt=0, userCosCnt =0, autoLogin =0;
-    private String interestBrand="";
+    private String userID ;
+    private String userName = "";
+    private String profileUrl = "";
+    private int userBoardCnt = 0, userCosCnt = 0, autoLogin = 0;
+    private String interestBrand = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,13 +104,13 @@ public class LoginActivity extends Activity {
                     //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
 
-                    System.out.println("UserProfile=====>"+userProfile.toString());
+                    System.out.println("UserProfile=====>" + userProfile.toString());
 
-                    System.out.println("프로필이미지 섬네일===>"+userProfile.getProfileImagePath());
-                    String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
+                    System.out.println("프로필이미지 섬네일===>" + userProfile.getProfileImagePath());
+                    long kakaoID = userProfile.getId(); // userProfile에서 ID값을 가져옴
                     String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
-                    System.out.println("카카오아이디  :  "+kakaoID);
-                    System.out.println("카카오닉네  :  "+kakaoNickname);
+                    System.out.println("카카오아이디  :  " + kakaoID);
+                    System.out.println("카카오닉네  :  " + kakaoNickname);
                     // 관심있는 화장품 브랜드 선택(다중선택 가능)
                     final List<String> list = new ArrayList<String>();
 
@@ -124,53 +122,44 @@ public class LoginActivity extends Activity {
                             .setMultiChoiceItems(
                                     brand_items,
                                     new boolean[]{false, false, false, false, false, false, false, false}
-                                    , new DialogInterface.OnMultiChoiceClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
-                                            if (isChecked) {
-                                                Toast.makeText(getApplicationContext(), brand_items[which], Toast.LENGTH_SHORT).show();
-                                                list.add(brand_items[which]);
-                                            } else {
-                                                list.remove(brand_items[which]);
-                                            }
+                                    , (dialogInterface, which, isChecked) -> {
+                                        if (isChecked) {
+                                            Toast.makeText(getApplicationContext(), brand_items[which], Toast.LENGTH_SHORT).show();
+                                            list.add(brand_items[which]);
+                                        } else {
+                                            list.remove(brand_items[which]);
                                         }
                                     }
                             )
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    String selectedItem = "";
-                                    for (String item : list) {
-                                        selectedItem += item + ", ";
-                                    }
-                                    //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
-                                    dbManager = new UserDB();
-
-
-                                    userID =String.valueOf(userProfile.getId());
-                                    userName = userProfile.getNickname();
-                                    profileUrl =userProfile.getProfileImagePath();
-                                    interestBrand =selectedItem;
-                                    Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
-                                    dbManager.userDBManager(userID, userName, userBoardCnt, userCosCnt, profileUrl,
-                                            autoLogin, interestBrand);
-
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                                    intent.putExtra("ProfileUrl",profileUrl);
-                                    intent.putExtra("userName",userName);
-                                    startActivity(intent);
-
-                                    finish();
-
+                            .setPositiveButton("확인", (dialogInterface, i) -> {
+                                String selectedItem = "";
+                                for (String item : list) {
+                                    selectedItem += item + ", ";
                                 }
+                                //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
+
+                                userID = String.valueOf(userProfile.getId());
+                                userName = userProfile.getNickname();
+                                profileUrl = userProfile.getProfileImagePath();
+                                interestBrand = selectedItem;
+                                Toast.makeText(getApplicationContext(), userID + ", " + userName + ", " + profileUrl + "," + userBoardCnt + ", " + interestBrand, Toast.LENGTH_LONG).show();
+
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+
+                                intent.putExtra("userID", userID);
+                                intent.putExtra("userName", userName);
+                                intent.putExtra("userBoardCnt", userBoardCnt);
+                                intent.putExtra("userCosCnt", userCosCnt);
+                                intent.putExtra("ProfileUrl", profileUrl);
+                                intent.putExtra("autoLogin", autoLogin);
+                                intent.putExtra("interestBrand", interestBrand);
+
+                                startActivity(intent);
+
+
                             })
-                            .setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            .setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
                     dialog.create();
                     dialog.show();
 

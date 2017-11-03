@@ -10,12 +10,16 @@ import android.view.MenuItem;
 
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.UserInfo;
+import com.cosmetic.db.UserDB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.navigation) BottomNavigationView navigation;
+    private UserDB dbManager;
+
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
     //@BindView(R.id.viewPager) ViewPager viewPager;
     public static ViewPager viewPager;
     private MainAdapter adapter;
@@ -26,15 +30,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        viewPager = (ViewPager)findViewById(R.id.viewPager);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
+        dbManager = new UserDB();
         Intent intent = getIntent();
+
+        String userID = intent.getExtras().getString("userID");
         String userNickname = intent.getExtras().getString("userName");
+        int userBoardCnt = intent.getExtras().getInt("userBoardCnt");
+        int userCosCnt = intent.getExtras().getInt("userCosCnt");
         String userprofileURL = intent.getExtras().getString("ProfileUrl");
-      new UserInfo(userNickname, userprofileURL);
+        int autoLogin = intent.getExtras().getInt("autoLogin");
+        String interestBrand = intent.getExtras().getString("interestBrand");
+
+        dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
+                autoLogin, interestBrand);
+
+        new UserInfo(userNickname, userprofileURL);
     }
 
 

@@ -26,9 +26,9 @@ public class UserDB {
     /*--DB cosmetic 접속하여 cosmetic 테이블에 db저장할 데이터*/
     private String userID;
     private String userName;
+    private String userProfile;
     private int userBoardCnt;
     private int userCosCnt;
-    private String userProfile;
     private int userAutoLogin;
     private String userInterestBrand;
     private ArrayList<String> results;
