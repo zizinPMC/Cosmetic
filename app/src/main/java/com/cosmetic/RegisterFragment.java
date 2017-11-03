@@ -250,7 +250,7 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_eyemakeup[index]);
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_eyemakeup[index];
                                 }
                             });
                     AlertDialog dialog = builder.create();
@@ -263,7 +263,7 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_lipmakeup[index]);
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_lipmakeup[index];
                                 }
                             });
                     AlertDialog dialog = builder.create();
@@ -277,7 +277,7 @@ public class RegisterFragment extends Fragment {
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_cleansing[index]);
                                     //for input DB
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_cleansing[index];
                                 }
                             });
                     AlertDialog dialog = builder.create();
