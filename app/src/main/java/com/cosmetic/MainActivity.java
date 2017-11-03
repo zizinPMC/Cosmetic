@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         String userprofileURL = intent.getExtras().getString("ProfileUrl");
         int autoLogin = intent.getExtras().getInt("autoLogin");
         String interestBrand = intent.getExtras().getString("interestBrand");
-
+        System.out.println("main------userId : "+userID);
         dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
                 autoLogin, interestBrand);
 

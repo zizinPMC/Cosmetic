@@ -64,7 +64,7 @@ public class UserDB {
                 con.setUseCaches(false);
                 con.setRequestMethod("POST");
 
-                String param = "userID" + userID +
+                String param = "userID=" + userID +
                         "&userName=" + userName
                         + "&userBoardCnt=" + userBoardCnt
                         + "&userCosCnt=" + userCosCnt
