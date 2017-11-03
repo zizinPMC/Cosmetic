@@ -222,7 +222,7 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_skincare[index]);
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_skincare[index];
                                 }
                             });
 
