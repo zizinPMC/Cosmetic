@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.fragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.cosmetic.R;
+import com.cosmetic.activity.MainActivity;
 import com.cosmetic.adapter.AutoScrollAdapter;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardTipDB;

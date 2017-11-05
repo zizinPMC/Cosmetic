@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -26,6 +26,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cosmetic.R;
+import com.cosmetic.activity.MainActivity;
 import com.cosmetic.board.UserInfo;
 import com.cosmetic.db.CosmeticWriteDB;
 

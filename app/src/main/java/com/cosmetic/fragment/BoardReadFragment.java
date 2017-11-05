@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.fragment;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.cosmetic.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

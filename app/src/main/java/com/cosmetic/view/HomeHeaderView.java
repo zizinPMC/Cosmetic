@@ -1,10 +1,12 @@
-package com.cosmetic;
+package com.cosmetic.view;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.cosmetic.Cosmetic;
+import com.cosmetic.R;
 import com.dhha22.bindadapter.Item;
 import com.dhha22.bindadapter.ItemView;
 

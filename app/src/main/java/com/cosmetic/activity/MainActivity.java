@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.cosmetic.R;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.UserInfo;
 
@@ -16,8 +17,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation) BottomNavigationView navigation;
-    //@BindView(R.id.viewPager) ViewPager viewPager;
-    public static ViewPager viewPager;
+    private   ViewPager viewPager;
     private MainAdapter adapter;
 
     @Override
@@ -31,10 +31,13 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         String userNickname = intent.getExtras().getString("userName");
-        String userprofileURL = intent.getExtras().getString("ProfileUrl");
-      new UserInfo(userNickname, userprofileURL);
+        String userProfileUrl = intent.getExtras().getString("profileUrl");
+        if(userNickname != null && userProfileUrl != null){
+            new UserInfo(userNickname, userProfileUrl);
+        }*/
+
     }
 
 

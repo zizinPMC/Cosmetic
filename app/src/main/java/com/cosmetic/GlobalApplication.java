@@ -3,6 +3,7 @@ package com.cosmetic;
 import android.app.Activity;
 import android.app.Application;
 
+import com.cosmetic.adapter.KakaoSDKAdapter;
 import com.kakao.auth.KakaoSDK;
 
 /**

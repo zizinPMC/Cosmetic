@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -7,14 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.cosmetic.R;
 import com.cosmetic.db.UserDB;
 import com.cosmetic.log.Logger;
-import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;

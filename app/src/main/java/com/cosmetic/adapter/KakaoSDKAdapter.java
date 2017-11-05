@@ -1,8 +1,9 @@
-package com.cosmetic;
+package com.cosmetic.adapter;
 
 import android.app.Activity;
 import android.content.Context;
 
+import com.cosmetic.GlobalApplication;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;

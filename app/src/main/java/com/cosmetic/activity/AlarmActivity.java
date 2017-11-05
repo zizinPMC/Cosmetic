@@ -1,8 +1,10 @@
-package com.cosmetic;
+package com.cosmetic.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.cosmetic.R;
 
 /**
  * Created by gimjihyeon on 2017. 11. 1..

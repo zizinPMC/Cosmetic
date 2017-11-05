@@ -17,12 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".KakaoSignupActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
 
 
         <activity
-            android:name="com.cosmetic.LoginActivity"
+            android:name="com.cosmetic.activity.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,8 +32,8 @@
         <activity
             android:name=".board.BoardWriteActivity"
             android:label="글 작성" />
-        <activity android:name=".AlarmActivity" />
-        <activity android:name=".MyCosmeticActivity"/>
+        <activity android:name=".activity.AlarmActivity" />
+        <activity android:name=".activity.MyCosmeticActivity"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

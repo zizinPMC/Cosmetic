@@ -3,6 +3,8 @@ package com.cosmetic;
 import android.content.Context;
 import android.content.Intent;
 
+import com.cosmetic.activity.MainActivity;
+
 /**
  * Created by DavidHa on 2017. 11. 3..
  */

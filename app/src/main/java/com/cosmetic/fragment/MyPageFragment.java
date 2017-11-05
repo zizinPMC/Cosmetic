@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.cosmetic.R;
+import com.cosmetic.activity.AlarmActivity;
+import com.cosmetic.activity.MyCosmeticActivity;
 import com.cosmetic.board.UserInfo;
 
 import butterknife.BindView;

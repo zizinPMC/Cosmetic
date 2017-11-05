@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.activity;
 
 import android.support.v7.app.AppCompatActivity;
 

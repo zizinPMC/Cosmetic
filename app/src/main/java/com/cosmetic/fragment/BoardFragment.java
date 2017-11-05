@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.cosmetic.R;
+import com.cosmetic.activity.MainActivity;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.BoardWriteActivity;
 import com.cosmetic.db.BoardTipDB;

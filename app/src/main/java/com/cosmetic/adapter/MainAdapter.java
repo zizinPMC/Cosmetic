@@ -4,11 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.cosmetic.BoardFragment;
-import com.cosmetic.BoardReadFragment;
-import com.cosmetic.HomeFragment;
-import com.cosmetic.MyPageFragment;
-import com.cosmetic.RegisterFragment;
+import com.cosmetic.fragment.BoardFragment;
+import com.cosmetic.fragment.BoardReadFragment;
+import com.cosmetic.fragment.HomeFragment;
+import com.cosmetic.fragment.MyPageFragment;
+import com.cosmetic.fragment.RegisterFragment;
 
 /**
  * Created by yujeen on 2017. 10. 28..
