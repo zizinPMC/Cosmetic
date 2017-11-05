@@ -52,10 +52,30 @@ public class RegisterFragment extends Fragment {
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_CAMERA = 2;
-    private CosmeticWriteDB dbManager;
-
+    private static final String BRAND_DIALOG_TITLE = "브랜드를 선택해주세요.";
+    private static final String MAIN_CATEGORY_DIALOG_TITLE = "대분류를 선택해주세요.";
+    private static final String MID_CATEGORY_DIALOG_TITLE = "중분류를 선택해주세요.";
+    private final String[] cosBrand = {"네이처리퍼블릭", "더샘", "더페이스샵", "마몽드", "맥", "미샤", "베네피트", "비욘드", "시드물", "아리따움", "어퓨", "에뛰드하우스", "이니스프리", "키스미", "토니모리", "페리페라", "홀리카홀리카", "기타"};
+    private final String[] cosMainCategory = {"스킨케어", "페이스 메이크업", "아이 메이크업", "립 메이크업", "클렌징"};
+    private final String[] cosMidCategorySkin = {"토너, 스킨", "로션, 에멀젼", "크림", "아이 케어", "미스트", "마사지 팩", "선 케어", "기타"};
+    private final String[] cosMidCategoryFace = {"베이스", "파운데이션", "컨실러", "파우더", "치크, 하이라이터, 쉐딩", "기타"};
+    private final String[] cosMidCategoryEye = {"아이섀도우", "마스카라", "아이라이너", "아이브로우", "기타"};
+    private final String[] cosMidCategoryLip = {"틴트, 립 라커", "립스틱", "립글로스", "기타"};
+    private final String[] cosMidCategoryCleansing = {"폼 클렌징", "클렌징 오일, 크림, 밤", "리무버", "기타"};
+    private String brandStr = "브랜드";
+    private String mainCategoryStr = "대분류";
+    private String midCategoryStr = "중분류";
     private Uri mImageCaptureUri;
+    @BindView(R.id.cosBrandBtn)
+    Button cosBrandBtn;
+    @BindView(R.id.cosMainCategoryBtn)
+    Button cosMainCategoryBtn;
+    @BindView(R.id.cosMidCategoryBtn)
+    Button cosMidCategoryBtn;
+    @BindView(R.id.categoryResultTxt)
+    TextView categoryResultTxt;
 
+/*
     @BindView(R.id.img_cosmetic)
     ImageButton imgbtn_Cos; //화장품 이미지
 
@@ -101,7 +121,7 @@ public class RegisterFragment extends Fragment {
     Button btn_cancel;
 
     @BindView(R.id.btn_register)
-    Button btn_register;
+    Button btn_register;*/
 
     long open = -1, exp, count;
     int cos_No = 0;
@@ -126,14 +146,67 @@ public class RegisterFragment extends Fragment {
         return view;
     }
 
+    private void showDialog(String title, String[] items, DialogInterface.OnClickListener clickListener) {
+        new AlertDialog.Builder(getContext())
+                .setTitle(title)
+                .setItems(items, clickListener)
+                .show();
+    }
+
+
+    private void updateCategoryResultTxt() {
+        final StringBuilder builder = new StringBuilder("[").append(brandStr).append("], [")
+                .append(mainCategoryStr).append("], [")
+                .append(midCategoryStr).append("]");
+        categoryResultTxt.setText(builder);
+    }
+
+    private String[] getMidCategory() {
+        if (!mainCategoryStr.equals("대분류")) {
+            switch (mainCategoryStr) {
+                case "스킨케어":
+                    return cosMidCategorySkin;
+                case "페이스 메이크업":
+                    return cosMidCategoryFace;
+                case "아이 메이크업":
+                    return cosMidCategoryEye;
+                case "립 메이크업":
+                    return cosMidCategoryLip;
+                case "클렌징":
+                    return cosMidCategoryCleansing;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        cosBrandBtn.setOnClickListener(v -> showDialog(BRAND_DIALOG_TITLE, cosBrand, (dialog, which) -> {
+            brandStr = cosBrand[which];
+            cosBrandBtn.setSelected(true);
+            updateCategoryResultTxt();
+        }));
+        cosMainCategoryBtn.setOnClickListener(v -> showDialog(MAIN_CATEGORY_DIALOG_TITLE, cosMainCategory, (dialog, which) -> {
+            mainCategoryStr = cosMainCategory[which];
+            cosMainCategoryBtn.setSelected(true);
+            updateCategoryResultTxt();
+        }));
+        cosMidCategoryBtn.setOnClickListener(v -> {
+           final String[] midCategory = getMidCategory();
+            if(midCategory != null) {
+                cosMidCategoryBtn.setSelected(true);
+                showDialog(MID_CATEGORY_DIALOG_TITLE, midCategory, (dialog, which) -> {
+                    midCategoryStr = midCategory[which];
+                    updateCategoryResultTxt();
+                });
+            }else{
+                Toast.makeText(getContext(), "화장품 대분류를 선택해주세요.", Toast.LENGTH_LONG).show();
+            }
+        });
 
-        dbManager = new CosmeticWriteDB();
 
-        context = getContext();
-        imgbtn_Cos.setOnClickListener(listener);
+       /* imgbtn_Cos.setOnClickListener(listener);
         checkbox_cosIsOpen.setOnClickListener(listener_chechbox_OpenDate);
         btn_opendate.setOnClickListener(listener_btn_openDateClick);
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -346,7 +419,7 @@ public class RegisterFragment extends Fragment {
                 }
             }
         });
-
+*/
     }
 
     public int countdday() {
@@ -446,7 +519,7 @@ public class RegisterFragment extends Fragment {
 
                 if (extras != null) {
                     Bitmap photo = extras.getParcelable("data");
-                    imgbtn_Cos.setImageBitmap(photo);
+                    // imgbtn_Cos.setImageBitmap(photo);
                 }
 
                 // 임시 파일 삭제
@@ -480,14 +553,14 @@ public class RegisterFragment extends Fragment {
                 intent.putExtra("scale", true);
                 intent.putExtra("return-data", true);
                 startActivityForResult(intent, CROP_FROM_CAMERA);
-                imgbtn_Cos.setAdjustViewBounds(true);
+                // imgbtn_Cos.setAdjustViewBounds(true);
 
                 break;
             }
         }
     }
 
-    View.OnClickListener listener_chechbox_OpenDate = new View.OnClickListener() {
+    /*View.OnClickListener listener_chechbox_OpenDate = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (checkbox_cosIsOpen.isChecked()) {
@@ -500,7 +573,7 @@ public class RegisterFragment extends Fragment {
                 cos_open_date = null;
             }
         }
-    };
+    };*/
     //개봉일 - 날짜
     View.OnClickListener listener_btn_openDateClick = new View.OnClickListener() {
         @Override
@@ -515,19 +588,19 @@ public class RegisterFragment extends Fragment {
                     = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                    btn_opendate.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
+                    //btn_opendate.setText(year + "년 " + (monthOfYear + 1) + "월 " + dayOfMonth + "일");
 
                 }
             }, mYear, mMonth, mDay);
 
             datePickerDialog.show();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
-            try {
+           /* try {
                 cos_open_date = dateFormat.parse(btn_opendate.getText().toString());
                 Toast.makeText(getContext(), dateFormat.parse(btn_opendate.getText().toString()).toString(), Toast.LENGTH_LONG).show();
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     };
 }
