@@ -7,7 +7,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:background="@color/white">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -15,12 +16,25 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll">
 
-            <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
-                android:id="@+id/homeAutoViewPager"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/not_found_long"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_background" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dimColor" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/category_box"
+                android:text="내주변 화장품 매장 찾기"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 

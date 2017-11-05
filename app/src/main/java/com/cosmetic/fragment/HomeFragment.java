@@ -41,7 +41,6 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 public class HomeFragment extends Fragment {
     @BindView(R.id.fabChat) FloatingActionButton fabChat;
-    @BindView(R.id.homeAutoViewPager) AutoScrollViewPager autoViewPager;
     @BindView(R.id.homeRecyclerView) RecyclerView recyclerView;
     private BindAdapter adapter;
 
