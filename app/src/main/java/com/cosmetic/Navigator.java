@@ -16,4 +16,9 @@ public class Navigator {
         intent.putExtra("profileUrl", profileUrl);
         context.startActivity(intent);
     }
+
+    public static void goMain(Context context){
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 }

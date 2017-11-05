@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.fragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.cosmetic.R;
 import com.cosmetic.adapter.AutoScrollAdapter;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardTipDB;
@@ -36,7 +37,7 @@ import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 public class HomeFragment extends Fragment {
 
 
-    public static FloatingActionButton fab;
+    private FloatingActionButton fab;
     @BindView(R.id.home_autoViewPager) AutoScrollViewPager autoViewPager;
     @BindView(R.id.home_listview) ListView listView;
     @BindView(R.id.go_board) Button btnGoBoard;
@@ -86,7 +87,7 @@ public class HomeFragment extends Fragment {
 
             switch (v.getId()){
                 case R.id.go_board :
-                    MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
+                    //MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                     break;
                 case R.id.fab_store: {
                     //제대로 들어가는지 테스트하기위해 초기 gps값을 강남역으로 설정

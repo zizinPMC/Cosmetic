@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,16 +6,17 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.cosmetic.Navigator;
+import com.cosmetic.R;
+import com.cosmetic.log.Logger;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,45 +38,48 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //profileImg = (ImageView) findViewById(R.id.kakaoImg);
-        /**카카오톡 로그아웃 요청**/
-        //한번 로그인이 성공하면 세션 정보가 남아있어서 로그인창이 뜨지 않고 바로 onSuccess()메서드를 호출합니다.
-        //테스트 하시기 편하라고 매번 로그아웃 요청을 수행하도록 코드를 넣었습니다 ^^
-        UserManagement.requestLogout(new LogoutResponseCallback() {
-            @Override
-            public void onCompleteLogout() {
-                //로그아웃 성공 후
-                /*runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this, "로그아웃 성공", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-            }
-        });
-
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
+        Session.getCurrentSession().checkAndImplicitOpen();
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //간편로그인시 호출 ,없으면 간편로그인시 로그인 성공화면으로 넘어가지 않음
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
-
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void getUserInfoFromKakao(){
+        UserManagement.requestMe(new MeResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+
+            }
+
+            @Override
+            public void onNotSignedUp() {
+
+            }
+
+            @Override
+            public void onSuccess(UserProfile result) {
+                Logger.v("User profile "+result.toString());
+                Navigator.goMain(LoginActivity.this);
+
+            }
+        });
     }
 
     private class SessionCallback implements ISessionCallback {
 
         @Override
         public void onSessionOpened() {
+            getUserInfoFromKakao();
 
-            UserManagement.requestMe(new MeResponseCallback() {
+           /* UserManagement.requestMe(new MeResponseCallback() {
 
                 @Override
                 public void onFailure(ErrorResult errorResult) {
@@ -162,22 +166,26 @@ public class LoginActivity extends Activity {
                                     finish();
 
                                 }
-                            })
-                            .setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
+                            ).setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
                     dialog.create();
                     dialog.show();
+*/
 
-
-                }
-            });
+         /*       }
+            });*/
 
 
         }
 
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-            // 세션 연결이 실패했을때
-            // 어쩔때 실패되는지는 테스트를 안해보았음 ㅜㅜ
+
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
     }
 }

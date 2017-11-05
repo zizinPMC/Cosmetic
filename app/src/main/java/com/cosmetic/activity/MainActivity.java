@@ -1,4 +1,4 @@
-package com.cosmetic;
+package com.cosmetic.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.cosmetic.R;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.UserInfo;
-import com.cosmetic.db.UserDB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-        dbManager = new UserDB();
+      /*  //dbManager = new UserDB();
         Intent intent = getIntent();
 
         long userID = intent.getExtras().getLong("userID");
@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
         int autoLogin = intent.getExtras().getInt("autoLogin");
         String interestBrand = intent.getExtras().getString("interestBrand");
         System.out.println("main------userId : "+userID);
-        dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
-                autoLogin, interestBrand);
+       *//* dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
+                autoLogin, interestBrand);*//*
 
-        new UserInfo(userNickname, userprofileURL);
+        new UserInfo(userNickname, userprofileURL);*/
     }
 
 
