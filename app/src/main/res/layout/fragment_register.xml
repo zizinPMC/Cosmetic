@@ -103,6 +103,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:text="개봉 여부"/>
+
             <!-- <RelativeLayout
                  android:id="@+id/layout_open"
                  android:layout_width="match_parent"
