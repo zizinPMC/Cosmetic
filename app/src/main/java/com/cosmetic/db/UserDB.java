@@ -24,16 +24,16 @@ public class UserDB {
             "http://zizin1318.cafe24.com/user/user.php";
 
     /*--DB cosmetic 접속하여 cosmetic 테이블에 db저장할 데이터*/
-    private String userID;
+    private long userID;
     private String userName;
+    private String userProfile;
     private int userBoardCnt;
     private int userCosCnt;
-    private String userProfile;
     private int userAutoLogin;
     private String userInterestBrand;
     private ArrayList<String> results;
 
-    public ArrayList<String> userDBManager(String userID, String userName, int userBoardCnt, int userCosCnt,
+    public ArrayList<String> userDBManager(long userID, String userName, int userBoardCnt, int userCosCnt,
                                            String userProfile, int userAutoLogin, String userInterestBrand) {
         urlPath = user_UrlPath;
         this.userID = userID;
@@ -64,7 +64,7 @@ public class UserDB {
                 con.setUseCaches(false);
                 con.setRequestMethod("POST");
 
-                String param = "userID" + userID +
+                String param = "userID=" + userID +
                         "&userName=" + userName
                         + "&userBoardCnt=" + userBoardCnt
                         + "&userCosCnt=" + userCosCnt

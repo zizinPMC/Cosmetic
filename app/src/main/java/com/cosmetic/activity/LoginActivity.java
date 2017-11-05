@@ -1,19 +1,17 @@
-package com.cosmetic.activity;
+package com.cosmetic;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.cosmetic.R;
-import com.cosmetic.db.UserDB;
-import com.cosmetic.log.Logger;
+import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
@@ -27,19 +25,35 @@ import java.util.List;
  */
 
 public class LoginActivity extends Activity {
-    private UserDB dbManager;
 
     SessionCallback callback;
-    private String userID;
-    private String userName;
-    private String profileUrl;
-    private  int userBoardCnt=0, userCosCnt =0, autoLogin =0;
-    private String interestBrand="";
+    private long userID ;
+    private String userName = "";
+    private String profileUrl = "";
+    private int userBoardCnt = 0, userCosCnt = 0, autoLogin = 0;
+    private String interestBrand = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //profileImg = (ImageView) findViewById(R.id.kakaoImg);
+        /**카카오톡 로그아웃 요청**/
+        //한번 로그인이 성공하면 세션 정보가 남아있어서 로그인창이 뜨지 않고 바로 onSuccess()메서드를 호출합니다.
+        //테스트 하시기 편하라고 매번 로그아웃 요청을 수행하도록 코드를 넣었습니다 ^^
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                //로그아웃 성공 후
+                /*runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(LoginActivity.this, "로그아웃 성공", Toast.LENGTH_SHORT).show();
+                    }
+                });*/
+            }
+        });
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
@@ -66,7 +80,14 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onFailure(ErrorResult errorResult) {
                     String message = "failed to get user info. msg=" + errorResult;
-                    Logger.e(message);
+                    Logger.d(message);
+
+                    ErrorCode result = ErrorCode.valueOf(errorResult.getErrorCode());
+                    if (result == ErrorCode.CLIENT_ERROR_CODE) {
+                        finish();
+                    } else {
+                        //redirectMainActivity();
+                    }
                 }
 
                 @Override
@@ -102,53 +123,47 @@ public class LoginActivity extends Activity {
                             .setMultiChoiceItems(
                                     brand_items,
                                     new boolean[]{false, false, false, false, false, false, false, false}
-                                    , new DialogInterface.OnMultiChoiceClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
-                                            if (isChecked) {
-                                                Toast.makeText(getApplicationContext(), brand_items[which], Toast.LENGTH_SHORT).show();
-                                                list.add(brand_items[which]);
-                                            } else {
-                                                list.remove(brand_items[which]);
-                                            }
+                                    , (dialogInterface, which, isChecked) -> {
+                                        if (isChecked) {
+                                            Toast.makeText(getApplicationContext(), brand_items[which], Toast.LENGTH_SHORT).show();
+                                            list.add(brand_items[which]);
+                                        } else {
+                                            list.remove(brand_items[which]);
                                         }
                                     }
                             )
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    String selectedItem = "";
-                                    for (String item : list) {
-                                        selectedItem += item + ", ";
-                                    }
-                                    //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
-                                    dbManager = new UserDB();
+                            .setPositiveButton("확인", (dialogInterface, i) -> {
+                                String selectedItem = "";
+                                for (String item : list) {
+                                    selectedItem += item + ", ";
+                                }
+                                //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
+
+                                //userID = String.valueOf(userProfile.getId());
+                                userID = userProfile.getId();
+                                userName = userProfile.getNickname();
+                                profileUrl = userProfile.getProfileImagePath();
+                                interestBrand = selectedItem;
+                                Toast.makeText(getApplicationContext(), userID + ", " + userName + ", " + profileUrl + "," + userBoardCnt + ", " + interestBrand, Toast.LENGTH_LONG).show();
+
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
 
-                                    userID =String.valueOf(userProfile.getId());
-                                    userName = userProfile.getNickname();
-                                    profileUrl =userProfile.getProfileImagePath();
-                                    interestBrand =selectedItem;
-                                    //Toast.makeText(getApplicationContext(), userID+ ", "+userName+", "+profileUrl+","+userBoardCnt+", "+interestBrand, Toast.LENGTH_LONG).show();
-                                    dbManager.userDBManager(userID, userName, userBoardCnt, userCosCnt, profileUrl,
-                                            autoLogin, interestBrand);
+                                intent.putExtra("userID", userID);
+                                intent.putExtra("userName", userName);
+                                intent.putExtra("userBoardCnt", userBoardCnt);
+                                intent.putExtra("userCosCnt", userCosCnt);
+                                intent.putExtra("ProfileUrl", profileUrl);
+                                intent.putExtra("autoLogin", autoLogin);
+                                intent.putExtra("interestBrand", interestBrand);
 
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                                    intent.putExtra("ProfileUrl",profileUrl);
-                                    intent.putExtra("userName",userName);
-                                    startActivity(intent);
+                                startActivity(intent);
 
                                     finish();
 
                                 }
                             })
-                            .setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            .setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
                     dialog.create();
                     dialog.show();
 

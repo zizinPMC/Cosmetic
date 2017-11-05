@@ -1,4 +1,4 @@
-package com.cosmetic.fragment;
+package com.cosmetic;
 
 import android.Manifest;
 import android.content.Context;
@@ -18,8 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.cosmetic.R;
-import com.cosmetic.activity.MainActivity;
 import com.cosmetic.adapter.AutoScrollAdapter;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardTipDB;
@@ -63,14 +61,14 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         fab = (FloatingActionButton)getActivity().findViewById(R.id.fab_store);
-        ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
+        /*ArrayList<String> data = new ArrayList<>(); //이미지 url를 저장하는 arraylist
         for(int i=1;i<=5;i++){
             data.add("http://zizin1318.cafe24.com/homeFlipImage/etude"+i+".jpg");
         }
         AutoScrollAdapter scrollAdapter = new AutoScrollAdapter(this.getContext(), data);
         autoViewPager.setAdapter(scrollAdapter); //Auto Viewpager에 Adapter 장착
         autoViewPager.setInterval(5000); // 페이지 넘어갈 시간 간격 설정
-        autoViewPager.startAutoScroll(); //Auto Scroll 시작
+        autoViewPager.startAutoScroll(); //Auto Scroll 시작*/
         //하단 게시판 글 뷰
         tipList = new ArrayList<HashMap<String, String>>();
         BoardTipDB.getData("http://zizin1318.cafe24.com/board/board_tip_read.php",tipList,this.getContext(),listView);

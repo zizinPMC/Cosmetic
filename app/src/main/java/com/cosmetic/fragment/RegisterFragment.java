@@ -166,7 +166,7 @@ public class RegisterFragment extends Fragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final String[] cos_brand = {"네이처리퍼블릭", "더샘", "더페이스샵", "마몽드", "맥", "미샤", "베네피트", "비욘드", "시드물", "아리따움", "어퓨", "에뛰드하우스", "이니스프리", "키스미", "토니모리", "페리페라", "홀리카홀리카", "기타"};
-        final String[] cos_maincate = {"스킨 케어", "페이스 메이크업", "아이 메이크업", "립 메이크업", "클렌징"};
+        final String[] cos_maincate = {"스킨케어", "페이스 메이크업", "아이 메이크업", "립 메이크업", "클렌징"};
         final String[] cos_midcate_skincare = {"토너, 스킨", "로션, 에멀젼", "크림", "아이 케어", "미스트", "마사지 팩", "선 케어", "기타"};
         final String[] cos_midcate_facemakeup = {"베이스", "파운데이션", "컨실러", "파우더", "치크, 하이라이터, 쉐딩", "기타"};
         final String[] cos_midcate_eyemakeup = {"아이섀도우", "마스카라", "아이라이너", "아이브로우", "기타"};
@@ -224,7 +224,7 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_skincare[index]);
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_skincare[index];
                                 }
                             });
 
@@ -252,7 +252,7 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_eyemakeup[index]);
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_eyemakeup[index];
                                 }
                             });
                     AlertDialog dialog = builder.create();
@@ -265,7 +265,7 @@ public class RegisterFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_lipmakeup[index]);
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_lipmakeup[index];
                                 }
                             });
                     AlertDialog dialog = builder.create();
@@ -279,7 +279,7 @@ public class RegisterFragment extends Fragment {
                                 public void onClick(DialogInterface dialogInterface, int index) {
                                     btn_CosMidCategory.setText(cos_midcate_cleansing[index]);
                                     //for input DB
-                                    cos_MidCate = cos_midcate_facemakeup[index];
+                                    cos_MidCate = cos_midcate_cleansing[index];
                                 }
                             });
                     AlertDialog dialog = builder.create();

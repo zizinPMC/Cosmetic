@@ -1,4 +1,4 @@
-package com.cosmetic.activity;
+package com.cosmetic;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,16 +8,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.cosmetic.R;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.UserInfo;
+import com.cosmetic.db.UserDB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation) BottomNavigationView navigation;
-    private   ViewPager viewPager;
+    //@BindView(R.id.viewPager) ViewPager viewPager;
+    public static ViewPager viewPager;
     private MainAdapter adapter;
 
     @Override
@@ -26,18 +27,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        viewPager = (ViewPager)findViewById(R.id.viewPager);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-        /*Intent intent = getIntent();
-        String userNickname = intent.getExtras().getString("userName");
-        String userProfileUrl = intent.getExtras().getString("profileUrl");
-        if(userNickname != null && userProfileUrl != null){
-            new UserInfo(userNickname, userProfileUrl);
-        }*/
+        dbManager = new UserDB();
+        Intent intent = getIntent();
 
+        long userID = intent.getExtras().getLong("userID");
+        String userNickname = intent.getExtras().getString("userName");
+        int userBoardCnt = intent.getExtras().getInt("userBoardCnt");
+        int userCosCnt = intent.getExtras().getInt("userCosCnt");
+        String userprofileURL = intent.getExtras().getString("ProfileUrl");
+        int autoLogin = intent.getExtras().getInt("autoLogin");
+        String interestBrand = intent.getExtras().getString("interestBrand");
+        System.out.println("main------userId : "+userID);
+        dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
+                autoLogin, interestBrand);
+
+        new UserInfo(userNickname, userprofileURL);
     }
 
 
