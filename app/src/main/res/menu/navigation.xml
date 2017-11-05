@@ -8,12 +8,12 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_make_up"
+        android:icon="@drawable/ic_write"
         android:title="화장품 등록" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_user_image"
+        android:icon="@drawable/ic_profile"
         android:title="마이페이지" />
 
 </menu>

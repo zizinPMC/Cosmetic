@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation) BottomNavigationView navigation;
-    //@BindView(R.id.viewPager) ViewPager viewPager;
     public static ViewPager viewPager;
     private MainAdapter adapter;
 
