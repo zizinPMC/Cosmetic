@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.cosmetic.Navigator;
 import com.cosmetic.R;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.board.UserInfo;
@@ -16,7 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.navigation) BottomNavigationView navigation;
+    @BindView(R.id.navigation)
+    BottomNavigationView navigation;
     public static ViewPager viewPager;
     private MainAdapter adapter;
 
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(MainAdapter.HOME, false);
                     return true;
                 case R.id.navigation_dashboard:
-                    viewPager.setCurrentItem(MainAdapter.REGISTER, false);
+                    Navigator.goRegister(MainActivity.this);
                     return true;
                 case R.id.navigation_notifications:
                     viewPager.setCurrentItem(MainAdapter.MY_PAGE, false);
