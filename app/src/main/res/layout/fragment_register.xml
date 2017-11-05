@@ -1,136 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fefefe"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/img_cosmetic"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_gravity="center"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_camera" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/rowColor" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="14dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="화장품 분류"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/categoryResultTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="6dp"
-            android:text="[브랜드], [대분류], [중분류]"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16dp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/categoryLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/cosBrandBtn"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/category_selector"
-            android:text="브랜드"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/cosMainCategoryBtn"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/category_selector"
-            android:text="대분류"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/cosMidCategoryBtn"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/category_selector"
-            android:text="중분류"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-
-    <EditText
-        android:id="@+id/inputCosmeticName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:hint="화장품 이름" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#fefefe"
         android:orientation="vertical">
 
-        <!-- <RelativeLayout
-             android:id="@+id/layout_open"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_cosmetic"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_camera" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/rowColor" />
 
 
-             <CheckBox
-                 android:id="@+id/checkbox_cosIsOpen"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginLeft="16dp"
-                 android:text="개봉여부"
-                 android:textSize="18sp"
-                 android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="14dp">
 
-             <Button
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화장품 분류"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-                 android:id="@+id/btn_opendate"
-                 android:layout_width="150dp"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginLeft="16dp"
-                 android:layout_marginStart="43dp"
-                 android:layout_toEndOf="@+id/checkbox_cosIsOpen"
-                 android:text="개봉일자"
-                 android:textStyle="bold"
-                 android:visibility="invisible"></Button>
-         </RelativeLayout>-->
+            <TextView
+                android:id="@+id/categoryResultTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="6dp"
+                android:text="[브랜드], [대분류], [중분류]"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+        </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/categoryLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cosBrandBtn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/category_selector"
+                android:text="브랜드"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/cosMainCategoryBtn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/category_selector"
+                android:text="대분류"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/cosMidCategoryBtn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/category_selector"
+                android:text="중분류"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/inputCosmeticName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:hint="화장품 이름" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- <RelativeLayout
+                 android:id="@+id/layout_open"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+
+                 <CheckBox
+                     android:id="@+id/checkbox_cosIsOpen"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="16dp"
+                     android:text="개봉여부"
+                     android:textSize="18sp"
+                     android:textStyle="bold" />
+
+                 <Button
+
+                     android:id="@+id/btn_opendate"
+                     android:layout_width="150dp"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginLeft="16dp"
+                     android:layout_marginStart="43dp"
+                     android:layout_toEndOf="@+id/checkbox_cosIsOpen"
+                     android:text="개봉일자"
+                     android:textStyle="bold"
+                     android:visibility="invisible"></Button>
+             </RelativeLayout>-->
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>
 

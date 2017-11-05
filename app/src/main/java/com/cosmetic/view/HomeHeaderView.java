@@ -18,7 +18,7 @@ public class HomeHeaderView extends ItemView {
     private TextView nameTxt;
     public HomeHeaderView(@NonNull Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.home_header,this,true);
+        setContentView(R.layout.home_header);
         setFullSpan();
         nameTxt = findViewById(R.id.nameTxt);
     }

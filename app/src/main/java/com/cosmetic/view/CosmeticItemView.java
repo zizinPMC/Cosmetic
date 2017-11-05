@@ -14,5 +14,6 @@ public class CosmeticItemView extends ItemView {
     public CosmeticItemView(@NonNull Context context) {
         super(context);
         setContentView(R.layout.cosmetic_item);
+        setFullSpan();
     }
 }

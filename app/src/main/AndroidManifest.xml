@@ -15,10 +15,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
 
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.NavigationActivity"/>
+        <activity android:name=".activity.NavigationActivity"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name="com.cosmetic.activity.LoginActivity"

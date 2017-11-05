@@ -6,18 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cosmetic.R;
 import com.cosmetic.activity.AlarmActivity;
 import com.cosmetic.activity.MyCosmeticActivity;
 import com.cosmetic.board.UserInfo;
+import com.cosmetic.model.Setting;
+import com.cosmetic.view.MyPageHeaderView;
+import com.cosmetic.view.MyPageItemView;
+import com.dhha22.bindadapter.BindAdapter;
+import com.dhha22.bindadapter.listener.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,22 +36,21 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
 public class MyPageFragment extends Fragment {
-    @BindView(R.id.userProfileImage)
-    ImageView userProfileImg;
-    @BindView(R.id.linear_alarm)
-    LinearLayout linear_alarm;
-    @BindView(R.id.linear_notice)
-    LinearLayout linear_notice;
-    @BindView(R.id.linear_mycosmetic)
-    LinearLayout linear_mycosmetic;
-    @BindView(R.id.userName)
-    TextView userName;
-
-    private Activity activity;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    private BindAdapter adapter;
 
     public static MyPageFragment newInstance() {
         MyPageFragment fragment = new MyPageFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new BindAdapter(getContext())
+                .addHeaderView(MyPageHeaderView.class)
+                .addLayout(MyPageItemView.class);
     }
 
     @Nullable
@@ -52,6 +58,9 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_mypage, container, false);
         ButterKnife.bind(this, view);
+        adapter.setOnItemClickListener(itemClickListener);
+        recyclerView.setAdapter(adapter);
+
         return view;
     }
 
@@ -59,55 +68,25 @@ public class MyPageFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String userprofileurl = UserInfo.profileUrl;
-        String usernickname = UserInfo.userName;
-
-        Glide.with(getActivity())
-                .load(userprofileurl)
-                .error(R.drawable.ic_person)
-                .centerCrop()
-                .crossFade()
-                .override(150, 150)
-                .bitmapTransform(new CropCircleTransformation(getActivity()))
-                .into(userProfileImg);
-
-        userName.setText(usernickname);
-        //마이페이지 -알람
-        linear_alarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, AlarmActivity.class);
-                activity.startActivity(intent);
-                //activity.finish();
-            }
-        });
-        //마이페이지 -공지사항
-        linear_notice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        //마이페이지 -내 등록화장품 목록
-        linear_mycosmetic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, MyCosmeticActivity.class);
-                activity.startActivity(intent);
-                //activity.finish();
-
-            }
-        });
+        adapter.addItem(new Setting(R.drawable.ic_notification, "알림"));
+        adapter.addItem(new Setting(R.drawable.ic_logout, "로그아웃"));
+        adapter.notifyData();
 
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if (context instanceof Activity) {
-            activity = (Activity) context;
+    private OnItemClickListener itemClickListener = new OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+            switch (position) {
+                case 1:
+                    Toast.makeText(getContext(), "알림입니다", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    Toast.makeText(getContext(), "로그아웃 입니다", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
+    };
 
-    }
+
 }
