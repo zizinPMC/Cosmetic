@@ -9,6 +9,10 @@
         android:background="#fefefe"
         android:orientation="vertical">
 
+        <com.cosmetic.view.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
         <ImageView
             android:id="@+id/img_cosmetic"
@@ -107,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="14dp"
-                android:text="개봉 여부"/>
+                android:text="개봉 여부" />
 
             <!-- <RelativeLayout
                  android:id="@+id/layout_open"
