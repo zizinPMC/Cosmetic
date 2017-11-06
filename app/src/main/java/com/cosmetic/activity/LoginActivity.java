@@ -40,7 +40,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RC_SIGN_IN = 1001;
-
+    public static int logout = 0; //마이페이지에서 로그아웃버튼을 눌러서 로그인액티비티로 넘어온것인지 판별
     // Firebase - Realtime Database
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private GoogleApiClient mGoogleApiClient;
+    private FirebaseUser user;
 
     // Views
     private SignInButton mBtnGoogleSignIn; // 로그인 버튼
@@ -71,15 +72,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         initViews();
-        //initFirebaseDatabase();
         initFirebaseAuth();
         initValues();
+
 
     }
 
     private void initViews() {
-
+        System.out.println("--->initViews()");
 
         mBtnGoogleSignIn = (SignInButton) findViewById(R.id.btn_google_signin);
         mBtnGoogleSignOut = (Button) findViewById(R.id.btn_google_signout);
@@ -90,46 +92,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mImgProfile = (ImageView) findViewById(R.id.img_profile);
     }
 
-    /*private void initFirebaseDatabase() {
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference("message");
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                User userData = dataSnapshot.getValue(User.class);
-                userData.firebaseKey = dataSnapshot.getKey();
-                mAdapter.add(userData);
-                //mListView.smoothScrollToPosition(mAdapter.getCount());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                String firebaseKey = dataSnapshot.getKey();
-                int count = mAdapter.getCount();
-                for (int i = 0; i < count; i++) {
-                    if (mAdapter.getItem(i).firebaseKey.equals(firebaseKey)) {
-                        mAdapter.remove(mAdapter.getItem(i));
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        mDatabaseReference.addChildEventListener(mChildEventListener);
-    }*/
 
     private void initFirebaseAuth() {
+        System.out.println("--->initFirebaseAuth()");
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -147,75 +112,85 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
                 updateProfile();
             }
         };
     }
 
     private void initValues() {
-        FirebaseUser user = mAuth.getCurrentUser();
+        System.out.println("--->initValues()");
+        user = mAuth.getCurrentUser();
         if (user != null) {
-            userName = user.getDisplayName();
+            /*userName = user.getDisplayName();
             System.out.println("--->User : userName = "+userName);
             fcmToken = FirebaseInstanceId.getInstance().getToken();
             userEmail = user.getEmail();
             userEmailID = userEmail.substring(0, userEmail.indexOf('@'));
             userPhotoUrl = user.getPhotoUrl().toString();
             mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+            System.out.println("--->initValues  userData = new User(...)");
             userData = new User(userName, userPhotoUrl, userEmail, userEmailID, fcmToken);
-            mDatabaseReference.child("users").child(userEmailID).setValue(userData);
-
+            mDatabaseReference.child("users").child(userEmailID).setValue(userData);*/
         }
+
 
     }
 
     private void updateProfile() {
         System.out.println("--->updateProfile");
-        FirebaseUser user = mAuth.getCurrentUser();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        if (user == null) {
+        user = mAuth.getCurrentUser();
+
+        if (user == null){
             // 비 로그인 상태 (메시지를 전송할 수 없다.)
-            System.out.println("--->updateProfile : user == null");
+            /*System.out.println("--->updateProfile : user == null");
             mBtnGoogleSignIn.setVisibility(View.VISIBLE);
             mBtnGoogleSignOut.setVisibility(View.GONE);
             mTxtProfileInfo.setVisibility(View.GONE);
-            mImgProfile.setVisibility(View.GONE);
-        } else {
-
+            mImgProfile.setVisibility(View.GONE);*/
+        }else {
             System.out.println("--->updateProfile : user != null");
             // 로그인 상태
-            mBtnGoogleSignIn.setVisibility(View.GONE);
+            /*mBtnGoogleSignIn.setVisibility(View.GONE);
             mBtnGoogleSignOut.setVisibility(View.VISIBLE);
             mTxtProfileInfo.setVisibility(View.VISIBLE);
-            mImgProfile.setVisibility(View.VISIBLE);
-
-            //userName = user.getDisplayName(); // 채팅에 사용 될 닉네임 설정
-            System.out.println("--->updateProfile : before picasso userName = " +userName);
-            /*StringBuilder profile = new StringBuilder();
-            profile.append(userName).append("\n").append(user.getEmail());
-            mTxtProfileInfo.setText(profile);
-
-
-            //mAdapter.setEmail(email);
-            //mAdapter.notifyDataSetChanged();
-
-            Picasso.with(this).load(user.getPhotoUrl()).into(mImgProfile);*/
+            mImgProfile.setVisibility(View.VISIBLE);*/
+            userName = user.getDisplayName();
             fcmToken = FirebaseInstanceId.getInstance().getToken();
             userEmail = user.getEmail();
             userEmailID = userEmail.substring(0, userEmail.indexOf('@'));
             userPhotoUrl = user.getPhotoUrl().toString();
 
-            /*System.out.println("--->updateProfile : userName = " +userName);
-            System.out.println("--->updateProfile : userPhotoUrl = " +userPhotoUrl);
-            System.out.println("--->updateProfile : userEmail= " +userEmail);
-            System.out.println("--->updateProfile : userEmailID = " +userEmailID);
-            System.out.println("--->updateProfile : fcmToken = " +fcmToken);*/
-
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+            System.out.println("--->updateProfile  userData = new User(...)");
             userData = new User(userName, userPhotoUrl, userEmail, userEmailID, fcmToken);
             mDatabaseReference.child("users").child(userEmailID).setValue(userData);
 
 
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //mDatabaseReference.removeEventListener(mChildEventListener);
     }
 
     private void signIn() {
@@ -226,6 +201,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signOut() {
         System.out.println("--->signOut");
+        logout=1;
+        signIn();
         mAuth.signOut();
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -234,14 +211,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         updateProfile();
                     }
                 });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("--->onActivityResult()");
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
             if (result.isSuccess()) {
+                System.out.println("--->onActivityResult....result.isSuccess() ");
                 GoogleSignInAccount account = result.getSignInAccount();
                 AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                 mAuth.signInWithCredential(credential)
@@ -252,19 +233,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    System.out.println("--->onActivityResult....onComplete");
-                                    System.out.println("--->updateProfile : userName = " +userName);
+                                    System.out.println("--->onActivityResult....onComplete()...task.isSuccessful logout="+logout );
+                                    /*System.out.println("--->updateProfile : userName = " +userName);
                                     System.out.println("--->updateProfile : userPhotoUrl = " +userPhotoUrl);
                                     System.out.println("--->updateProfile : userEmail= " +userEmail);
                                     System.out.println("--->updateProfile : userEmailID = " +userEmailID);
-                                    System.out.println("--->updateProfile : fcmToken = " +fcmToken);
-                                    Intent intent = new Intent(getApplication(), MainActivity.class);
+                                    System.out.println("--->updateProfile : fcmToken = " +fcmToken);*/
+                                    if(logout==0){
+                                        Intent intent = new Intent(getApplication(), MainActivity.class);
                                     startActivity(intent);
-                                    finish();
+                                    }
+                                    logout=0;
                                 }
                             }
                         });
             } else {
+                System.out.println("--->onActivityResult....result.isSuccess() is not ");
                 updateProfile();
             }
         }
@@ -274,7 +258,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_google_signin:
-                signIn();
+                if(logout==1) {
+                    System.out.println("--->onClick() btn_google_signin...logout=1");
+                    signOut();
+                }
+                else if(logout==0) {
+                    System.out.println("--->onClick() btn_google_signin...logout=0");
+                    signIn();
+                }
                 break;
             case R.id.btn_google_signout:
                 signOut();

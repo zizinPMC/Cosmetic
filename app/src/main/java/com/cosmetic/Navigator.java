@@ -3,6 +3,7 @@ package com.cosmetic;
 import android.content.Context;
 import android.content.Intent;
 
+import com.cosmetic.activity.LoginActivity;
 import com.cosmetic.activity.MainActivity;
 import com.cosmetic.activity.NavigationActivity;
 import com.cosmetic.fragment.RegisterFragment;
@@ -27,6 +28,10 @@ public class Navigator {
     public static void goRegister(Context context){
         Intent intent = new Intent(context, NavigationActivity.class);
         NavigationActivity.setFragment(RegisterFragment.newInstance());
+        context.startActivity(intent);
+    }
+    public static void goLogin(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 }

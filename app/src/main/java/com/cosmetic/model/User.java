@@ -39,6 +39,7 @@ public class User {
         UserSave.setUserEmail(this.userEmail);
         UserSave.setUserEmailID(this.userEmailID);
         UserSave.setFcmToken(this.fcmToken);
+        System.out.println("--->  User -> UserSave success ..."+UserSave.getUserName()+", "+UserSave.getUserEmail()+"...");
 
     }
 

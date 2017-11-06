@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.cosmetic.Navigator;
 import com.cosmetic.R;
+import com.cosmetic.activity.LoginActivity;
 import com.cosmetic.model.Setting;
 import com.cosmetic.view.MyPageHeaderView;
 import com.cosmetic.view.MyPageItemView;
@@ -74,11 +76,14 @@ public class MyPageFragment extends Fragment {
                     Toast.makeText(getContext(), "알림입니다", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-                    Toast.makeText(getContext(), "로그아웃 입니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+                    LoginActivity.logout=1;
+                    Navigator.goLogin(getContext());
                     break;
             }
         }
     };
+
 
 
 }

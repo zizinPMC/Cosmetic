@@ -42,7 +42,7 @@ public class BoardReadDB //extends AppCompatActivity{
 
     protected static void showList(ArrayList<HashMap<String,String>> tipList, Context context){
         try {
-            System.out.println("-------->showlist start" + myJSON);
+            /*//System.out.println("-------->showlist start" + myJSON);*/
             JSONObject jsonObject = new JSONObject(myJSON);
             jsonArray = jsonObject.getJSONArray(TAG_RESULTS);
             for(int i=0;i<jsonArray.length();i++){
@@ -112,7 +112,7 @@ public class BoardReadDB //extends AppCompatActivity{
             @Override
             protected void onPostExecute(String s) {
                 myJSON = s;
-                System.out.println("-------->boardread DB get data return : "+s);
+                /*System.out.println("-------->boardread DB get data return : "+s);*/
                 showList(tipList,context);
             }
         }
