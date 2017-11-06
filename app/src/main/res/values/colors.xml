@@ -8,5 +8,6 @@
     <color name="black">#000000</color>
     <color name="gray">#a6a6a6</color>
     <color name="white">#ffffff</color>
+    <color name="dimColor">#8b000000</color>
 
 </resources>
