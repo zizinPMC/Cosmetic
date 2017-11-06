@@ -11,10 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.cosmetic.activity.MainActivity;
+import com.cosmetic.MainActivity;
 import com.cosmetic.R;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardWriteDB;
+import com.cosmetic.model.UserInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,9 +49,6 @@ public class BoardWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board_write);
         ButterKnife.bind(this);
 
-        //setSupportActionBar(toolbar);
-        //nickname.setText(UserInfo.userName+"  님");
-
         ArrayAdapter adapter = new ArrayAdapter(
                 getBaseContext()
                 ,android.R.layout.simple_spinner_item
@@ -72,18 +70,14 @@ public class BoardWriteActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if(v.getId()==R.id.cbw_bt_submit){
-                //String sCategory = editCategory.getText().toString();
                 String sCategory = spinCategory.getSelectedItem().toString();
-                //String sWriter = editWriter.getText().toString();
-                String sWriter = UserInfo.userName;
+                String sWriter = UserInfo.getUserName();
                 String sTitle = editTitle.getText().toString();
                 String sContents = editContents.getText().toString();
                 SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date(System.currentTimeMillis());
                 String sDate =sdfNow.format(date).toString();
                 dbManager.comBoardDBManager(sCategory,sWriter, sTitle,sContents,sDate,"",NULL,0);
-                /*BoardFragment.newInstance();
-                finish();*/
                 MainActivity.viewPager.setCurrentItem(MainAdapter.HOME,false);
                 MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                 finish();
@@ -93,7 +87,6 @@ public class BoardWriteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         AlertDialog.Builder d = new AlertDialog.Builder(this);
         d.setMessage("글 작성을 종료하시겠습니까?");
         d.setPositiveButton("예", new DialogInterface.OnClickListener() {

@@ -36,9 +36,6 @@
         <activity android:name=".activity.AlarmActivity" />
         <activity android:name=".activity.MyCosmeticActivity"/>
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="702855761e75ea2f962df38badcf6325" />
 
     </application>
 

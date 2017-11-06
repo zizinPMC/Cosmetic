@@ -1,6 +1,5 @@
 package com.cosmetic.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 import com.cosmetic.Navigator;
 import com.cosmetic.R;
 import com.cosmetic.adapter.MainAdapter;
-import com.cosmetic.board.UserInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,4 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
+
 }
