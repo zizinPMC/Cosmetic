@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
+
         long tempTime        = System.currentTimeMillis();
         long intervalTime    = tempTime - backPressedTime;
 
@@ -75,8 +76,11 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            //backPressedTime = tempTime;
+            backPressedTime = tempTime;
             Toast.makeText(getApplicationContext(), "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+
+            moveTaskToBack(true);
+            finish();
             android.os.Process.killProcess(android.os.Process.myPid());
 
         }

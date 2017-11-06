@@ -33,5 +33,7 @@ public class Navigator {
     public static void goLogin(Context context){
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
+
+
     }
 }

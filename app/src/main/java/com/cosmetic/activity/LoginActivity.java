@@ -68,15 +68,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     User userData;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        System.out.println("---> LoginActivity onCreate()...logout = "+logout);
         initViews();
         initFirebaseAuth();
         initValues();
-
 
     }
 
@@ -122,17 +123,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         System.out.println("--->initValues()");
         user = mAuth.getCurrentUser();
         if (user != null) {
-            /*userName = user.getDisplayName();
-            System.out.println("--->User : userName = "+userName);
-            fcmToken = FirebaseInstanceId.getInstance().getToken();
-            userEmail = user.getEmail();
-            userEmailID = userEmail.substring(0, userEmail.indexOf('@'));
-            userPhotoUrl = user.getPhotoUrl().toString();
-            mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-            System.out.println("--->initValues  userData = new User(...)");
-            userData = new User(userName, userPhotoUrl, userEmail, userEmailID, fcmToken);
-            mDatabaseReference.child("users").child(userEmailID).setValue(userData);*/
         }
+
 
 
     }
@@ -142,19 +134,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         user = mAuth.getCurrentUser();
 
         if (user == null){
-            // 비 로그인 상태 (메시지를 전송할 수 없다.)
-            /*System.out.println("--->updateProfile : user == null");
-            mBtnGoogleSignIn.setVisibility(View.VISIBLE);
-            mBtnGoogleSignOut.setVisibility(View.GONE);
-            mTxtProfileInfo.setVisibility(View.GONE);
-            mImgProfile.setVisibility(View.GONE);*/
         }else {
             System.out.println("--->updateProfile : user != null");
-            // 로그인 상태
-            /*mBtnGoogleSignIn.setVisibility(View.GONE);
-            mBtnGoogleSignOut.setVisibility(View.VISIBLE);
-            mTxtProfileInfo.setVisibility(View.VISIBLE);
-            mImgProfile.setVisibility(View.VISIBLE);*/
             userName = user.getDisplayName();
             fcmToken = FirebaseInstanceId.getInstance().getToken();
             userEmail = user.getEmail();
@@ -190,7 +171,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //mDatabaseReference.removeEventListener(mChildEventListener);
     }
 
     private void signIn() {
@@ -201,8 +181,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signOut() {
         System.out.println("--->signOut");
-        logout=1;
-        signIn();
         mAuth.signOut();
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -211,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         updateProfile();
                     }
                 });
-
+        logout=0;
     }
 
     @Override
@@ -234,11 +212,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     System.out.println("--->onActivityResult....onComplete()...task.isSuccessful logout="+logout );
-                                    /*System.out.println("--->updateProfile : userName = " +userName);
-                                    System.out.println("--->updateProfile : userPhotoUrl = " +userPhotoUrl);
-                                    System.out.println("--->updateProfile : userEmail= " +userEmail);
-                                    System.out.println("--->updateProfile : userEmailID = " +userEmailID);
-                                    System.out.println("--->updateProfile : fcmToken = " +fcmToken);*/
                                     if(logout==0){
                                         Intent intent = new Intent(getApplication(), MainActivity.class);
                                     startActivity(intent);
@@ -261,6 +234,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(logout==1) {
                     System.out.println("--->onClick() btn_google_signin...logout=1");
                     signOut();
+                    signIn();
                 }
                 else if(logout==0) {
                     System.out.println("--->onClick() btn_google_signin...logout=0");
@@ -271,5 +245,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signOut();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+
+            moveTaskToBack(true);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+
+
     }
 }
