@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,9 +35,6 @@
         <activity android:name=".activity.AlarmActivity" />
         <activity android:name=".activity.MyCosmeticActivity"/>
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="702855761e75ea2f962df38badcf6325" />
 
     </application>
 

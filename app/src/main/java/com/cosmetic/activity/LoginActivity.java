@@ -1,191 +1,184 @@
 package com.cosmetic.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cosmetic.Navigator;
 import com.cosmetic.R;
-import com.cosmetic.log.Logger;
-import com.kakao.auth.ErrorCode;
-import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.Session;
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeResponseCallback;
-import com.kakao.usermgmt.response.model.UserProfile;
-import com.kakao.util.exception.KakaoException;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by gimjihyeon on 2017. 10. 28..
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int RC_SIGN_IN = 1001;
 
-    SessionCallback callback;
-    private long userID ;
-    private String userName = "";
-    private String profileUrl = "";
-    private int userBoardCnt = 0, userCosCnt = 0, autoLogin = 0;
-    private String interestBrand = "";
+    // Firebase - Authentication
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private GoogleApiClient mGoogleApiClient;
+
+    // Views
+    private SignInButton mBtnGoogleSignIn; // 로그인 버튼
+    private Button mBtnGoogleSignOut; // 로그아웃 버튼
+    private TextView mTxtProfileInfo; // 사용자 정보 표시
+    private ImageView mImgProfile; // 사용자 프로필 이미지 표시
+
+    // Values
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
-        Session.getCurrentSession().checkAndImplicitOpen();
+        initViews();
+        initFirebaseAuth();
 
+    }
+
+    private void initViews() {
+
+        mBtnGoogleSignIn = (SignInButton) findViewById(R.id.btn_google_signin);
+        mBtnGoogleSignOut = (Button) findViewById(R.id.btn_google_signout);
+        mBtnGoogleSignIn.setOnClickListener(this);
+        mBtnGoogleSignOut.setOnClickListener(this);
+
+        mTxtProfileInfo = (TextView) findViewById(R.id.txt_profile_info);
+        mImgProfile = (ImageView) findViewById(R.id.img_profile);
+    }
+
+
+    private void initFirebaseAuth() {
+        mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                updateProfile();
+            }
+        };
+    }
+
+    private void initValues() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            userName = user.getDisplayName();
+        }
+    }
+
+    private void updateProfile() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            // 비 로그인 상태 (메시지를 전송할 수 없다.)
+            mBtnGoogleSignIn.setVisibility(View.VISIBLE);
+            mBtnGoogleSignOut.setVisibility(View.GONE);
+            mTxtProfileInfo.setVisibility(View.GONE);
+            mImgProfile.setVisibility(View.GONE);
+        } else {
+            // 로그인 상태
+            mBtnGoogleSignIn.setVisibility(View.GONE);
+            mBtnGoogleSignOut.setVisibility(View.VISIBLE);
+            mTxtProfileInfo.setVisibility(View.VISIBLE);
+            mImgProfile.setVisibility(View.VISIBLE);
+            userName = user.getDisplayName(); // 채팅에 사용 될 닉네임 설정
+            String email = user.getEmail();
+            StringBuilder profile = new StringBuilder();
+            profile.append(userName).append("\n").append(user.getEmail());
+            mTxtProfileInfo.setText(profile);
+
+            Picasso.with(this).load(user.getPhotoUrl()).into(mImgProfile);
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+                        updateProfile();
+                    }
+                });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void getUserInfoFromKakao(){
-        UserManagement.requestMe(new MeResponseCallback() {
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-
-            }
-
-            @Override
-            public void onNotSignedUp() {
-
-            }
-
-            @Override
-            public void onSuccess(UserProfile result) {
-                Logger.v("User profile "+result.toString());
-                Navigator.goMain(LoginActivity.this);
-
-            }
-        });
-    }
-
-    private class SessionCallback implements ISessionCallback {
-
-        @Override
-        public void onSessionOpened() {
-            getUserInfoFromKakao();
-
-           /* UserManagement.requestMe(new MeResponseCallback() {
-
-                @Override
-                public void onFailure(ErrorResult errorResult) {
-                    String message = "failed to get user info. msg=" + errorResult;
-                    Logger.d(message);
-
-                    ErrorCode result = ErrorCode.valueOf(errorResult.getErrorCode());
-                    if (result == ErrorCode.CLIENT_ERROR_CODE) {
-                        finish();
-                    } else {
-                        //redirectMainActivity();
-                    }
-                }
-
-                @Override
-                public void onSessionClosed(ErrorResult errorResult) {
-                }
-
-                @Override
-                public void onNotSignedUp() {
-                }
-
-                @Override
-                public void onSuccess(UserProfile userProfile) {
-
-                    //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
-                    //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
-
-                    Logger.v("User profile "+userProfile.toString());
-
-
-                    System.out.println("프로필이미지 섬네일===>"+userProfile.getProfileImagePath());
-                    String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
-                    String kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
-                    System.out.println("카카오아이디  :  "+kakaoID);
-                    System.out.println("카카오닉네  :  "+kakaoNickname);
-                    // 관심있는 화장품 브랜드 선택(다중선택 가능)
-                    final List<String> list = new ArrayList<String>();
-
-                    final String[] brand_items = new String[]{"이니스프리", "미샤", "어퓨", "아리따움", "올리브영", "홀리카홀리카", "에뛰드하우스", "스킨푸드"};
-
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
-                    dialog.setTitle("관심브랜드를 선택해주세요.")
-                            .setMultiChoiceItems(
-                                    brand_items,
-                                    new boolean[]{false, false, false, false, false, false, false, false}
-                                    , (dialogInterface, which, isChecked) -> {
-                                        if (isChecked) {
-                                            Toast.makeText(getApplicationContext(), brand_items[which], Toast.LENGTH_SHORT).show();
-                                            list.add(brand_items[which]);
-                                        } else {
-                                            list.remove(brand_items[which]);
-                                        }
-                                    }
-                            )
-                            .setPositiveButton("확인", (dialogInterface, i) -> {
-                                String selectedItem = "";
-                                for (String item : list) {
-                                    selectedItem += item + ", ";
-                                }
-                                //선택된 관심브랜드 toast로 나옴 - selectedItem  - startActivityForResult 로 넘기기
-
-                                //userID = String.valueOf(userProfile.getId());
-                                userID = userProfile.getId();
-                                userName = userProfile.getNickname();
-                                profileUrl = userProfile.getProfileImagePath();
-                                interestBrand = selectedItem;
-                                Toast.makeText(getApplicationContext(), userID + ", " + userName + ", " + profileUrl + "," + userBoardCnt + ", " + interestBrand, Toast.LENGTH_LONG).show();
-
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-
-                                intent.putExtra("userID", userID);
-                                intent.putExtra("userName", userName);
-                                intent.putExtra("userBoardCnt", userBoardCnt);
-                                intent.putExtra("userCosCnt", userCosCnt);
-                                intent.putExtra("ProfileUrl", profileUrl);
-                                intent.putExtra("autoLogin", autoLogin);
-                                intent.putExtra("interestBrand", interestBrand);
-
-                                startActivity(intent);
-
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                GoogleSignInAccount account = result.getSignInAccount();
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                mAuth.signInWithCredential(credential)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Intent intent = new Intent(getApplication(),MainActivity.class);
+                                    startActivity(intent);
                                     finish();
-
                                 }
-                            ).setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
-                    dialog.create();
-                    dialog.show();
-*/
-
-         /*       }
-            });*/
-
-
-        }
-
-        @Override
-        public void onSessionOpenFailed(KakaoException exception) {
-
+                            }
+                        });
+            } else {
+                updateProfile();
+            }
         }
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Session.getCurrentSession().removeCallback(callback);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_google_signin:
+                signIn();
+                break;
+            case R.id.btn_google_signout:
+                signOut();
+                break;
+        }
     }
 }

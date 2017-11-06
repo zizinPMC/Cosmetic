@@ -42,26 +42,28 @@ dependencies {
 
     //circle imageview
     compile 'de.hdodenhof:circleimageview:1.2.2'
-    // 카카오 로그인 sdk를 사용하기 위해 필요.
-    compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
-    // 카카오링크 sdk를 사용하기 위해 필요.
-    compile group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
-
-    // 카카오톡 sdk를 사용하기 위해 필요.
-    compile group: 'com.kakao.sdk', name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
-
+    //butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     //glide for Image
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
-    compile ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
+    /*compile ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
-    }
+    }*/
     //gcm
-    compile "com.google.android.gms:play-services-gcm:8.4.0"
-    compile (group: 'org.apache.httpcomponents' , name: 'httpmime' , version: '4.3.5') { exclude module: 'org.apache.httpcomponents:httpclient'}
+    compile "com.google.android.gms:play-services-gcm:10.0.1"
+    //compile (group: 'org.apache.httpcomponents' , name: 'httpmime' , version: '4.3.5') { exclude module: 'org.apache.httpcomponents:httpclient'}
 
+    // Firebase
+    compile 'com.google.firebase:firebase-database:10.0.1'
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.google.android.gms:play-services-auth:10.0.1'
+    compile 'com.google.firebase:firebase-messaging:10.0.1'
+    // Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
 }
+apply plugin: 'com.google.gms.google-services'

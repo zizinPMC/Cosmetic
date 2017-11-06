@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "408705434044",
+    "firebase_url": "https://pmc-by-zizin.firebaseio.com",
+    "project_id": "pmc-by-zizin",
+    "storage_bucket": "pmc-by-zizin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408705434044:android:54c8d4c35f49607e",
+        "android_client_info": {
+          "package_name": "com.cosmetic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408705434044-aortbailjpvvgqp7gfun9h9gf450gntf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cosmetic",
+            "certificate_hash": "563b463b0d8b051826ca4a2f65fb0e2202056284"
+          }
+        },
+        {
+          "client_id": "408705434044-891f4js58m2tg50dqpur92ks24uc0hd3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh0C2oDW7HbnE3BxCCvHJx_VTiSTniDzQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408705434044-891f4js58m2tg50dqpur92ks24uc0hd3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
