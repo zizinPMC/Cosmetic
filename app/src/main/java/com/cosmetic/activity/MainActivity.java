@@ -25,32 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //System.out.println("--->User : userName = "+ User.userName);
-        /*System.out.println("--->User : userPhotoUrl = "+ userData.userPhotoUrl);
-        System.out.println("--->User : userEmail = "+ userData.userEmail);
-        System.out.println("--->User : userEmailID = "+ userData.userEmailID);
-        System.out.println("--->User : fcmToken = "+ userData.fcmToken);
-*/
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-      /*  //dbManager = new UserDB();
-        Intent intent = getIntent();
-
-        long userID = intent.getExtras().getLong("userID");
-        String userNickname = intent.getExtras().getString("userName");
-        int userBoardCnt = intent.getExtras().getInt("userBoardCnt");
-        int userCosCnt = intent.getExtras().getInt("userCosCnt");
-        String userprofileURL = intent.getExtras().getString("ProfileUrl");
-        int autoLogin = intent.getExtras().getInt("autoLogin");
-        String interestBrand = intent.getExtras().getString("interestBrand");
-        System.out.println("main------userId : "+userID);
-       *//* dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
-                autoLogin, interestBrand);*//*
-
-        new UserInfo(userNickname, userprofileURL);*/
     }
 
 

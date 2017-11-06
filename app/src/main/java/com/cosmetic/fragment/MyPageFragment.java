@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cosmetic.R;
 import com.cosmetic.model.Setting;
-import com.cosmetic.model.User;
 import com.cosmetic.view.MyPageHeaderView;
 import com.cosmetic.view.MyPageItemView;
 import com.dhha22.bindadapter.BindAdapter;
@@ -20,9 +18,6 @@ import com.dhha22.bindadapter.listener.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.cosmetic.R.id.userNameTxt;
 
 /**
  * Created by yujeen on 2017. 10. 28..

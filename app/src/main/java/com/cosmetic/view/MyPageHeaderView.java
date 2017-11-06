@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.cosmetic.R;
-import com.cosmetic.model.User;
+import com.cosmetic.model.UserSave;
 import com.dhha22.bindadapter.ItemView;
 
 import butterknife.BindView;
@@ -18,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class MyPageHeaderView extends ItemView {
-    @BindView(R.id.userProfileImg) CircleImageView imgProfile;
+    @BindView(R.id.userProfileImg) CircleImageView userProfileImg;
     @BindView(R.id.userNameTxt) TextView userNameTxt;
     @BindView(R.id.userEmailTxt) TextView userEmailTxt;
 
@@ -28,10 +28,11 @@ public class MyPageHeaderView extends ItemView {
         setFullSpan();
         ButterKnife.bind(this);
 
+        //userNameTxt.setText(UserSave.getUserName());
         //set imgProfile
-        Glide.with(getContext()).load(User.getUserPhotoUrl()).into(imgProfile);
+        Glide.with(getContext()).load(UserSave.getUserPhotoUrl()).into(userProfileImg);
         //set text
-        userNameTxt.setText(User.getUserName());
-        userEmailTxt.setText(User.getUserEmail());
+        userNameTxt.setText(UserSave.getUserName());
+        userEmailTxt.setText(UserSave.getUserEmail());
     }
 }

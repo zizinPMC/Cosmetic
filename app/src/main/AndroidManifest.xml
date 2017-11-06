@@ -31,11 +31,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
-            android:label="글 작성" />
-        <activity
-            android:name=".board.BoardWriteActivity"
-            android:label="글 작성" />
+            android:name=".activity.MainActivity"/>
+
         <activity android:name=".activity.AlarmActivity" />
         <activity android:name=".activity.MyCosmeticActivity"/>
 

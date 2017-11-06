@@ -5,13 +5,13 @@ package com.cosmetic.model;
  */
 
 public class User {
-    public static String userName; // 사용자 이름
-    public static String userPhotoUrl; // 사용자 사진 URL
-    public static String userEmail; // 사용자 이메일주소
-    public static String userEmailID; // email 주소에서 @ 이전까지의 값.
+    public String userName; // 사용자 이름
+    public String userPhotoUrl; // 사용자 사진 URL
+    public String userEmail; // 사용자 이메일주소
+    public String userEmailID; // email 주소에서 @ 이전까지의 값.
     public String fcmToken;
 
-    public static String getUserName() {
+    /*public static String getUserName() {
         return userName;
     }
 
@@ -25,7 +25,7 @@ public class User {
 
     public static String getUserEmailID() {
         return userEmailID;
-    }
+    }*/
 
     public User(String userName, String userPhotoUrl, String userEmail, String userEmailID, String fcmToken) {
         this.userName = userName;
@@ -33,6 +33,13 @@ public class User {
         this.userEmail = userEmail;
         this.userEmailID = userEmailID;
         this.fcmToken = fcmToken;
+
+        UserSave.setUserName(this.userName);
+        UserSave.setUserPhotoUrl(this.userPhotoUrl);
+        UserSave.setUserEmail(this.userEmail);
+        UserSave.setUserEmailID(this.userEmailID);
+        UserSave.setFcmToken(this.fcmToken);
+
     }
 
 
