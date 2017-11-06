@@ -58,7 +58,9 @@ public class RegisterFragment extends Fragment {
     private static final int REQUEST_TAKE_PHOTO = 2222;
     private static final int REQUEST_TAKE_ALBUM = 3333;
     private static final int REQUEST_IMAGE_CROP = 4444;
+    private final long FINISH_INTERVAL_TIME = 2000;
 
+    private long   backPressedTime = 0;
     private Uri imageUri;
     private Uri photoURI, albumURI;
     /*private String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -128,7 +130,6 @@ public class RegisterFragment extends Fragment {
     Date cos_open_date, cos_exp_date;
     int cos_exp_month, cos_IsOpen = 0, cos_ExpDday = 0;
     private Context context;
-    private int mYear, mMonth, mDay;
 
     public static RegisterFragment newInstance() {
         RegisterFragment fragment = new RegisterFragment();
@@ -181,6 +182,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 1);
         cosBrandBtn.setOnClickListener(v -> showDialog(BRAND_DIALOG_TITLE, cosBrand, (dialog, which) -> {
             brandStr = cosBrand[which];
@@ -284,6 +286,8 @@ public class RegisterFragment extends Fragment {
 
 }
 */
+
+
     public int countdday() {
         try {
             if (expNonRadioBtn.isChecked()) {
@@ -613,5 +617,4 @@ public class RegisterFragment extends Fragment {
             e.printStackTrace();
         }
     };
-
 }

@@ -1,4 +1,3 @@
-/*
 package com.cosmetic.activity;
 
 import android.app.NotificationManager;
@@ -16,11 +15,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
-*/
-/**
- * Created by gimjihyeon on 2017. 11. 7..
- *//*
+import com.cosmetic.R;
+/*
+*
+ * Created by gimjihyeon on 2017. 11. 1..
 
+*/
 
 public class AlarmReciver extends BroadcastReceiver {
     Context context;
@@ -64,7 +64,7 @@ public class AlarmReciver extends BroadcastReceiver {
         //알림 사운드
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         //큰 아이콘
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),android.R.drawable.ic_menu_gallery); // 아이콘 ic_menu_gallery를 띄워준다.
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_pmc);
 
 
         //노티피케이션을 생성할때 매개변수는 PendingIntent이므로 Intent를 PendingIntent로 만들어주어야함.
@@ -72,10 +72,10 @@ public class AlarmReciver extends BroadcastReceiver {
 
         //노티피케이션 빌더 : 위에서 생성한 이미지나 텍스트, 사운드등을 설정해줍니다.
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(android.R.drawable.ic_menu_gallery)
+                .setSmallIcon(R.drawable.ic_pmc)
                 .setLargeIcon(bitmap) // 이미지
-                .setContentTitle("알람") // 푸시의 타이틀이다.
-                .setContentText("알람 딸랑딸랑~") // 서버에서 받은 텍스트
+                .setContentTitle("P M C") // 푸시의 타이틀이다.
+                .setContentText("사용기한이 끝나가는 화장품이 있습니다~") // 서버에서 받은 텍스트
                 .setAutoCancel(true)
                 .setSound(soundUri) // 푸시가 날아올때 사운드 설정
                 .setContentIntent(pendingIntent); // 푸시를 누르면 위에서 설정한 intent에 의해 화면이 넘어간다.
@@ -83,9 +83,7 @@ public class AlarmReciver extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         //노티피케이션을 생성합니다.
-        notificationManager.notify(0 */
-/* ID of notification *//*
-, notificationBuilder.build());
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
 
 
     }
@@ -93,4 +91,3 @@ public class AlarmReciver extends BroadcastReceiver {
 }
 
 
-*/

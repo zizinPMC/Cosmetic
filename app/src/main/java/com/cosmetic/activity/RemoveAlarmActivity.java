@@ -1,4 +1,3 @@
-/*
 package com.cosmetic.activity;
 
 import android.app.Activity;
@@ -8,19 +7,18 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cosmetic.Navigator;
 import com.cosmetic.R;
-
-*/
-/**
+/*
+*
  * Created by gimjihyeon on 2017. 11. 7..
- *//*
+ */
 
 
-public class RemoveAlarmActivity extends Activity{
+public class RemoveAlarmActivity extends Activity {
 
     private Intent intent;
     private PendingIntent ServicePending;
@@ -34,48 +32,41 @@ public class RemoveAlarmActivity extends Activity{
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
 
-        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.touchlove );
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.touchlove);
         mediaPlayer.start(); // prepare(); 나 create() 를 호출할 필요 없음
 
 
+        Button.OnClickListener bClickListener = v -> {
+            switch (v.getId()) {
+                case R.id.changeSet:
+
+                    Navigator.goMain(getApplicationContext());
+                    break;
+                case R.id.removeAlarm:
+
+                    mediaPlayer.stop();
+                    removeAlarm();
+                    break;
 
 
-        //알람 설정, 해제 버튼
-        Button.OnClickListener bClickListener = new View.OnClickListener() {
-
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.changeSet:
-
-                        Toast.makeText(getBaseContext(), "미구현", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.removeAlarm:
-
-                        mediaPlayer.stop();
-                        removeAlarm();
-                        break;
-
-
-                }
             }
         };
 
-        findViewById(R.id.changeSet).setOnClickListener(bClickListener);
+
         findViewById(R.id.removeAlarm).setOnClickListener(bClickListener);
     }
-    void removeAlarm(){
+
+    void removeAlarm() {
 
         intent = new Intent("AlarmReceiver");
         //PendingIntent.getBroadcast(Context context, int requestCod, Intent intent, int flag);
         ServicePending = PendingIntent.getBroadcast(
                 RemoveAlarmActivity.this, 111, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Log.d("ServicePending : ",""+ServicePending.toString());
+        Log.d("ServicePending : ", "" + ServicePending.toString());
 
-        Toast.makeText(getBaseContext(), "알람 해제", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "알람이 해제되었습니다", Toast.LENGTH_SHORT).show();
 
         alarmManager.cancel(ServicePending);
     }
 
 }
-*/

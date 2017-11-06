@@ -33,7 +33,8 @@ import butterknife.ButterKnife;
 
 
 public class MyPageFragment extends Fragment {
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
 
     private BindAdapter adapter;
@@ -67,37 +68,33 @@ public class MyPageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
         adapter.addItem(new Setting(R.drawable.ic_notification, "알림"));
-        adapter.addItem(new Setting(R.drawable.ic_favorite,"관심브랜드 설정"));
+        adapter.addItem(new Setting(R.drawable.ic_favorite, "관심브랜드 설정"));
         adapter.addItem(new Setting(R.drawable.ic_logout, "로그아웃"));
 
         adapter.notifyData();
 
     }
 
-    private OnItemClickListener itemClickListener = new OnItemClickListener() {
-        @Override
-        public void onItemClick(View view, int position) {
-            switch (position) {
-                case 1:
-                    //Navigator.goAlarm(getContext());
-                    Toast.makeText(getContext(), "알람 입니다", Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    show();
-                    break;
-                case 3:
-                    Toast.makeText(getContext(), "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
-                    LoginActivity.logout=1;
-                    Navigator.goLogin(getContext());
-                    getActivity().finish();
-                    break;
-            }
+    private OnItemClickListener itemClickListener = (view, position) -> {
+        switch (position) {
+            case 1:
+                //Toast.makeText(getContext(), "알람 입니다", Toast.LENGTH_SHORT).show();
+                Navigator.goAlarm(getContext());
+                break;
+            case 2:
+                show();
+                break;
+            case 3:
+                Toast.makeText(getContext(), "로그아웃되었습니다.", Toast.LENGTH_SHORT).show();
+                LoginActivity.logout = 1;
+                Navigator.goLogin(getContext());
+                getActivity().finish();
+                break;
         }
     };
-    void show()
-    {
+
+    void show() {
         final List<String> ListItems = new ArrayList<>();
         ListItems.add("에뛰드하우스");
         ListItems.add("이니스프리");
@@ -107,7 +104,7 @@ public class MyPageFragment extends Fragment {
         ListItems.add("아리따움");
         ListItems.add("올리브영");
         ListItems.add("네이처리퍼블릭");
-        final CharSequence[] items =  ListItems.toArray(new String[ ListItems.size()]);
+        final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("관심브랜드 설정");
@@ -120,7 +117,6 @@ public class MyPageFragment extends Fragment {
         });
         builder.show();
     }
-
 
 
 }

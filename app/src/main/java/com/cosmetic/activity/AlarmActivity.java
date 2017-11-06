@@ -1,4 +1,3 @@
-/*
 package com.cosmetic.activity;
 
 import android.app.AlarmManager;
@@ -20,12 +19,11 @@ import com.cosmetic.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+/*
+*
+ * Created by gimjihyeon on 2017. 11. 1..
 
 */
-/**
- * Created by gimjihyeon on 2017. 11. 1..
- *//*
-
 
 public class AlarmActivity extends AppCompatActivity {
     //시간 설정을 위한 객체
@@ -166,4 +164,3 @@ public class AlarmActivity extends AppCompatActivity {
 
     }
 }
-*/
