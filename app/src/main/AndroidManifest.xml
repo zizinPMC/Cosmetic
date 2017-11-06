@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
 
     <application
         android:allowBackup="true"
@@ -16,12 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.NavigationActivity"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity
-            android:name="com.cosmetic.activity.LoginActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
