@@ -1,14 +1,16 @@
+/*
 package com.cosmetic;
 
 import android.app.Activity;
 import android.app.Application;
 
-import com.cosmetic.adapter.KakaoSDKAdapter;
 import com.kakao.auth.KakaoSDK;
 
+*/
 /**
  * Created by gimjihyeon on 2017. 10. 12..
- */
+ *//*
+
 
 public class GlobalApplication extends Application {
 
@@ -34,4 +36,4 @@ public class GlobalApplication extends Application {
     public static void setCurrentActivity(Activity currentActivity) {
         GlobalApplication.currentActivity = currentActivity;
     }
-}
+}*/

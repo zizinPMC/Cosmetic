@@ -1,3 +1,4 @@
+/*
 package com.cosmetic.activity;
 
 import android.app.Activity;
@@ -21,9 +22,11 @@ import com.kakao.util.exception.KakaoException;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by gimjihyeon on 2017. 10. 28..
- */
+ *//*
+
 
 public class LoginActivity extends Activity {
 
@@ -79,7 +82,8 @@ public class LoginActivity extends Activity {
         public void onSessionOpened() {
             getUserInfoFromKakao();
 
-           /* UserManagement.requestMe(new MeResponseCallback() {
+           */
+/* UserManagement.requestMe(new MeResponseCallback() {
 
                 @Override
                 public void onFailure(ErrorResult errorResult) {
@@ -169,10 +173,13 @@ public class LoginActivity extends Activity {
                             ).setNeutralButton("취소", (dialogInterface, i) -> Toast.makeText(getApplicationContext(), "취소버튼 누름누름", Toast.LENGTH_SHORT).show());
                     dialog.create();
                     dialog.show();
-*/
+*//*
 
-         /*       }
-            });*/
+
+         */
+/*       }
+            });*//*
+
 
 
         }
@@ -189,3 +196,4 @@ public class LoginActivity extends Activity {
         Session.getCurrentSession().removeCallback(callback);
     }
 }
+*/
