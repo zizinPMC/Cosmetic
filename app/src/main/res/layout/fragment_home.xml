@@ -17,6 +17,7 @@
             app:layout_scrollFlags="scroll">
 
             <ImageView
+                android:id="@+id/homeFavoriteImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -28,6 +29,7 @@
                 android:background="@color/dimColor" />
 
             <Button
+                android:id="@+id/btn_findShop"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
