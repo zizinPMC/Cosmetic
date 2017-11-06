@@ -260,7 +260,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     System.out.println("--->updateProfile : fcmToken = " +fcmToken);
                                     Intent intent = new Intent(getApplication(), MainActivity.class);
                                     startActivity(intent);
-                                    //finish();
+                                    finish();
                                 }
                             }
                         });

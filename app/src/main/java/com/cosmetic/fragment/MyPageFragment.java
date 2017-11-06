@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cosmetic.R;
 import com.cosmetic.model.Setting;
+import com.cosmetic.model.User;
 import com.cosmetic.view.MyPageHeaderView;
 import com.cosmetic.view.MyPageItemView;
 import com.dhha22.bindadapter.BindAdapter;
@@ -18,6 +20,9 @@ import com.dhha22.bindadapter.listener.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.cosmetic.R.id.userNameTxt;
 
 /**
  * Created by yujeen on 2017. 10. 28..
@@ -25,8 +30,9 @@ import butterknife.ButterKnife;
 
 
 public class MyPageFragment extends Fragment {
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
+
+
     private BindAdapter adapter;
 
     public static MyPageFragment newInstance() {
@@ -56,6 +62,8 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         adapter.addItem(new Setting(R.drawable.ic_notification, "알림"));
         adapter.addItem(new Setting(R.drawable.ic_logout, "로그아웃"));
