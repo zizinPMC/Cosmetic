@@ -98,14 +98,14 @@ public class MyPageFragment extends Fragment {
     void show()
     {
         final List<String> ListItems = new ArrayList<>();
-        ListItems.add("에뛰드하우스");
-        ListItems.add("이니스프리");
-        ListItems.add("토니모리");
-        ListItems.add("미샤");
-        ListItems.add("더샘");
-        ListItems.add("아리따움");
-        ListItems.add("올리브영");
-        ListItems.add("네이처리퍼블릭");
+        ListItems.add(Favorite.ETUDE);
+        ListItems.add(Favorite.INNISFREE);
+        ListItems.add(Favorite.TONYMOLY);
+        ListItems.add(Favorite.MISHA);
+        ListItems.add(Favorite.THESAM);
+        ListItems.add(Favorite.ARITAUM);
+        ListItems.add(Favorite.OLIVEYOUNG);
+        ListItems.add(Favorite.NATUREREPUBLIC);
         final CharSequence[] items =  ListItems.toArray(new String[ ListItems.size()]);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
