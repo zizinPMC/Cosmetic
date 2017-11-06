@@ -1,3 +1,4 @@
+/*
 package com.cosmetic.board;
 
 import android.content.DialogInterface;
@@ -26,9 +27,10 @@ import butterknife.ButterKnife;
 
 import static java.sql.Types.NULL;
 
-/**
+*
  * Created by yujeen on 2017. 9. 21..
- */
+
+
 
 public class BoardWriteActivity extends AppCompatActivity {
 
@@ -77,8 +79,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                 SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date(System.currentTimeMillis());
                 String sDate =sdfNow.format(date).toString();
-                dbManager.comBoardDBManager(sCategory,sWriter, sTitle,sContents,sDate,"",NULL,0);
-                MainActivity.viewPager.setCurrentItem(MainAdapter.HOME,false);
+                dbManager.comBoardDBMㅁr.setCurrentItem(MainAdapter.HOME,false);
                 MainActivity.viewPager.setCurrentItem(MainAdapter.BOARD,false);
                 finish();
             }
@@ -103,3 +104,4 @@ public class BoardWriteActivity extends AppCompatActivity {
 
     }
 }
+*/

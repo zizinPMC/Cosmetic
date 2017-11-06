@@ -1,3 +1,4 @@
+/*
 package com.cosmetic.fragment;
 
 import android.content.Intent;
@@ -23,9 +24,11 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+*/
 /**
  * Created by yujeen on 2017. 10. 28..
- */
+ *//*
+
 
 public class BoardFragment extends Fragment {
 
@@ -76,3 +79,4 @@ public class BoardFragment extends Fragment {
 
 
 }
+*/

@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cosmetic.R;
+import com.cosmetic.db.DBHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,10 +83,12 @@ public class RegisterFragment extends Fragment {
     private String mainCategoryStr = "대분류";
     private String midCategoryStr = "중분류";
 
+
     @BindView(R.id.cosBrandBtn) Button cosBrandBtn;
     @BindView(R.id.cosMainCategoryBtn) Button cosMainCategoryBtn;
     @BindView(R.id.cosMidCategoryBtn) Button cosMidCategoryBtn;
     @BindView(R.id.categoryResultTxt) TextView categoryResultTxt;
+    @BindView(R.id.inputCosmeticName) EditText cosName;
     @BindView(R.id.iscosOpenCheckbox) CheckBox iscosOpenCheckbox;
     @BindView(R.id.opendateBtn) Button opendateBtn;
     @BindView(R.id.expRadioGroup) RadioGroup expRadioGroup;
@@ -96,9 +100,8 @@ public class RegisterFragment extends Fragment {
     @BindView(R.id.expDateLayout) LinearLayout expDateLayout;
     @BindView(R.id.expDateTxt) TextView expDateTxt;
     @BindView(R.id.img_cosmetic) ImageButton cosImg;
-
+    @BindView(R.id.ic_check) Toolbar check;
     long open = -1, exp, count;
-    int cos_No = 0;
     String userID, cos_Name;
     String cos_Brand = "", cos_MainCate = "", cos_MidCate = "", cos_PicUrl = "";
     Date cos_open_date, cos_exp_date;
@@ -162,15 +165,18 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetic.db", null, 1);
         cosBrandBtn.setOnClickListener(v -> showDialog(BRAND_DIALOG_TITLE, cosBrand, (dialog, which) -> {
             brandStr = cosBrand[which];
             cosBrandBtn.setSelected(true);
             updateCategoryResultTxt();
+            cos_Brand = cosBrandBtn.getText().toString();
         }));
         cosMainCategoryBtn.setOnClickListener(v -> showDialog(MAIN_CATEGORY_DIALOG_TITLE, cosMainCategory, (dialog, which) -> {
             mainCategoryStr = cosMainCategory[which];
             cosMainCategoryBtn.setSelected(true);
             updateCategoryResultTxt();
+            cos_MainCate =cosMainCategoryBtn.getText().toString();
         }));
         cosMidCategoryBtn.setOnClickListener(v -> {
             final String[] midCategory = getMidCategory();
@@ -179,11 +185,14 @@ public class RegisterFragment extends Fragment {
                 showDialog(MID_CATEGORY_DIALOG_TITLE, midCategory, (dialog, which) -> {
                     midCategoryStr = midCategory[which];
                     updateCategoryResultTxt();
+                    cos_MidCate = cosMidCategoryBtn.getText().toString();
                 });
             } else {
                 Toast.makeText(getContext(), "화장품 대분류를 선택해주세요.", Toast.LENGTH_LONG).show();
             }
         });
+
+        cos_Name = cosName.getText().toString();
         expRadioGroup.setOnCheckedChangeListener((radioGroup, checkedID) -> {
             switch (checkedID) {
                 case R.id.expDateRadioBtn: {
@@ -236,7 +245,22 @@ public class RegisterFragment extends Fragment {
 
         iscosOpenCheckbox.setOnClickListener(listener_chechbox_OpenDate);
         opendateBtn.setOnClickListener(listener_btn_openDateClick);
+
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cos_Brand!="브랜드"|cos_MainCate!="대분류"|cos_MidCate!="중분류"|cos_Name!=null){
+                    dbHelper.insert(cos_Name,cos_Brand,cos_MainCate,cos_MidCate,0,"id");
+                    Toast.makeText(getContext(),dbHelper.getResult(),Toast.LENGTH_LONG).show();
+                    new Intent(getActivity(),HomeFragment.class);
+                }else{
+                    Toast.makeText(getContext(),"값을 제대로 입력했는지 확인해주세요 ",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
+
 
     /*
     btn_register.setOnClickListener(new View.OnClickListener() {

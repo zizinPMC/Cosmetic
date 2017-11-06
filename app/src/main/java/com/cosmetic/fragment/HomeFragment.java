@@ -1,29 +1,16 @@
 package com.cosmetic.fragment;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 
 import com.cosmetic.R;
-import com.cosmetic.adapter.AutoScrollAdapter;
-import com.cosmetic.adapter.MainAdapter;
-import com.cosmetic.db.BoardTipDB;
 import com.cosmetic.model.Cosmetic;
 import com.cosmetic.view.CosmeticItemView;
 import com.dhha22.bindadapter.BindAdapter;
@@ -33,7 +20,6 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 /**
  * Created by yujeen on 2017. 10. 28..
