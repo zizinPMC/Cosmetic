@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_toRightOf="@id/profileImg"
-        android:text="지현님, 안녕하세요."
+        android:text="한유진님, 안녕하세요."
         android:textColor="@color/white"
         android:textSize="22dp" />
 

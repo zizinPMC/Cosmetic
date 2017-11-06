@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.cosmetic.MainActivity;
 import com.cosmetic.R;
+import com.cosmetic.activity.MainActivity;
 import com.cosmetic.adapter.MainAdapter;
 import com.cosmetic.db.BoardWriteDB;
 import com.cosmetic.model.UserInfo;

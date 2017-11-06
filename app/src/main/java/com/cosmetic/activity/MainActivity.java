@@ -25,7 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        //System.out.println("--->User : userName = "+ User.userName);
+        /*System.out.println("--->User : userPhotoUrl = "+ userData.userPhotoUrl);
+        System.out.println("--->User : userEmail = "+ userData.userEmail);
+        System.out.println("--->User : userEmailID = "+ userData.userEmailID);
+        System.out.println("--->User : fcmToken = "+ userData.fcmToken);
+*/
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
