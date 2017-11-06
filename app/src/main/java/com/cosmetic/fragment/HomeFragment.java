@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cosmetic.R;
+import com.cosmetic.activity.ChatActivity;
 import com.cosmetic.model.Cosmetic;
 import com.cosmetic.model.Favorite;
 import com.cosmetic.view.CosmeticItemView;
@@ -128,6 +129,9 @@ public class HomeFragment extends Fragment {
     };
     private void goChatting(){
         // 채팅페이지 이동
+        Intent intent = new Intent(getContext(), ChatActivity.class);
+        startActivity(intent);
+
     }
 
 
