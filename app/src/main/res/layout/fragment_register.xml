@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:src="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,14 +14,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <android.support.v7.widget.Toolbar
+
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="right"
+            android:id="@+id/ic_check"
+            android:background="@drawable/ic_check"/>
 
         <ImageButton
             android:id="@+id/img_cosmetic"
             android:layout_width="match_parent"
             android:layout_height="195dp"
             android:layout_gravity="center"
-            android:scaleType="centerInside"
             android:background="@color/white"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_camera" />
 
         <View
@@ -183,10 +191,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/expDateLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/expDateLayout"
                 android:visibility="invisible">
 
                 <TextView
@@ -202,8 +210,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="8dp"
-                    android:textSize="14sp"
-                     />
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </LinearLayout>

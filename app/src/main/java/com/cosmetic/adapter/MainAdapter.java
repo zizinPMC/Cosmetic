@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.cosmetic.fragment.BoardFragment;
 import com.cosmetic.fragment.BoardReadFragment;
 import com.cosmetic.fragment.HomeFragment;
 import com.cosmetic.fragment.MyPageFragment;
@@ -35,8 +34,8 @@ public class MainAdapter extends FragmentStatePagerAdapter {
                 return RegisterFragment.newInstance();
             case MY_PAGE:
                 return MyPageFragment.newInstance();
-            case BOARD:
-                return BoardFragment.newInstance();
+            /*case BOARD:
+                return BoardFragment.newInstance();*/
             case READ :
                 return BoardReadFragment.newInstance();
         }
