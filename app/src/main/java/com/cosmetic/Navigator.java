@@ -3,7 +3,6 @@ package com.cosmetic;
 import android.content.Context;
 import android.content.Intent;
 
-
 import com.cosmetic.activity.MainActivity;
 import com.cosmetic.activity.NavigationActivity;
 import com.cosmetic.fragment.RegisterFragment;
@@ -30,9 +29,4 @@ public class Navigator {
         NavigationActivity.setFragment(RegisterFragment.newInstance());
         context.startActivity(intent);
     }
-   /* public static void goAlarm(Context context){
-        Intent intent = new Intent(context, AlarmActivity.class);
-        NavigationActivity.setFragment(RegisterFragment.newInstance());
-        context.startActivity(intent);
-    }*/
 }

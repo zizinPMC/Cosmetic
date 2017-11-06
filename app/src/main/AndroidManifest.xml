@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera2"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,26 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--<activity
+        <activity
             android:name=".board.BoardWriteActivity"
-            android:label="글 작성" />-->
+            android:label="글 작성" />
         <activity android:name=".activity.AlarmActivity" />
         <activity android:name=".activity.MyCosmeticActivity"/>
 
-        <activity android:name=".activity.RemoveAlarmActivity">
-            <intent-filter>
-                <action android:name="AlarmRemove" >
-                </action>
-            </intent-filter>
-        </activity>
 
-        <receiver android:name=".activity.AlarmReciver" android:exported="true">
-            <intent-filter>
-                <action android:name="AlarmReceiver" >
-                </action>
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

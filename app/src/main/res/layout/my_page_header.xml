@@ -7,7 +7,7 @@
     android:padding="24dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImg"
+        android:id="@+id/userProfileImg"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginRight="14dp"
@@ -18,9 +18,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:layout_toRightOf="@id/profileImg"
-        android:text="한유진님, 안녕하세요."
+        android:layout_toRightOf="@id/userProfileImg"
+        android:text="사용자 이름"
         android:textColor="@color/white"
         android:textSize="22dp" />
+    <TextView
+        android:id="@+id/userEmailTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userNameTxt"
+        android:layout_toRightOf="@id/userProfileImg"
+        android:layout_marginTop="5dp"
+        android:text="Email Address"
+        android:textColor="@color/white"
+        android:textSize="15dp" />
 
 </RelativeLayout>

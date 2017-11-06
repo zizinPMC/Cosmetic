@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.cosmetic.Navigator;
 import com.cosmetic.R;
@@ -20,37 +21,23 @@ public class MainActivity extends AppCompatActivity {
     public static ViewPager viewPager;
     private MainAdapter adapter;
 
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long   backPressedTime = 0;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //System.out.println("--->User : userName = "+ User.userName);
-        /*System.out.println("--->User : userPhotoUrl = "+ userData.userPhotoUrl);
-        System.out.println("--->User : userEmail = "+ userData.userEmail);
-        System.out.println("--->User : userEmailID = "+ userData.userEmailID);
-        System.out.println("--->User : fcmToken = "+ userData.fcmToken);
-*/
+
+        LoginActivity.logout=0;
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         adapter = new MainAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-      /*  //dbManager = new UserDB();
-        Intent intent = getIntent();
-
-        long userID = intent.getExtras().getLong("userID");
-        String userNickname = intent.getExtras().getString("userName");
-        int userBoardCnt = intent.getExtras().getInt("userBoardCnt");
-        int userCosCnt = intent.getExtras().getInt("userCosCnt");
-        String userprofileURL = intent.getExtras().getString("ProfileUrl");
-        int autoLogin = intent.getExtras().getInt("autoLogin");
-        String interestBrand = intent.getExtras().getString("interestBrand");
-        System.out.println("main------userId : "+userID);
-       *//* dbManager.userDBManager(userID, userNickname, userBoardCnt, userCosCnt, userprofileURL,
-                autoLogin, interestBrand);*//*
-
-        new UserInfo(userNickname, userprofileURL);*/
     }
 
 
@@ -76,5 +63,28 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    @Override
+    public void onBackPressed()
+    {
+
+        long tempTime        = System.currentTimeMillis();
+        long intervalTime    = tempTime - backPressedTime;
+
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+
+            moveTaskToBack(true);
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+
+        }
+
+    }
 
 }
