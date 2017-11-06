@@ -61,6 +61,46 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return result;
     }
+    public String getPic() {
+        //읽기가 가능하게 DB열기
+        SQLiteDatabase db = getReadableDatabase();
+
+        String result = "";
+
+        //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        while (cursor.moveToNext()) {
+            result =cursor.getString(1) + " \n";       //cospic
+        }
+        return result;
+    }
+    public String getCosName() {
+        //읽기가 가능하게 DB열기
+        SQLiteDatabase db = getReadableDatabase();
+
+        String result = "";
+
+        //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        while (cursor.moveToNext()) {
+            result =cursor.getString(2) + " \n";       //cospic
+        }
+        return result;
+    }
+    public String getCosDday() {
+        //읽기가 가능하게 DB열기
+        SQLiteDatabase db = getReadableDatabase();
+
+        String result = "";
+
+        //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        while (cursor.moveToNext()) {
+            result =cursor.getString(6) + " \n";       //cospic
+        }
+        return result;
+    }
+
     public String getItem2() {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();

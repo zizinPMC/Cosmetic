@@ -37,6 +37,8 @@ import android.widget.Toast;
 import com.cosmetic.Navigator;
 import com.cosmetic.R;
 import com.cosmetic.db.DBHelper;
+import com.cosmetic.model.User;
+import com.cosmetic.model.UserSave;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,7 +62,7 @@ public class RegisterFragment extends Fragment {
     private static final int REQUEST_IMAGE_CROP = 4444;
     private final long FINISH_INTERVAL_TIME = 2000;
 
-    private long   backPressedTime = 0;
+    private long backPressedTime = 0;
     private Uri imageUri;
     private Uri photoURI, albumURI;
     /*private String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -245,10 +247,11 @@ public class RegisterFragment extends Fragment {
 
         iscosOpenCheckbox.setOnClickListener(listener_chechbox_OpenDate);
         opendateBtn.setOnClickListener(listener_btn_openDateClick);
-
+        User user = new User();
         check.setOnClickListener(view1 -> {
             if (brandStr.equals("브랜드") == false | mainCategoryStr.equals("대분류") == false | midCategoryStr.equals("중분류") == false | cos_Name.equals("") == false) {
-                dbHelper.insert(cos_PicUrl, cosName.getText().toString(), brandStr, mainCategoryStr, midCategoryStr, countdday(), "id");
+                dbHelper.insert(cos_PicUrl, cosName.getText().toString(), brandStr, mainCategoryStr, midCategoryStr, countdday(), UserSave.getUserEmailID());
+
                 Toast.makeText(getContext(), dbHelper.getResult(), Toast.LENGTH_LONG).show();
                 Navigator.goMain(getContext());
             } else if (brandStr.equals("브랜드") | mainCategoryStr.equals("대분류") | midCategoryStr.equals("중분류") | cos_Name.equals("")) {
@@ -297,7 +300,7 @@ public class RegisterFragment extends Fragment {
                     return 12 * 30;
                 }
             } else if (expMonthRadioBtn.isChecked()) {
-                return cos_exp_month * 30;
+                return Integer.parseInt(expMonthEdt.getText().toString()) * 30;
             } else {
                 count = exp - open;
                 cos_ExpDday = (int) count;

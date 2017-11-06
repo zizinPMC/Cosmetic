@@ -26,7 +26,9 @@ public class User {
     public static String getUserEmailID() {
         return userEmailID;
     }*/
-
+public User (){
+    UserSave.setUserEmailID(this.userEmailID);
+}
     public User(String userName, String userPhotoUrl, String userEmail, String userEmailID, String fcmToken) {
         this.userName = userName;
         this.userPhotoUrl = userPhotoUrl;

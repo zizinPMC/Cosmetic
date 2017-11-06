@@ -81,7 +81,7 @@ public class MyPageFragment extends Fragment {
         public void onItemClick(View view, int position) {
             switch (position) {
                 case 1:
-                    Toast.makeText(getContext(), "알림입니다", Toast.LENGTH_SHORT).show();
+                    Navigator.goAlarm(getContext());
                     break;
                 case 2:
                     show();

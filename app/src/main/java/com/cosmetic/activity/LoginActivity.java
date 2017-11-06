@@ -232,12 +232,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_google_signin:
                 if(logout==1) {
-                    System.out.println("—>onClick() btn_google_signin…logout=1");
+                    System.out.println("--->onClick() btn_google_signin...logout=1");
                     signOut();
                     signIn();
                 }
                 else if(logout==0) {
-                    System.out.println("—>onClick() btn_google_signin…logout=0");
+                    System.out.println("--->onClick() btn_google_signin...logout=0");
                     signIn();
                 }
                 break;

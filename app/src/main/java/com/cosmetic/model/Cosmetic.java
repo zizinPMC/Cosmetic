@@ -17,6 +17,12 @@ public class Cosmetic implements Item {
     public Cosmetic(String name) {
         this.name = name;
 
+
+    }
+    public Cosmetic(String name,int cosExpDate) {
+        this.name = name;
+        this.cosExpDate = cosExpDate;
+
     }
     public Cosmetic() {
 

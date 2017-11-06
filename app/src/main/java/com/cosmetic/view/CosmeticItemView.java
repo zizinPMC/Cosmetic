@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cosmetic.R;
+import com.cosmetic.model.Cosmetic;
+import com.dhha22.bindadapter.Item;
 import com.dhha22.bindadapter.ItemView;
 
 /**
@@ -28,13 +30,14 @@ public class CosmeticItemView extends ItemView {
         cosDday = (TextView) findViewById(R.id.cosmeticDday);
     }
 
- /*   @Override
+    @Override
     public void setData(Item data) {
         super.setData(data);
         if(data instanceof Cosmetic){
-            cosImg.setImageURI(Uri.parse(((Cosmetic) data).cosImgUrl));
+            //cosImg.setImageURI(Uri.parse(((Cosmetic) data).cosImgUrl));
+            //Toast.makeText(getContext(),((Cosmetic) data).name,Toast.LENGTH_LONG).show();
             cosTitle.setText(((Cosmetic) data).name);
-            cosDday.setText(((Cosmetic) data).cosExpDate);
+//            cosDday.setText(((Cosmetic) data).cosExpDate);
         }
-    }*/
+    }
 }
