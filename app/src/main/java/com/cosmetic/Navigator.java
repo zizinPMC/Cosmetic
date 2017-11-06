@@ -3,6 +3,7 @@ package com.cosmetic;
 import android.content.Context;
 import android.content.Intent;
 
+import com.cosmetic.activity.AlarmActivity;
 import com.cosmetic.activity.LoginActivity;
 import com.cosmetic.activity.MainActivity;
 import com.cosmetic.activity.NavigationActivity;
@@ -33,7 +34,9 @@ public class Navigator {
     public static void goLogin(Context context){
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
-
-
+    }
+    public static void goAlarm(Context context){
+        Intent intent = new Intent(context, AlarmActivity.class);
+        context.startActivity(intent);
     }
 }

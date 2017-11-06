@@ -1,3 +1,4 @@
+/*
 package com.cosmetic.board;
 
 import android.content.Context;
@@ -5,14 +6,16 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
-import com.cosmetic.Cosmetic;
 import com.cosmetic.R;
+import com.cosmetic.model.Cosmetic;
 import com.dhha22.bindadapter.Item;
 import com.dhha22.bindadapter.ItemView;
 
+*/
 /**
  * Created by gimjihyeon on 2017. 10. 28..
- */
+ *//*
+
 
 public class HomeBoardListView extends ItemView {
     private TextView nameTxt;
@@ -31,3 +34,4 @@ public class HomeBoardListView extends ItemView {
 
     }
 }
+*/

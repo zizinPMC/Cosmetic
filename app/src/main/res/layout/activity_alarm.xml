@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#ffffff">
 
+    <Button
+        android:textSize="18sp"
+        android:id="@+id/setAlarm"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="24dp"
+        android:textColor="@color/white"
+        android:background="@drawable/category_selector"
+        android:text="알람 설정" />
 
-    <Switch
-        android:id="@+id/switch_alarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:switchMinWidth="40dp"
-        android:switchPadding="50dp"
-        android:text="알림 여부      "
-        android:textSize="22sp" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    <Button
+        android:textSize="18sp"
+        android:id="@+id/removeAlarm"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="24dp"
+        android:textColor="@color/white"
+        android:background="@drawable/category_selector"
+        android:layout_below="@+id/setAlarm"
+        android:text="알람 해제" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/removeAlarm"
+        android:layout_margin="24dp"
+        android:background="@drawable/category_selector"
+        android:text="알람 시간 설정"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
     <TextView
-        android:id="@+id/txt_alarmTime"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:text="알림 일시"
-        android:textSize="22sp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="New Text" />
 
-</LinearLayout>
-
-
-
-</LinearLayout>
+</RelativeLayout>

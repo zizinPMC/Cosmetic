@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     System.out.println("--->onActivityResult....onComplete()...task.isSuccessful logout="+logout );
                                     if(logout==0){
                                         Intent intent = new Intent(getApplication(), MainActivity.class);
-                                    startActivity(intent);
+                                        startActivity(intent);
                                     }
                                     logout=0;
                                 }
@@ -251,9 +251,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onBackPressed()
     {
 
-            moveTaskToBack(true);
-            finish();
-            android.os.Process.killProcess(android.os.Process.myPid());
+        moveTaskToBack(true);
+        finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
 
 
     }
