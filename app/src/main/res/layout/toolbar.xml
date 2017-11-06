@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="54dp"
     android:background="@color/colorPrimary">
-
     <ImageView
         android:id="@+id/backBtn"
         android:layout_width="36dp"

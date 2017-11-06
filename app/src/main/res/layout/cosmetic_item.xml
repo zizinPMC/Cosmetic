@@ -14,8 +14,31 @@
         android:id="@+id/cosmeticTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/cosmeticImg"
         android:padding="14dp"
-        android:text="cosmetic name" />
+        android:textSize="20sp"
+        android:text="cosmetic name"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/cosmeticImg" />
 
+    <TextView
+        android:paddingTop="6dp"
+        android:layout_below="@id/cosmeticTitle"
+        android:id="@+id/cosmeticDday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_marginRight="100dp"
+        android:layout_alignParentRight="true"
+
+        android:text="cosmetic Dday"/>
+        <!--android:layout_alignBottom="@+id/cosCateImg" -->
+    <!--<ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_clock"
+        android:layout_below="@id/cosmeticTitle"
+        android:layout_toRightOf="@id/cosmeticImg"
+        android:id="@+id/cosCateImg"
+        android:layout_alignBottom="@id/cosmeticImg"
+        android:layout_toLeftOf="@id/cosmeticDday"/>-->
 </RelativeLayout>

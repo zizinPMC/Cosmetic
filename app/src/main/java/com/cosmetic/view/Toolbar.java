@@ -46,5 +46,6 @@ public class Toolbar extends FrameLayout {
             AlertDialog alert = builder.create();
             alert.show();
         });
+
     }
 }

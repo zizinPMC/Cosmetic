@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cosmetic.R;
+import com.cosmetic.db.DBHelper;
 import com.cosmetic.model.Cosmetic;
 import com.cosmetic.view.CosmeticItemView;
 import com.dhha22.bindadapter.BindAdapter;
@@ -41,6 +42,8 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new BindAdapter(getContext()).addLayout(CosmeticItemView.class);
+
+
     }
 
     @Nullable
@@ -71,8 +74,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeDumy(){
-        adapter.addItem(new Cosmetic());
-        adapter.addItem(new Cosmetic());
+        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 1);
+        adapter.addItem(new Cosmetic(dbHelper.getItem()));
+        adapter.addItem(new Cosmetic(dbHelper.getItem2()));
         adapter.addItem(new Cosmetic());
         adapter.addItem(new Cosmetic());
         adapter.addItem(new Cosmetic());

@@ -14,14 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.Toolbar
-
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="right"
-            android:id="@+id/ic_check"
-            android:background="@drawable/ic_check"/>
-
         <ImageButton
             android:id="@+id/img_cosmetic"
             android:layout_width="match_parent"
@@ -123,16 +115,41 @@
                 android:layout_height="wrap_content"
                 android:text="개봉 여부" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:text="개봉 일자"
+                android:id="@+id/opendateTxt"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <Button
                 android:id="@+id/opendateBtn"
                 android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/category_selector"
-                android:text="개봉 일자"
+                android:text="날짜 선택"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:paddingLeft="4dp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:text="사용기한 " />
         </LinearLayout>
 
         <RadioGroup
@@ -215,6 +232,19 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/ic_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="등 록 하 기"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>
 
