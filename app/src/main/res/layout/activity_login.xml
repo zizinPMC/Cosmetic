@@ -36,7 +36,9 @@
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_google_signin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:paddingLeft="50sp"
+                android:paddingRight="50sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
