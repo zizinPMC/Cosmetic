@@ -1,5 +1,7 @@
 package com.cosmetic.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,10 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cosmetic.R;
+import com.cosmetic.activity.ChatActivity;
 import com.cosmetic.db.DBHelper;
 import com.cosmetic.model.Cosmetic;
+import com.cosmetic.model.Favorite;
 import com.cosmetic.view.CosmeticItemView;
 import com.cosmetic.view.HomeFavoriteView;
 import com.dhha22.bindadapter.BindAdapter;
@@ -28,10 +36,10 @@ import butterknife.ButterKnife;
  */
 
 public class HomeFragment extends Fragment {
-    @BindView(R.id.fabChat)
-    FloatingActionButton fabChat;
-    @BindView(R.id.homeRecyclerView)
-    RecyclerView recyclerView;
+    @BindView(R.id.fabChat) FloatingActionButton fabChat;
+    @BindView(R.id.homeRecyclerView) RecyclerView recyclerView;
+    @BindView(R.id.homeFavoriteImg) ImageView favoriteImg;
+    @BindView(R.id.btn_findShop) Button btnShop;
     private BindAdapter adapter;
 
     ArrayList<HashMap<String, String>> tipList;//하단 리스트뷰 팁리스트
@@ -73,6 +81,13 @@ public class HomeFragment extends Fragment {
         autoViewPager.setInterval(5000); // 페이지 넘어갈 시간 간격 설정
         autoViewPager.startAutoScroll(); //Auto Scroll 시작*/
 
+        if(Favorite.favorite!=null){
+            hfv = new HomeFavoriteView(Favorite.favorite);
+            Glide.with(getContext()).load(favoriteImg).into(favoriteImg);
+        }
+
+        favoriteImg.setOnClickListener(listener);
+        btnShop.setOnClickListener(listener);
 
         makeDumy();
         fabChat.setOnClickListener(v -> goChatting());
@@ -87,12 +102,39 @@ public class HomeFragment extends Fragment {
         adapter.addItem(new Cosmetic());
         adapter.addItem(new Cosmetic());
         adapter.notifyData();
-
     }
 
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_findShop: {
+                    if (Favorite.favorite != null) {
+                        /*Intent intent = new Intent();
+                        startActivity(intent);*/
+                        Toast.makeText(getContext(), "btn_findShop을 눌렀습니다", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "마이페이지에서 관심브랜드를 설정해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+                case R.id.homeFavoriteImg: {
+                    if (Favorite.favorite != null) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(hfv.favoriteWeb));
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getContext(), "마이페이지에서 관심브랜드를 설정해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            }
+        }
+    };
 
     private void goChatting() {
         // 채팅페이지 이동
+        Intent intent = new Intent(getContext(), ChatActivity.class);
+        startActivity(intent);
     }
 
 
