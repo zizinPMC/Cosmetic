@@ -252,7 +252,7 @@ public class RegisterFragment extends Fragment {
             if (brandStr.equals("브랜드") == false | mainCategoryStr.equals("대분류") == false | midCategoryStr.equals("중분류") == false | cos_Name.equals("") == false) {
                 dbHelper.insert(cos_PicUrl, cosName.getText().toString(), brandStr, mainCategoryStr, midCategoryStr, countdday(), UserSave.getUserEmailID());
 
-                Toast.makeText(getContext(), dbHelper.getResult(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), dbHelper.getResult(), Toast.LENGTH_LONG).show();
                 Navigator.goMain(getContext());
             } else if (brandStr.equals("브랜드") | mainCategoryStr.equals("대분류") | midCategoryStr.equals("중분류") | cos_Name.equals("")) {
                 Toast.makeText(getContext(), "값을 모두 입력했는지 확인해주세요 ", Toast.LENGTH_LONG).show();

@@ -27,7 +27,7 @@ public class CosmeticItemView extends ItemView {
         cosImg = (ImageView) findViewById(R.id.cosmeticImg);
         cosTitle = (TextView) findViewById(R.id.cosmeticTitle);
       //  cosCateImg = (ImageView) findViewById(R.id.cosCateImg);
-        cosDday = (TextView) findViewById(R.id.cosmeticDday);
+        //cosDday = (TextView) findViewById(R.id.cosmeticDday);
     }
 
     @Override

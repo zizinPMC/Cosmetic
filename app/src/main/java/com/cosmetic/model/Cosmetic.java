@@ -10,16 +10,14 @@ import com.dhha22.bindadapter.Item;
 
 public class Cosmetic implements Item {
     public String name;
-    public  int cosExpDate;
+    public  String cosExpDate;
     public  String cosImgUrl;
     private Context context = null;
 
     public Cosmetic(String name) {
         this.name = name;
-
-
     }
-    public Cosmetic(String name,int cosExpDate) {
+    public Cosmetic(String name,String cosExpDate) {
         this.name = name;
         this.cosExpDate = cosExpDate;
 
@@ -27,7 +25,7 @@ public class Cosmetic implements Item {
     public Cosmetic() {
 
     }
-    public Cosmetic(String name, int cosExpDate, String cosImgUrl) {
+    public Cosmetic(String name, String cosExpDate, String cosImgUrl) {
         this.name = name;
         this.cosExpDate = cosExpDate;
         this.cosImgUrl = cosImgUrl;

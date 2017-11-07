@@ -22,5 +22,5 @@
         android:layout_margin="24dp"
         android:textColor="@color/white"
         android:background="@drawable/category_selector"
-        android:text="확인하러가기" />
+        android:text="사용임박 화장품 확인하러가기" />
 </LinearLayout>
