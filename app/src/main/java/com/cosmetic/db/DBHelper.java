@@ -30,12 +30,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insert(String cosPic,String cosName, String cosBrand, String cosMainCate, String cosMidCate, int cosExpDate, String userID) {
+    public void insert(String cosPic, String cosName, String cosBrand, String cosMainCate, String cosMidCate, int cosExpDate, String userID) {
         //읽고 쓰기가 가능하게  DB열기
         SQLiteDatabase db = getWritableDatabase();
         //DB에 입력한 값으로 행 추가
         //Cosmetic table
-        db.execSQL("INSERT INTO COSMETICS VALUES(null,'" + cosPic+ "', '" +cosName + "', '"
+        db.execSQL("INSERT INTO COSMETICS VALUES(null,'" + cosPic + "', '" + cosName + "', '"
                 + cosBrand + "', '" + cosMainCate + "', '"
                 + cosMidCate + "', " + cosExpDate + ", '" + userID + "');");
         db.close();
@@ -47,20 +47,45 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM COSMETICS WHERE cosName='" + cosName + "';");
         db.close();
     }
+
+    //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
     public String getItem() {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();
-
         String result = "";
-
-        //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
         Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
         while (cursor.moveToNext()) {
-            result += cursor.getString(2) +  "\n\n"   //cos name
-                    + cursor.getString(6) + "\n";   //cos dday
+            result = cursor.getString(2) + "\n";   //cos name
         }
         return result;
     }
+
+    public int numColum() {
+        SQLiteDatabase db = getReadableDatabase();
+        int i;
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        for (i = 0; i < 7; i++) {
+            if (cursor.toString().equals(null)) {
+                return i;
+            }
+        }
+        return i;
+    }
+
+    public String getCosDB() {
+        SQLiteDatabase db = getReadableDatabase();
+        int i = 0;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + i + ";", null);
+        for (int num = 0; num < numColum(); i++) {
+            if (cursor.toString().equals(null) == false) {
+                String result = "이름 : " + getCosName(i); /*+ "\n" + "D -  " + getCosDday();*/
+                return result;
+            }
+        }
+        return "";
+    }
+
     public String getPic() {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();
@@ -70,69 +95,51 @@ public class DBHelper extends SQLiteOpenHelper {
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
         Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
         while (cursor.moveToNext()) {
-            result =cursor.getString(1) + " \n";       //cospic
+            result = cursor.getString(1) + " \n";       //cospic
         }
         return result;
     }
-    public String getCosName() {
+
+    public String getCosName(int a) {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();
 
         String result = "";
 
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + a + ";", null);
         while (cursor.moveToNext()) {
-            result =cursor.getString(2) + " \n";       //cospic
+            result = cursor.getString(2);       //cospic
         }
         return result;
     }
-    public String getCosDday() {
+
+    public String getCosDday(int a) {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();
 
         String result = "";
 
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + a + ";", null);
         while (cursor.moveToNext()) {
-            result =cursor.getString(6) + " \n";       //cospic
+            result = cursor.getString(6);       //cospic
         }
         return result;
     }
 
-    public String getItem2() {
+
+    public String getResult(int a) {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();
 
         String result = "";
 
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + a + ";", null);
         while (cursor.moveToNext()) {
-            result +=cursor.getString(1) + " \n"+       //cospic
-                    cursor.getString(2) +  "\n\n"   //cos name
-                    + cursor.getString(6) + "\n";   //cos dday
-        }
-        return result;
-    }
-    public String getResult() {
-        //읽기가 가능하게 DB열기
-        SQLiteDatabase db = getReadableDatabase();
-
-        String result = "";
-
-        //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
-        while (cursor.moveToNext()) {
-            result += cursor.getString(0) + " : "
-                    + cursor.getString(1) + " ,"
-                    + cursor.getString(2) + " , "
-                    + cursor.getString(3) + " , "
-                    + cursor.getString(4) + " , "
-                    + cursor.getString(5) + " , "
-                    + cursor.getString(6) + " , "
-                    + cursor.getString(7) + "\n";
+            result += "이름 : " +cursor.getString(2) + "\n"+" D- day : "
+                    + cursor.getString(6);
 
         }
         return result;

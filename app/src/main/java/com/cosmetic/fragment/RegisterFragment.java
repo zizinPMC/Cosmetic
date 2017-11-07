@@ -37,7 +37,6 @@ import android.widget.Toast;
 import com.cosmetic.Navigator;
 import com.cosmetic.R;
 import com.cosmetic.db.DBHelper;
-import com.cosmetic.model.User;
 import com.cosmetic.model.UserSave;
 
 import java.io.File;
@@ -185,7 +184,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 1);
+        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 2);
         cosBrandBtn.setOnClickListener(v -> showDialog(BRAND_DIALOG_TITLE, cosBrand, (dialog, which) -> {
             brandStr = cosBrand[which];
             cosBrandBtn.setSelected(true);
@@ -247,12 +246,11 @@ public class RegisterFragment extends Fragment {
 
         iscosOpenCheckbox.setOnClickListener(listener_chechbox_OpenDate);
         opendateBtn.setOnClickListener(listener_btn_openDateClick);
-        User user = new User();
         check.setOnClickListener(view1 -> {
             if (brandStr.equals("브랜드") == false | mainCategoryStr.equals("대분류") == false | midCategoryStr.equals("중분류") == false | cos_Name.equals("") == false) {
                 dbHelper.insert(cos_PicUrl, cosName.getText().toString(), brandStr, mainCategoryStr, midCategoryStr, countdday(), UserSave.getUserEmailID());
 
-                Toast.makeText(getContext(), dbHelper.getResult(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), dbHelper.getResult(), Toast.LENGTH_LONG).show();
                 Navigator.goMain(getContext());
             } else if (brandStr.equals("브랜드") | mainCategoryStr.equals("대분류") | midCategoryStr.equals("중분류") | cos_Name.equals("")) {
                 Toast.makeText(getContext(), "값을 모두 입력했는지 확인해주세요 ", Toast.LENGTH_LONG).show();
@@ -567,7 +565,7 @@ public class RegisterFragment extends Fragment {
             RegisterFragment obj = new RegisterFragment();
             Calendar calendar = obj.dateToCalendar(openDate);
             open = calendar.getTimeInMillis() / 86400000;//->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
-            System.out.println("time : ----->" + open);
+            System.out.println("time : ——>" + open);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -615,7 +613,7 @@ public class RegisterFragment extends Fragment {
             RegisterFragment obj = new RegisterFragment();
             Calendar calendar = obj.dateToCalendar(expDate);
             exp = calendar.getTimeInMillis() / 86400000;//->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
-            System.out.println("time : ----->" + exp);
+            System.out.println("time : ——>" + exp);
         } catch (Exception e) {
             e.printStackTrace();
         }
