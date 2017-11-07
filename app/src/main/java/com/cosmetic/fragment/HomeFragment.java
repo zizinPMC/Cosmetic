@@ -103,13 +103,16 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeDumy() {
-        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 1);
-        adapter.addItem(new Cosmetic(dbHelper.getCosName()));
-        adapter.addItem(new Cosmetic(dbHelper.getCosName()));
-        adapter.addItem(new Cosmetic(dbHelper.getCosName()));
-        adapter.addItem(new Cosmetic());
-        adapter.addItem(new Cosmetic());
-        adapter.addItem(new Cosmetic());
+        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 2);
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(1),dbHelper.getCosDday(1), dbHelper.getPic(1)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(2),dbHelper.getCosDday(2), dbHelper.getPic(2)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(3),dbHelper.getCosDday(3), dbHelper.getPic(3)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(4),dbHelper.getCosDday(4), dbHelper.getPic(4)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(5),dbHelper.getCosDday(5), dbHelper.getPic(3)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(6),dbHelper.getCosDday(6), dbHelper.getPic(5)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(7),dbHelper.getCosDday(7), dbHelper.getPic(6)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(8),dbHelper.getCosDday(8), dbHelper.getPic(7)));
+
         adapter.notifyData();
     }
 
