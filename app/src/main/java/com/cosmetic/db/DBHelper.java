@@ -95,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
         Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + a + ";", null);
         while (cursor.moveToNext()) {
-            result = cursor.getString(1) + " \n";       //cospic
+            result = cursor.getString(1).trim().substring(7);       //cospic
         }
         //result = result.substring(6);
         return result;
