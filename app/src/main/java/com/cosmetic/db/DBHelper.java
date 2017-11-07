@@ -138,7 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
         Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + a + ";", null);
         while (cursor.moveToNext()) {
-            result += "이름 : " +cursor.getString(2) + " D- day : "
+            result += "이름 : " +cursor.getString(2) + "\n"+" D- day : "
                     + cursor.getString(6);
 
         }

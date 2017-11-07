@@ -37,7 +37,6 @@ import android.widget.Toast;
 import com.cosmetic.Navigator;
 import com.cosmetic.R;
 import com.cosmetic.db.DBHelper;
-import com.cosmetic.model.User;
 import com.cosmetic.model.UserSave;
 
 import java.io.File;
@@ -185,7 +184,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 1);
+        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 2);
         cosBrandBtn.setOnClickListener(v -> showDialog(BRAND_DIALOG_TITLE, cosBrand, (dialog, which) -> {
             brandStr = cosBrand[which];
             cosBrandBtn.setSelected(true);
@@ -247,7 +246,6 @@ public class RegisterFragment extends Fragment {
 
         iscosOpenCheckbox.setOnClickListener(listener_chechbox_OpenDate);
         opendateBtn.setOnClickListener(listener_btn_openDateClick);
-        User user = new User();
         check.setOnClickListener(view1 -> {
             if (brandStr.equals("브랜드") == false | mainCategoryStr.equals("대분류") == false | midCategoryStr.equals("중분류") == false | cos_Name.equals("") == false) {
                 dbHelper.insert(cos_PicUrl, cosName.getText().toString(), brandStr, mainCategoryStr, midCategoryStr, countdday(), UserSave.getUserEmailID());
