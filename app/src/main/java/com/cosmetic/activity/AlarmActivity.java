@@ -95,7 +95,6 @@ public class AlarmActivity extends AppCompatActivity {
                     case R.id.button:
                         new TimePickerDialog(AlarmActivity.this, sTimeSetListener, Time.get(Calendar.HOUR_OF_DAY), Time.get(Calendar.MINUTE), false).show();
 
-
                         new DatePickerDialog(AlarmActivity.this, eDateSetListener, Time.get(Calendar.YEAR),
                                 Time.get(Calendar.MONTH),
                                 Time.get(Calendar.DAY_OF_MONTH)).show();
@@ -137,7 +136,7 @@ public class AlarmActivity extends AppCompatActivity {
         alarmManager.set(AlarmManager.RTC_WAKEUP, Time.getTimeInMillis(), ServicePending);
         //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Time.getTimeInMillis(), 1000, ServicePending); // Millisec * Second * Minute
 
-        Toast.makeText(getBaseContext(), "알람 설정" + Time.getTime(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "알람 설정 완료" + Time.getTime(), Toast.LENGTH_SHORT).show();
 
 
     }
