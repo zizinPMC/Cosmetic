@@ -36,14 +36,10 @@ import butterknife.ButterKnife;
  */
 
 public class HomeFragment extends Fragment {
-    @BindView(R.id.fabChat)
-    FloatingActionButton fabChat;
-    @BindView(R.id.homeRecyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.homeFavoriteImg)
-    ImageView favoriteImg;
-    @BindView(R.id.btn_findShop)
-    Button btnShop;
+    @BindView(R.id.fabChat) FloatingActionButton fabChat;
+    @BindView(R.id.homeRecyclerView) RecyclerView recyclerView;
+    @BindView(R.id.homeFavoriteImg) ImageView favoriteImg;
+    @BindView(R.id.btn_findShop) Button btnShop;
     private BindAdapter adapter;
 
     ArrayList<HashMap<String, String>> tipList;//하단 리스트뷰 팁리스트
@@ -85,7 +81,7 @@ public class HomeFragment extends Fragment {
         autoViewPager.setInterval(5000); // 페이지 넘어갈 시간 간격 설정
         autoViewPager.startAutoScroll(); //Auto Scroll 시작*/
 
-        if (Favorite.favorite != null) {
+        if(Favorite.favorite!=null){
             hfv = new HomeFavoriteView(Favorite.favorite);
             Glide.with(getContext()).load(favoriteImg).into(favoriteImg);
         }
@@ -98,14 +94,13 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeDumy() {
-        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 2);
-        adapter.addItem(new Cosmetic(dbHelper.getResult(1)));
-        adapter.addItem(new Cosmetic(dbHelper.getResult(2)));
-        adapter.addItem(new Cosmetic(dbHelper.getResult(3)));
-        //adapter.addItem(new Cosmetic(dbHelper.getCosName(4)));
-        //adapter.addItem(new Cosmetic(dbHelper.getCosName(5)));
-        //adapter.addItem(new Cosmetic(dbHelper.getCosName(6)));
-
+        final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 1);
+        adapter.addItem(new Cosmetic(dbHelper.getCosName()));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName()));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName()));
+        adapter.addItem(new Cosmetic());
+        adapter.addItem(new Cosmetic());
+        adapter.addItem(new Cosmetic());
         adapter.notifyData();
     }
 
@@ -118,7 +113,7 @@ public class HomeFragment extends Fragment {
                         /*Intent intent = new Intent();
                         startActivity(intent);*/
                         Toast.makeText(getContext(), "btn_findShop을 눌렀습니다", Toast.LENGTH_SHORT).show();
-                    } else {
+                    }else{
                         Toast.makeText(getContext(), "마이페이지에서 관심브랜드를 설정해주세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -127,7 +122,7 @@ public class HomeFragment extends Fragment {
                     if (Favorite.favorite != null) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(hfv.favoriteWeb));
                         startActivity(intent);
-                    } else {
+                    }else{
                         Toast.makeText(getContext(), "마이페이지에서 관심브랜드를 설정해주세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
