@@ -20,6 +20,26 @@
         android:text="cosmetic name"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/cosmeticImg" />
+    <TextView
+        android:id="@+id/cosDday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        android:layout_alignStart="@id/cosmeticTitle"
+        android:layout_below="@id/cosmeticTitle"
+        android:text="DD"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/cosDday"
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        android:layout_below="@id/cosmeticTitle"
+        android:text=" DAY"/>
+
 
         <!--android:layout_alignBottom="@+id/cosCateImg" -->
     <!--<ImageView

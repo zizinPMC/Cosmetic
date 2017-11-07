@@ -107,7 +107,19 @@ public class HomeFragment extends Fragment {
     }
     private void makeDumy() {
         final DBHelper dbHelper = new DBHelper(getContext(), "Cosmetics.db", null, 2);
-        adapter.addItem(new Cosmetic(dbHelper.getResult(1)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(1),dbHelper.getCosDday(1),dbHelper.getPic(1)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(2),dbHelper.getCosDday(2),dbHelper.getPic(2)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(3),dbHelper.getCosDday(3),dbHelper.getPic(3)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(4),dbHelper.getCosDday(4),dbHelper.getPic(4)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(5),dbHelper.getCosDday(5),dbHelper.getPic(5)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(6),dbHelper.getCosDday(6),dbHelper.getPic(6)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(7),dbHelper.getCosDday(7),dbHelper.getPic(7)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(8),dbHelper.getCosDday(8),dbHelper.getPic(8)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(9),dbHelper.getCosDday(9),dbHelper.getPic(9)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(10),dbHelper.getCosDday(10),dbHelper.getPic(10)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(11),dbHelper.getCosDday(11),dbHelper.getPic(11)));
+        adapter.addItem(new Cosmetic(dbHelper.getCosName(12),dbHelper.getCosDday(12),dbHelper.getPic(12)));
+        /*adapter.addItem(new Cosmetic(dbHelper.getResult(1)));
         adapter.addItem(new Cosmetic(dbHelper.getResult(2)));
         adapter.addItem(new Cosmetic(dbHelper.getResult(3)));
         adapter.addItem(new Cosmetic(dbHelper.getResult(4)));
@@ -118,9 +130,10 @@ public class HomeFragment extends Fragment {
         adapter.addItem(new Cosmetic(dbHelper.getResult(9)));
         adapter.addItem(new Cosmetic(dbHelper.getResult(10)));
         adapter.addItem(new Cosmetic(dbHelper.getResult(11)));
-        adapter.addItem(new Cosmetic(dbHelper.getResult(12)));
+        adapter.addItem(new Cosmetic(dbHelper.getResult(12)));*/
         //adapter.addItem(new Cosmetic(dbHelper.getCosName(5)));
         //adapter.addItem(new Cosmetic(dbHelper.getCosName(6)));
+
 
         adapter.notifyData();
     }

@@ -86,17 +86,18 @@ public class DBHelper extends SQLiteOpenHelper {
         return "";
     }
 
-    public String getPic() {
+    public String getPic(int a) {
         //읽기가 가능하게 DB열기
         SQLiteDatabase db = getReadableDatabase();
 
         String result = "";
 
         //DB에 있는 데이터를 쉽게 처리하기 위해 Cussor을 사용하여 테이블에 있는 모든 데이터 출력
-        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM COSMETICS WHERE _cosNum=" + a + ";", null);
         while (cursor.moveToNext()) {
             result = cursor.getString(1) + " \n";       //cospic
         }
+        //result = result.substring(6);
         return result;
     }
 
